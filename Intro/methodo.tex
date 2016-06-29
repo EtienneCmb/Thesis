@@ -1,0 +1,284 @@
+% #############################################################################
+%                             METHODOLOGIE
+% #############################################################################
+\chapter{méthodologie}
+
+Cette partie méthodologique sera divisée en deux grandes sous parties visant à présenter :
+\begin{enumerate}
+\item L'extraction des features: présentation des méthodes utilisées dans le cadre de l'extraction d'attributs issus de l'activité neuronale. De manière générale, nous avons étudiés des attributs spectraux comprenant:
+\begin{itemize}
+\item Phase et puissance spectrale
+\item Attributs de couplage
+\end{itemize}
+
+\item Le machine learning: présentation des principaux algorithmes testées dans le cadre du décodage de l'activité neuronale 
+\end{enumerate}
+
+% -----------------------------------------------------------------------------
+% FEATURES
+% -----------------------------------------------------------------------------
+\section{Extraction des features}
+
+Comme nous l'avons décrit précédemment, l'objectif du décodage de l'activité neuronale est d'arriver à extraire des signaux cérébraux une information suffisamment pertinente pour pouvoir discriminer différents types de classes (exemple: mouvement vers la gauche Vs droite). \\
+Tout les attributs testés dans le cadre de cette thèse sont des attributs spectraux, donc issus de bandes de fréquences. La plupart de ces outils partagent donc une partie méthodologique commune à savoir, le filtrage. De plus, la plupart sont extraits en utilisant la transformée d'Hilbert. Pour éviter une redondance à travers les attributs, nous allons tout d'abord introduire quelques pré-requis.
+
+% **************** PRE-REQUIS
+\subsection{Pré-requis}
+
+\subsubsection{Filtrage}
+L'intégralité des filtrages dans cette thèse ont été effectués avec la fonction \textit{eegfilt} (qui a ensuite été reproduite pour le passage à python). De plus, afin d'éviter tout phénomène de déphasage, le fonction \textit{filtfilt} a été systématiquement utilisée afin que le filtre soit appliqué dans les deux sens. Si cette dernière fonctionnalité n'est pas forcément indispensable dans le cadre d'un calcul de puissance, elle est absolument nécessaire pour un calcul de \pacFR.  \\
+L'ordre du filtre présenté au dessus dépend de la fréquence de filtrage. Il a systématiquement été calculé en utilisant la méthode décrite par \cite{bahramisharif_propagating_2013}:
+\begin{equation}
+FiltOrder = N_{cycle} \times f_{s}/f_{oi}
+\end{equation} \\
+où $f_{s}$ est la fréquence d'échantillonnage, $f_{oi}$ est la fréquence d'intérêt et $N_{cycle}$ est un nombre de cycles définit par $N_{cycle}=3$ pour les oscillations lentes et $N_{cycle}=6$ pour les oscillations rapides. 
+
+\subsubsection{Transformée d'Hilbert}
+Transformée permettant de passer un signal temporel $x(t)$ du domaine réel au domaine complexe. Le signal peut ensuite s'écrire $x_{H}(t)=a(t)e^{j\phi(t)}$ où $a(t)$ est l'amplitude et $\phi(t)$, la phase. Cette transformation est particulièrement exploitée car le module de $x_{H}(t)$ permet de récupérer l'amplitude et la phase est obtenue en prenant l'angle de $x_{H}(t)$.
+
+\subsubsection{Transformée en ondelettes}
+\citep{worrell_recording_2012, tallon-baudry_oscillatory_1997}
+\begin{equation}
+f(a, b)=\int_{-\infty}^{\infty} \mathrm{f}(x)\overline{\psi}_{a, b}\mathrm{d}x 
+\end{equation} \\
+$\psi_{a,b}=\frac{1}{\sqrt{a}}\Psi(\frac{x-b}{a})$ \\
+b facteur de translation et a de dilatation.\\
+$\psi_{a,b}=\mathrm{e}^{-\pi x^{2}} \mathrm{e}^{10i\pi x}$ \\
+Checker dans mon implémentation la définition utilisée
+\todo{A FAIRE}
+
+% **************** PUISSANCE SPECTRALE
+\subsection{Puissance spectrale}
+
+\subsubsection{Méthodes explorées}
+Le calcul de la puissance spectrale a été approché par deux méthodologies :
+\begin{itemize}
+\item La transformée d'Hilbert: souvent exploité dans le cadre du décodage ainsi que pour garder une uniformité entre les attributs de phase et \pacFR basés eux aussi sur cette transformée.
+\item La transformée en ondelettes: principalement utilisée pour la visualisation des cartes \tf à cause de l'adaptation des ondelettes aux bandes physiologiques.
+\end{itemize}
+
+\subsubsection{Normalisation}
+On utilise la normalisation pour observer l'émergence d'un phénomène par rapport à une période définie comme baseline. A travers la littérature, quatre grands types de normalisation sont rencontrés:
+\begin{enumerate}
+\item Soustraction par la moyenne de la baseline
+\item Division par la moyenne de la baseline
+\item Soustraction puis division par la moyenne de la baseline
+\item Z-score: soustraction de la moyenne puis division par la déviation de la baseline
+\end{enumerate}
+De manière générale, la normalisation z-score est la plus fréquemment rencontrée à travers la littérature \addref{PAPIER UTILISANT Z-SCORE}. Le choix du type de normalisation dépend du type de données utilisées. Dans le cadre de nos données, \textit{3.} était clairement la plus adapté pour tout ce qui était de la visualisation. \\
+En revanche, dans le cadre de la classification, nous obtenions systématiquement de meilleurs résultats sans normalisation.
+
+\subsubsection{Évaluation statistique}
+L'évaluation statistique de la puissance s'est fait comparativement à la baseline. Pour ce faire, nous avons testé deux approches:
+\begin{enumerate}
+\item Permutations : les essais de puissance et de baseline sont aléatoirement mélangés.   \todo{A FAIRE}
+\end{enumerate}
+
+
+\begin{enumerate}
+\item Extraction de la puissance (Hibert, wavelet ou PSD)
+
+
+\item Rôle physiologique des bandes de puissance
+\item décodage puissance
+\item Normalisation
+\item Évaluation statistique + one/two tails
+\begin{enumerate}
+\item Wilcoxon // Kruskal-Wallis
+\item Permutations
+\end{enumerate}
+\end{enumerate}
+
+% **************** PHASE
+\subsection{Phase}
+\begin{itemize}
+\item Extraction de la phase (Hilbert)
+\item Rôle physiologique supposé
+\item décodage phase
+\item Evaluation statistique par stat de Rayleigh
+\end{itemize}
+
+% **************** PAC
+\subsection{\PACEN}
+
+\subsubsection{Méthodologie du \pacEN}
+Il existe une large variété de méthodes pour calculer le PAC, ce qui complique son exploration. Toutefois, il n'existe pas de consensus sur une méthode plus polyvalente qu'une autre, chacune possédant ses points forts et limitations.
+Pour aller un peu plus loin, et présenter quelques méthodes, il est nécessaire d'introduire quelques variable. Soit $x(t)$, une série temporelle de données de taille N. Pour cette série temporelle, on souhaite savoir si la phase extraite dans une bande de fréquence $f_{\phi}=[f_{\phi_{1}},f_{\phi_{2}}]$ est couplée avec l'amplitude contenue dans $f_{A}=[f_{A_{1}},f_{A_{2}}]$. Pour cela, on va tout d'abord extraire $x_{\phi}(t)$ et $x_{A}(t)$ les signaux filtrés dans ces deux bandes. Enfin, la phase $\phi(t)$ est obtenue en prenant l'angle de la transformée d'Hilbert de $x_{\phi}(t)$ tandis que l'amplitude $a(t)$ est obtenue en prenant le module de la transformée d'Hilbert de $x_{A}(t)$. 
+
+\begin{enumerate}
+
+% MEAN VECTOR LENGTH
+\item \mvl \\
+\begin{equation}
+MVL = |\sum_{j=1}^{N} a_(j) \times e^{j\phi(j)}|
+\end{equation} \\
+où $a_{h}(t)$ est ... et $\phi(t)$ est ... \\
+
+% KULLBACK-LEIBLER DIVERGENCE
+\item \kld:\\
+A l'origine, la divergence de Kullback-Leibler (KLD), qui est issue de la théorie de l'information, permet de mesurer les dissimilarités entre deux distributions de probabilités. Ainsi, pour pouvoir utiliser cette mesure dans le cadre du PAC, \cite{tort_measuring_2010} propose une solution élégante qui consiste à générer une distribution de densité probabilités de l'amplitude (DPA) en fonction des valeurs de phase et d'ensuite utiliser le KLD pour comparer cette distribution à la densité de probabilité d'une distribution uniforme (DPU). Plus la DPA s'éloigne de la DPU, plus le couplage entre l'amplitude et la phase est consistant. \\
+Pour construire la DPA, l'astuce consiste à couper le cercle trigonométrique en N tranches (dans l'article il est proposé de couper en 18 tranches de 20°). Puis, si on prend l'exemple de la tranche $[0,20°]$, on va chercher tout les instants temporels où la phase prend des valeurs comprises entre $[0,20°]$ ($t, \phi(t) \subset [0,20°]$). On prend ensuite la moyenne de l'amplitude pour ces valeurs de $t$ et on répète cette procédure pour chacune des tranches de phase. On obtient ainsi la densité d'amplitudes en fonction des valeurs de phase. Il ne reste plus qu'à normaliser cette distribution par la somme des amplitudes à travers les tranches et on récupère une distribution de densité de probabilités. La figure \ref{fig:PAC_plot_Tort_2010} \citep{tort_measuring_2010} présente un exemple de DPA en fonction de tranches de phase. \\
+
+\figScaleX{0.6}{PAC_plot_Tort_2010}{Densité de probabilité d'une distribution d'amplitudes en fonction de tranches de phases}
+
+Le calcul de la divergence de Kullback-Leibler est ensuite appliqué pour mesurer les dissimilarités entre la DPA et la DPU et c'est cette mesure qui servira d'estimation du \pacFR:
+\begin{equation}
+D_{KL}(P, Q) = \displaystyle\sum_{j=1}^{N} P(j) \times \log{\frac{P(j)}{Q(j)}}
+\end{equation} \\
+où $P(j)$ est la densité de probabilité de $a(t)$ en fonction de $\phi(t)$ et $Q(j)$ est la densité de probabilité d'une distribution uniforme. \\
+
+% HEIGHT-RATIO
+\item \hr \\
+La méthode du \hr \citep{lakatos_oscillatory_2005} est extr\^{e}mement proche du \kld. En effet, l'amplitude sera binée de la même façon en fonction des tranches de phase. La mesure du PAC est ensuite donnée par:
+\begin{equation}
+hr=(f_{max}-f_{min})/f_{max}
+\end{equation} \\
+où $f_{max}$ et $f_{min}$ sont respectivement le maximum et le minimum de la de la densité de probabilité de l'amplitude en fonction des valeurs de phase. \\
+
+% NDPAC
+\item \ndpac \\
+Le \ndpac, qui n'est pas une des méthodes les plus fréquemment rencontrées, présente toutefois une avantage certain. En plus de fournir une estimation fiable du \pacFR, \cite{ozkurt_statistically_2012} démontre l'existence d'un seuil à partir duquel on peut considérer l'estimation du PAC comme étant statistiquement fiable. La beauté de cette méthode, c'est que ce seuil statistique, qui est une fonction de la valeur p désirée, ne dépend que de la taille de la série temporelle. Ce qui rend son utilisation particulièrement simple. \\
+Pour estimer le PAC, une des hypothèses ayant permis d'aboutir à ce seuil statistique est de devoir normaliser l'amplitude par un z-score dénotée $\tilde{a}(t)$. L'estimation du PAC est quasiment identique au MVL puisque c'est en réalité le carré de celle-ci. Enfin, pour une valeur p désirée, l'article introduit le seuil statistique: \\
+\begin{equation}
+x_{lim}=N \times [erf^{-1}(1-p)]^{2}
+\end{equation} \\
+
+où $erf^{-1}$ est la fonction d'erreur inverse. On déduira que l'estimation PAC est significative si et seulement si cette valeur est deux fois supérieur à ce seuil. \\
+
+\end{enumerate}
+
+% PERMUTATIONS ET NORMALISATION
+\subsubsection{Robustesse du \pacEN et évaluation statistique}
+
+\begin{itemize}
+\item Calcul de surrogates
+\item Normalisation du pac par surrogates
+\item Calcul de la p-value
+\end{itemize}
+
+% COMPARATIF
+\subsubsection{Comparatif des méthodes}
+\todo{A FAIRE}
+\citep{tort_measuring_2010}
+\begin{figure}[H]
+\hspace*{-1in}
+\includegraphics[scale=0.35]{./figures/PAC_methods_comparison}
+\caption{Comparatif de méthodes d'évaluation de \pacFR}
+\end{figure}
+
+% VISUALISATION
+\subsubsection{Représentation du \pacEN}
+Comparée à la puissance, l'exploration du PAC peut s'avérer plus complexe d\^{u} à sa dimensionnalité plus grande. Il existe donc des outils et des méthodes destinées à simplifier cette exploration et à visualiser ces résultats. \\
+Exemple concret, si on cherche à conna\^{i}tre les modulations de puissance contenue dans un signal, on peut représenter une carte \tf. Pour le PAC, idéalement on voudrait visualiser les phases, les amplitudes et le temps mais ces trois dimensions empêche une représentation simple. On peut donc avoir recours à différents types de représentations complémentaires:
+\begin{itemize}
+\item Scalogramme : cette représentation permet de faire émerger l'existence d'un couplage, pour une phase donnée, et d'observer sa durée. Pour cela, on aligne les phase en détectant le pic le plus proche de l'instant temporel étudié. On calcul les cartes \tf que l'on va ensuite moyenner après les avoir recalées de la même façon que les phases (\cad avec la même latence).
+\item Comodulogramme : pour une tranche temporelle définie, on représente les valeur de PAC pour différentes valeurs de phase et d'amplitude \addref{Ref comodulogramme?}
+\end{itemize}
+
+\figScaleX{1}{hemptinne_2013}{\textbf{(A)} Exemple de scalogramme aligné sur la phase du $\beta$, \textbf{(B)} Exemple de comodulogramme}
+
+La figure \ref{fig:hemptinne_2013} \citep{hemptinne_exaggerated_2013} met en évidence que le scalogramme \textbf{(A)} est limité d'une part, par la phase sur laquelle on choisit de recaler et d'autre part cette méthode est également limité par l'instant où l'on choisit de recaler. Pour la figure \textbf{(B)}, le calcul du PAC se faisant à travers la dimension temporelle, on a aucune idée de l'évolution du couplage dans le temps. \\
+
+% ERPAC
+\subsubsection{\PACEN: résolution temporel?}
+Comment peut-on savoir si un ensemble de musiciens jouent ensemble, en rythme? L'approche traditionnelle consiste à dire que, en fonction de la prestation du groupe, on sera en mesure de dire si ils étaient en rythme ou non. Donc on focalise notre attention sur chaque instant du morceau et on analyse chaque note, chaque décalage. Cela signifie aussi que toute notre attention a été mobilisée par l'analyse du rythme et finalement, on passe à côté de la musique. Notre attention au détail nous a écarté du morceau global. On pourrait dire que l'on a écrasé la dimension temporelle du morceau. Une autre approche consiste à assister à toute les répétitions du fameux groupe. Ce faisant, on est capable de dire si d'une manière générale les musiciens ont tendance à jouer ensemble. Ainsi, le jour d'une représentation, toute notre attention peut rester uniquement sur le concert. On garde donc la dimension temporelle.\\ 
+C'est par ce changement de positionnement face au problème de résolution temporelle que \cite{voytek_method_2013} introduit le \erpac . L'approche traditionnelle du PAC nécessitant de connaître un nombre de cycles afin d'en déduire l'existence ou non du couplage, et donc perdre la dimension temps, l'article propose de calculer le PAC à travers les essais (ou répétitions). Pour un jeu de données de M essais de longueur N, on extrait respectivement les phases et les amplitudes $\phi_{M}(t)$ et $a_{M}(t)$ puis, pour chaque point temporel, on calcul la corrélation à travers les essais (corrélation linéaire-circulaire \citep{berens_circstat_2009} qui se fait entre l'amplitude et des sinus/cosinus de la phase). Il en résulte une valeur de corrélation pour chaque instant et donc, de couplage. \\
+
+\subsubsection{Importance du filtrage}
+\begin{itemize}
+\item Filtrage dans les deux sens pour éviter les shifts fréquentiels
+\item Ordre du filtre en fonction du nombre de cycles \citep{bahramisharif_propagating_2013}
+\item Nombre de cycle: au moins un cycle pour pouvoir estimer le PAC mais comme c'est sensible au bruit, plus on multiplie le nombre de cycles, plus l'estimation est fiable \citep{tort_measuring_2010, voytek_method_2013} mais en plus précis: \citep{bahramisharif_propagating_2013}
+\end{itemize}
+
+
+% -----------------------------------------------------------------------------
+% APPRENTISSAGE SUPERVISE
+% -----------------------------------------------------------------------------
+\section{Apprentissage supervisé}
+Présentation du concept
+Training set et Testing set
+
+\subsection{Labellisation et apprentissage}
+
+\subsection{Classifieurs}
+\begin{enumerate}
+
+% LINEAR DISCRIMINANT ANALYSIS
+\item \lda \\
+
+\citep{fisher_use_1936}, \citep{lotte_review_2007} \\
+
+
+\figScaleX{0.6}{LDA_Lotte_2007}{Principe du \lda}
+
+% SUPPORT VECTOR MACHINE
+\item \svm \\
+\citep{cortes_support-vector_1995, vapnik_nature_2000}
+\citep{lotte_review_2007}
+\figScaleX{0.6}{SVM_Lotte_2007}{Principe du \svm}
+
+% K-NEAREST NEIGHBOR
+\item \knn
+
+% NAIVE BAYES
+\item \nb
+
+% RANDOM FOREST
+\item \rf
+\end{enumerate}
+
+\subsection{Cross-validation}
+Présentation et utilisation (contexte: séparation Training et Testing set // optimisation des paramètres (classifieurs et \mf))
+
+\begin{enumerate}
+\item \kfold
+
+\kfold , \skfold , \shsp, et \sshsp
+\item \loo
+
+\end{enumerate}
+
+\subsubsection{Évaluation de la performance de décodage}
+\begin{enumerate}
+\item \da
+\item \roc
+\end{enumerate}
+
+\subsubsection{Évaluation statistique de la performance de décodage}
+\begin{enumerate}
+\item Loie binomiale
+\item Permutation: data driven + différents types de permutations \citep{ojala_permutation_2010}
+\begin{itemize}
+\item Shuffle y
+\item Full-shuffle
+\item Intra-class shuffle y
+\end{itemize}
+\end{enumerate}
+
+\subsection{Sur-apprentissage}
+
+\subsubsection{Optimisation des paramètres de classification}
+% -----------------------------------------------------------------------------
+% -> Single et Multi-features
+\section{Du single et multi-features}
+Présentation du concept
+\subsection{Single-feature}
+
+\subsection{Multi-features}
+
+\begin{enumerate}
+
+\item Sélection statistique
+\begin{enumerate}
+\item Sélection binomiale
+\item sélection permutations
+\end{enumerate}
+\item Sélection séquentielle
+\begin{enumerate}
+\item Forward selection
+\item Backward selection
+\item exhaustive selection
+\end{enumerate}
+
+\end{enumerate}

@@ -1,0 +1,105 @@
+\documentclass[sommairechap,stylejchiquet]{these_gi}
+
+
+
+\begin{document}
+ 
+% ==================================================================
+% OPTIONS D'AFFICHAGE
+% non-définitif (soumis aux rapporteurs) ou  définitif
+\definitiftrue
+% \definitiffalse
+ 
+% ==================================================================
+% RENSEIGNEMENTS SUR LA THÈSE
+\titleFR{Décodage des intentions et des représentations motrices chez l'homme: analyse multi-échelle et application aux interfaces cerveau-machine}
+\titleEN{Le titre en anglais}
+\abstractFR{Le résumé en français ($\approx$ 1000 caractères)}
+\abstractEN{Le résumé en anglais ($\approx$ 1000 caractères)}
+\keywordsFR{Les mots-clés en français}
+\keywordsEN{Les mots-clés en anglais}
+ 
+\author{Etienne Combrisson}
+\address{e.combrisson@gmail.com}
+\universite{université claude bernard lyon 1}
+\laboratoire{}
+\specialite{spécialité de la thèse}
+\datesoutenance{09/2016}
+\datesoumission{la date de soumission aux rapporteurs}
+\jury{\begin{tabular}{llll}
+    M\up{me} & \textsc{Erika Raté} & Uiversité à la Menthe & (Rapporteur) \\
+    M. & \textsc{Jacques Ouille} & Université à la Fraise & (Rapporteur) \\
+    M. & \textsc{Henri Zoto} & Laboratoire laborieux & (Rapporteur) \\
+    M. & \textsc{Jean File} & UTC & (Directeur) \\
+       & etc. &  \\
+  \end{tabular}    
+}
+ 
+% ==================================================================
+% DÉDICACE
+\dedicate{À Isabelle et Didier, mes deux parents,\\ qui ont tout donné pour que ceci me soit un jour possible. \\ Merci}
+ 
+% ==================================================================
+% DEBUT DE LA PRÉFACE
+\beforepreface
+ 
+% remerciements
+\include{Remerc/remerc}
+ 
+% table des matières générale
+\tableofcontents
+ 
+% affiche la liste des figures
+\newpage
+\listoffigures
+
+% ==================================================================
+\afterpreface
+
+% ==================================================================
+% NOTATIONS
+\include{Nota/nota}
+
+% ==================================================================
+% AVANT-PROPOS
+\include{Intro/intro}
+\adjustmtc
+ 
+% ==================================================================
+% CONTENU GÉNÉRAL
+%\pagestyle{headings}
+\include{Chap1/chap1}
+\include{Chap2/chap2}
+\include{Chap3/chap3}
+\include{Chap4/chap4}
+\include{Chap5/chap5}
+
+% ==================================================================
+% CONCLUSION
+\include{Ccl/concl}
+ 
+% ==================================================================
+% ANNEXES
+\appendix
+\include{Annexes/annexe}
+ 
+% ==================================================================
+% BIBLIOGRAPHIE
+\bibliographystyle{apalike}
+\bibliography{Manuscrit}
+ 
+% ==================================================================
+% COLOPHON
+%\colophon{Ce document a été préparé à l'aide de l'éditeur de texte GNU
+%  Emacs et du logiciel de composition typographique \LaTeXe.}
+ 
+% ==================================================================
+% COUVERTURE : RESUME ET MOTS-CLÉS
+\abstractpage
+
+
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
