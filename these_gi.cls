@@ -33,6 +33,12 @@
 %\usepackage{natbib}
 \usepackage[cyr]{aeguill}
 \usepackage[francais]{babel}
+\usepackage[pdftex,
+			pdfauthor={Etienne Combrisson},
+			pdftitle={Décodage des intentions et des représentations motrices chez l'homme: analyse multi-échelle et application aux interfaces cerveau-machine},
+			pdfsubject={Thesis},
+			pdfkeywords={Décodage; encodage; machine-learning; puissance; phase; phase-amplitude coupling; seeg}]{hyperref}
+\hypersetup{hidelinks=true}
 
 %\usepackage{babel}
 \frenchspacing
