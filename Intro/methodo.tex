@@ -66,7 +66,11 @@ Pour une distribution de permutations construite à partir de deux sous-ensembles
 \figScaleX{0.6}{stat_permutations}{\textit{"One-tailed"} et \textit{"two-tailed"} test}
 Grâce à cette méthode d'évaluation statistique, nous pourrons par exemple conclure si l'on a une augmentation, une diminution ou une différence statistique entre une valeur de puissance et la puissance contenue dans une période de baseline. Dernière précision, on comprend ainsi que pour obtenir une valeur $p$ il faut que la taille de la distribution $N$ soit au moins de $1/p$.
 
-
+\subsubsection{Hyperplan}
+Un hyperplan est un espace de co-dimension 1. Donc, dans un espace $3D$, l'hyperplan est un plan (dimension $2D+1$). De manière générale, un espace de dimension $N$ possède un hyperplan de dimension $N-1$
+\begin{equation}
+	dim_{ESPACE} = dim_{HYPERPLAN}+1
+\end{equation}
 
 % ********************************************
 %                 PUISSANCE
@@ -190,12 +194,7 @@ A ma connaissance, il n'existe pas de comparatif entre ces corrections et je n'a
 
 % COMPARATIF
 \subsubsection{Comparatif des méthodes}
-\cite{penny_testing_2008} ont comparé plusieurs méthodes dont le \textit{MVL}, \textit{PLV} et le \textit{GLM} et \cite{tort_measuring_2010} ont complété cette étude avec d'autres méthodes comme le montre le tableau ci-dessous. Enfin, \cite{canolty_functional_2010} a fait une review qui comprend un descriptif très instructif.
-\begin{figure}[H]
-	\hspace*{-1in}
-	\includegraphics[scale=0.35]{./figures/PAC_methods_comparison}
-	\caption{Comparatif de méthodes d'évaluation de \pacFR}
-\end{figure}
+\cite{penny_testing_2008} ont comparé plusieurs méthodes dont le \textit{MVL}, \textit{PLV} et le \textit{GLM} et \cite{tort_measuring_2010} ont complété cette étude avec d'autres méthodes (cf. \ref{comp_pac}). Enfin, \cite{canolty_functional_2010} a fait une review qui comprend un descriptif très instructif.
 
 % VISUALISATION
 \subsubsection{Représentation du \pacEN}
@@ -223,98 +222,209 @@ C'est par ce changement de positionnement face au problème de résolution tempore
 %                           APPRENTISSAGE SUPERVISE
 % -----------------------------------------------------------------------------
 % -----------------------------------------------------------------------------
-Présentation du concept
-Training set et Testing set
+Le travail effectué durant cette thèse s'est exclusivement porté sur l'apprentissage supervisé. Celui-ci consiste à apprendre à la machine à reconna\^{i}tre des événements qui ont été labellisé au préalable (cf. \ref{labellisation}). A contrario, l'apprentissage non supervisé laisse la machine apprendre par elle-m\^{e}me. En pratique, l'apprentissage se fait sur des attributs. Par exemple, pour différencier des chats et des chiens, ou pourra utiliser l'angle formé par le sommet des oreilles. Les attributs doivent contenir une information pertinente permettant de différencier les classes. Enfin, les algorithmes de classification vont se servir de ces attributs pour définir une frontière entre les classes étudiées. A ce stade, il semble important de préciser que l'utilisation des outils d'apprentissage machine peut s'orienter (globalement) suivant deux axes:
+\begin{enumerate}
+	\item Optimisation des attributs: on travail sur un raffinement des attributs afin que ceux-ci soient les plus performants possibles pour séparer les classes
+	\item Optimisation des paramètres de classification: on considère une base de données comme étant fixe, définitive, optimale et l'on va faire varier les différents paramètres liés à l'apprentissage machine (classifeurs, cross-validation...). C'est le cas des compétitions \textit{BCI} où tout le monde travail sur une même base de données.
+\end{enumerate}
+Bien s\^{u}r, ces deux axes peuvent être cumulés. Dans le cadre de cette thèse, le machine learning a été utilisé comme outil de validation d'hypothèses donc essentiellement porté sur l'optimisation des attributs. Le raffinement des paramètres de classification a également été étudié, mais, au final, il ne constitue pas la majeure partie de l'étude.
+\vspace{1\baselineskip}
 
-\subsection{Labellisation et apprentissage}
+Un schéma classique d'analyse peut-être décrit par:
+\begin{enumerate}
+	\item Labellisation des données
+	\item Constitution de données d'entra\^{i}nement (\train) et de test (\test)
+	\item Choix d'un classifieur puis entra\^{i}nement de celui-ci sur les données \train
+	\item Test de ce classifeur entra\^{i}né sur les données \test et évaluation de la performance
+	\item Évaluation statistique de cette acuité de décodage
+\end{enumerate}
 
+% ********************************************
+%              LABELLISATION
+% ********************************************
+\subsection{Labellisation et apprentissage}\label{labellisation}
+La labellisation c'est le fait d'associer à chaque événement l'appartenance à une classe ou à une condition. C'est par ce procédé que l'on va pouvoir apprendre ensuite au classifieur à identifier les classes. Par exemple, considérons \textit{up} et \textit{down} deux classes qui reflètent des mouvements de la main vers le haut ou vers le bas. On va donc construire un vecteur $y_{direction}$ qui labellise chaque essais avec direction effectuée (ce vecteur peut aussi \^{e}tre booléen ou contenir des entiers. L'essentiel est que à chaque classe soit attribué une valeur qui lui est propre). Ce vecteur $y$ est appelé \textit{vecteur label}, qui vient labelliser chaque essais d'un vecteur d'attributs $x$. \\ 
+\begin{equation}
+	y_{direction}=
+	\begin{pmatrix}
+		up \\
+		down \\
+		down \\
+		\vdots \\\
+		up
+	\end{pmatrix},
+	y_{bool}=
+	\begin{pmatrix}
+		0 \\
+		1 \\
+		1 \\
+		\vdots \\\
+		0
+	\end{pmatrix},
+	x=
+	\begin{pmatrix}
+		x_{trial_{1}} \\
+		x_{trial_{2}} \\
+		x_{trial_{3}} \\
+		\vdots \\
+		x_{trial_{N}} \\
+	\end{pmatrix}
+\end{equation}
+D'où le nom apprentissage supervisé. Finalement, l'apprentissage machine se fera gr\^{a}ce à ce vecteur label $y$ et cette matrice d'attributs $x$. Ce qui nous amène directement aux notions de \textit{training set} et de \textit{testing set}.\\
+\figScaleX{0.5}{clf_labeling}{Labellisation de données}
+
+
+% ********************************************
+%           TRAINING ET TESTING
+% ********************************************
+\subsection{\textit{Training}, \test et \cvfr}
+Cette section est sans aucun doute la plus importante pour le machine learning puisque c'est elle qui assure la conformité méthodologique. \\
+Un bon exemple pour comprendre cette partie est celui des contr\^{o}les de mathématiques. Avant l'examen, l'étudiant s'entra\^{i}ne sur une série d'exercices. C'est la phase de \train. D'ailleurs, plus il s'entra\^{i}ne, plus ses chances de réussir à l'examen sont grandes. Le jour du contr\^{o}le, le professeur teste l'étudiant sur une série de nouveaux exercices en lien avec ce qu'il a étudié. C'est le \test. Ici, c'est un test parfait puisque l'étudiant est naïf sur le contenue de l'examen ce qui veut dire que l'on teste ses capacités mathématiques pures. Toutefois, il peut arriver durant la scolarité que l'on soit testé sur des exercices que l'on a déjà vu dans la phase de \train. Dans ce cas, la moyenne des notes des étudiants est généralement beaucoup plus élevée puisque l'on ne teste plus des capacités mathématiques, mais la capacité à restituer un apprentissage.
+
+\subsubsection{\textit{Training set}, \textit{testing set} et naïveté}
+Pour en revenir à la question du machine learning, on définit un une partie des données pour entraîner la machine. Ensuite, on teste cette machine entra\^{i}née sur un nouveau jeu de données de test. Il est essentiel d'avoir une séparation stricte entre des données définies comme \train et des données de \test afin d'assurer la naïveté du classifieur. M\^{e}me si cela peut par\^{i}tre évident, nous verrons que ça n'est pas toujours aussi facile que ça. \\
+Se pose maintenant la question de comment l'on choisit de couper les données en \train et \test. Une méthode serait de prendre une partie des données de manière aléatoire, de la définir comme \train et sur tester sur les données restantes. Toutefois, ce choix ne représenterai qu'une partie des données. Une méthode plus exhaustive et plus rigoureuse consiste à utiliser une \cvfr (ou \cv).
+
+\subsubsection{Validation-croisée}
+La \cvfr (CV) est une procédure permettant de séparer les données en \train et \test. Pour comprendre comment cela fonctionne, prenons un ensemble composé de $N$ échantillons. Il existe plusieurs de CV mais de manière générale, toutes dérivent du même principe qui est la \cv \kfold \citep{efron1994introduction, kohavi1995study}. On coupe les $N$ échantillons en $k$ paquets de tailles égales (ou proches). Ensuite, le classifieur est entraîné sur $k-1$ paquets puis on le test sur le paquet restant. Cette procédure est ensuite appliquée $k$ fois afin que chaque paquet passe au \test. On dira que la \cv est \textit{stratified} si la proportion de classes représentées au sein de chaque dossier est approximativement uniforme à travers les folds. on pourra aussi rencontrer le terme \textit{shuffle} si il y a un mélange supplémentaire. Tout cela nous emmène à des CV k-fold, k-fold stratified, k-fold shuffle ou encore k-fold stratified shuffle. \\
+Concernant le nombre de folds, on rencontre en générale 3 valeurs à travers la littérature: 3-folds, 5-folds ou 10-folds \citep{latinne2001limiting, yanagisawa_neural_2009, besserve_classification_2007, waldert_hand_2008}. Un cas particulier, mais si le nombre de folds $k=N$, ça revient à entraîner la machine sur $N-1$ échantillons tester sur celui qui a été isolé et on répète cette procédure $N$ fois. C'est ce que l'on appelle le \textit{\loo}. Toutefois cette dernière possède une grande variance et peut conduire à des estimations non fiables \citep{efron1994introduction, kohavi1995study}. \\
+Un autre cas particulier, est celui du \textit{Leave-p-Subject-Out} \citep{vidaurre2009time, lajnef_learning_2015} qui consiste à entraîner sur $p$ sujets et tester sur les sujets restants. Cette procédure est particulièrement exigeante puisqu'elle nécessite d'avoir une certaine reproductibilité entre les sujets. Cette \cvfr est fréquente avec des données EEG mais impossible à mettre en  \oe{}uvre pour la sEEG à cause de l'implantation unique de chaque sujet. 
+\figScaleX{1}{clf_cv}{Exemple d'une cross validation 3-folds}
+
+
+% ********************************************
+%                 CLASSIFIEURS
+% ********************************************
 \subsection{Classifieurs}
 \begin{enumerate}
 
 	% LINEAR DISCRIMINANT ANALYSIS
-	\item \lda \\
-	
-	\citep{fisher_use_1936}, \citep{lotte_review_2007} \\
-	
-	
-	\figScaleX{0.4}{LDA_Lotte_2007}{Principe du \lda}
+	\item \lda (LDA) \\
+	Le LDA \citep{fisher_use_1936} est un classifieur linéaire. Pour un problème à deux classes, le LDA tente de trouver un hyperplan qui va maximiser la distance entre les classes tout en minimisant la variance inter-classes. Ce classifieur fait l'hypothèse que les données sont normalement distribuées avec la même co-variance. Un problème multi-classes pouvant être transformée en multiple bi-classes, le LDA tente de trouver un hyperplan séparant la classe du reste (\textit{One-vs-All}) \\	
+	\figScaleX{0.4}{LDA_Lotte_2007}{Principe du \lda  \citep{lotte_review_2007}}
 	
 	% SUPPORT VECTOR MACHINE
-	\item \svm \\
-	\citep{cortes_support-vector_1995, vapnik_nature_2000}
-	\citep{lotte_review_2007}
-	\figScaleX{0.4}{SVM_Lotte_2007}{Principe du \svm}
+	\item \svm (SVM)\\
+	Le SVM \citep{boser_training_1992, cortes_support-vector_1995, vladimir1995nature} utilise également un hyperplan pour séparer deux classes. Toutefois, cet hyperplan optimal est trouvé en maximisant les marges (ou distance) entre ce plan et les attributs les plus proches. Le SVM possède une particularité, il utilise un noyau qui peut permettre de résoudre les problèmes linéaire (\textit{linear SVM}) mais également les problèmes non-linéaire en projetant les données dans un espace de dimension supérieure (\textit{kernel trick}). Un noyau que l'on retrouve assez régulièrement est le \textit{Radial Basis Function (RBF)} \citep{burges1998tutorial}. Les problèmes multi-classes peuvent également être traités en \textit{One-vs-All}
+	\figScaleX{0.4}{SVM_Lotte_2007}{Principe du \svm \citep{lotte_review_2007}}
 	
 	% K-NEAREST NEIGHBOR
-	\item \knn
+	\item \knn (KNN) \\
+	Pour un nouveau point de testing, le KNN \citep{fix1951discriminatory} mesure la distance avec les $k$ plus proches voisins et déduit la classe de ce point en fonction des classes de ces k-voisins (l'attribution de la classe se fait donc par vote)
+	\figScaleX{0.4}{knn}{Principe du \knn \citep{weinberger2005distance}}
 	
 	% NAIVE BAYES
-	\item \nb
-	
-	% RANDOM FOREST
-	\item \rf
+	\item \nb (NB) \\
+	Le NB \citep{fukunaga1990introduction} est un classifieur probabiliste. Une des hypothèses du NB est que les données dans les classes doivent être normalement distribuées et indépendante.
 \end{enumerate}
 
-\begin{figure}[H]
-	\hspace*{-0.7in}
-	\includegraphics[scale=0.35]{./figures/scikit_classifier}
-	\caption{Comparatif de classifieurs (scikit-learn)}
-\end{figure}
+La figure \ref{comp_clf} en annexe, issue de l'excellentissime librairie python scikit-learn dédiée au machine learning, illustre le comportement de chaque classifieur façe à trois types de données. D'autres informations détaillées à propos des classifieurs peuvent être trouvées dans  \cite{lotte_review_2007, wieland_performance_2014, wu_top_2008}
+\figScaleX{0.9}{clf_classifier}{Entraînement puis test d'un classifieur linéaire}
 
-\subsection{Cross-validation}
-Présentation et utilisation (contexte: séparation Training et Testing set // optimisation des paramètres (classifieurs et \mf))
-
+% ********************************************
+%               DECODING ACCURACY
+% ********************************************
+\subsection{Évaluation de la performance de décodage}
+La question qui se pose maintenant, c'est comment évaluer la performance de décodage. Pour cela, on peut par exemple utiliser le \textit{\da} ou le \textit{roc}
 \begin{enumerate}
-	\item \kfold
-	
-	\kfold , \skfold , \shsp, et \sshsp
-	\item \loo
+	\item \da (DA)\\
+	L'utilisation (DA) est ce que l'on retrouve le plus fréquemment. Le calcul est simple, on compare les véritables labels avec les labels prédits par le classifieur. En faisant la somme des labels correctement prédits divisé par le nombre d'essais, on obtient un ratio qui correspond à l'acuité de décodage. Le plus souvent, ce ratio est ensuite exprimé en pourcentage. Le taux d'erreurs peut-être calculé en prenant $1-DA$. 
+	\figScaleX{0.2}{clf_da}{Calcul de l'acuité de décodage}
 
+	\item \roc (ROC) \\
+	Une autre méthode pour évaluer la performance de décodage est l'utilisation de l'aire sous la courbe (AUC) ROC \citep{ling_auc_2003,huang_using_2005,bradley_use_1997}. Celle-ci prend en compte le nombre d'essais correctement et incorrectement classifiés et pourrait donc prendre davantage de valeur possible comparé au \da.
 \end{enumerate}
-%\verb+\+figScaleX\{0.6\}\{LDA\_Lotte\_2007\}\{Principe du \verb+\+lda\}
 
 
-
-\subsubsection{Évaluation de la performance de décodage}
+% ********************************************
+%                STATISTIQUE
+% ********************************************
+\subsection{Seuil de chance et évaluation statistique de la performance de décodage}
+\label{chance_level_stat}
+De manière théorique, le seuil de chance est donné par $1/c$ où $c$ est le nombre de classes. Par exemple, un problème à quatre classes donne un seuil de chance de $25\%$. Toutefois, ce seuil de chance est atteint pour un nombre de sample $n$ infinis. En pratique, nous travaillons avec un nombre réduis de données, parfois même, avec très peu de sample. Dans ce cas, on peut obtenir des DA très élevés qui pourtant, ne sont pas pertinents. Les méthodes présentées ci-dessous ont pour but de trouver le seuil de chance associé à un jeu de donnée et de trouver pas la même occasion, la valeur $p$.
 \begin{enumerate}
-	\item \da
-	\item \roc
+	\item Loi binomiale \\
+	En faisant l'hypothèse que l'erreur de classification suit une distribution binomiale cumulative, on peut utiliser la loi suivante pour en déduire la probabilité de prédire au moins $z$ fois la classe $c$:
+	\begin{equation}
+		P(z)=\sum_{i=z}^{n}
+		\begin{pmatrix} n \\ i \end{pmatrix} \times 
+		\left(\frac{1}{c}\right)^{i} \times 
+		\left(\frac{c-1}{c}\right)^{n-1}
+	\end{equation}
+	\item Permutation \\
+	Les permutations présentent l'avantage d'être calculées à partir des données (\textit{data driven}).   \cite{ojala_permutation_2010} nous renseigne sur les différents types de permutations possibles dans le cadre du décodage:
+	\begin{enumerate}
+		\item \textit{Full permutation}: les données sont mélangés
+		\item \textit{Shuffle y}: le vecteur de label est mélangé. C'est la procédure la plus fréquemment rencontrée.
+		\item \textit{Intra-class shuffle}: les données sont mélangées à travers la dimension $features$ (colonne) et ce, à l'intérieur de chaque classe.
+	\end{enumerate}
+	Autant les méthodes $(a)$ et $(b)$ nous renseigne véritablement sur la consistance d'un décodage par rapport aux données, autant la méthode $(c)$ donne des informations un peu différentes. En effet, en cas de décodage non-significatif, on pourra soit conclure qu'il n'y a pas de consistance dans les attributs à l'intérieur des classes, soit que le classifieur est incapable d'utiliser cette l'inter-dépendance. \cite{ojala_permutation_2010} précise que dans ce cas, il n'est pas nécessaire d'utiliser un classifieur compliqué et qu'un classifieur simple devrait suffire.
 \end{enumerate}
 
-\subsubsection{Évaluation statistique de la performance de décodage}
-\begin{enumerate}
-\item Loie binomiale
-\item Permutation: data driven + différents types de permutations \citep{ojala_permutation_2010}
-\begin{itemize}
-\item Shuffle y
-\item Full-shuffle
-\item Intra-class shuffle y
-\end{itemize}
-\end{enumerate}
+Cette partie est volontairement synthétique puisqu'elle a fait l'objet d'une publication scientifique (cf. \ref{seuil_chance}). \\
+Un pipeline standard de classification est proposé en annexe (cf. \ref{clf_pip}).
 
-\subsection{Sur-apprentissage}
-
-\subsubsection{Optimisation des paramètres de classification}
-% -----------------------------------------------------------------------------
 % -> Single et Multi-features
-\section{Du single au multi-features}
-Présentation du concept
-\subsection{Single-feature}
+\subsection{Du single au multi-features}
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+%                       SINGLE ET MULI-FEATURES
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+Dans les sections précédentes, nous avons vu comment extraire des attributs de l'activité neuronale et comment les classifier. C'est ce que l'on appelle le \textit{single feature} (SF), \cad que l'on évalue la performance de chaque attribut séparément. Cette approche permet de constituer un set de features pertinents et répond à des questions neuro-scientifique. Cette démarche de SF a donc un but exploratoire. \\
+La question que l'on peut maintenant se poser, c'est quelle performance de décodage puis-je obtenir si je combine ces attributs et dans quel cas est-ce utile? C'est le multi-attributs (ou \textit{multi-features} (MF)). Tout d'abord, le MF est utilisé lorsqu'il y a soit un désir soit un besoin de performances accrue. Par exemple, on utilisera le MF dans les compétitions de décodage ou tout simplement, pour une BCI où la performance est essentielle. Si l'on construit un système de bras robotisé piloté par activité neuronale, on comprend sans peine que celui-ci doit être le plus efficace possible et donc, le MF s'impose. Le dernier cas où l'on rencontre du MF, et ce n'est pas le cas le plus glorieux, c'est le cas où il y a un besoin de pallier à des résultats de SF assez faibles. La littérature expose des \da toujours plus hauts, des méthodes toujours plus complexes et donc, pour publier correctement un article, il faut avoir des résultats au-moins aussi perspicaces. \\
+Le \mf c'est donc l'utilisation de multiples attributs pour aboutir à une classification et ce, sans sélection particulière. Individuellement, les attributs d'un même set n'auront pas la même performance. Certains seront des bons marqueurs et d'autres, n'ajouteront pas ou peu d'information. Donc en combinant ces features, il est probable que l'acuité de décodage soit moins bonne que la performance en attribut unique. Pour cela, on pourra donc utiliser des algorithmes de sélections de marqueurs (\textit{feature selection}). Le but de cette sélection est de trouver dans un set d'attributs, un sous-ensemble dont la performance groupée est meilleure que la performance individuelle. \\
+Cette sélection est une procédure exigeante où le risque de sur-apprentissage est grand. C'est la raison pour laquelle cette sélection doit être mise à l'intérieur d'une \cv. Donc on définis un set de \train et de \test grâce à la validation croisée, puis sur le \train, on lance la \textit{feature selection}. On aboutit à un sous-ensemble de marqueurs qui va servir à entraîner le classifieur. Ensuite, on sélectionne ce subset dans le \test et on test le classifieur avec ce subset. Toute ceci étant enfin répété pour chaque \textit{fold} de la \cv. A la vue de cette procédure, deux problèmes émergent:
+\begin{itemize}
+	\item La sélection d'attributs se faisant à l'intérieur des folds de la \cv, on peut très bien aboutir à des listes d'attributs différentes. Pour obtenir une information finale, on pourra donc parler des attributs les plus fréquemment choisis. Par exemple, si la sélection se fait dans un \cv 10-folds, on pourra dire que le feature 1 a été choisi 7/10, le feature 2, 3/10... 
+	\item En fonction de la sélection choisie et de la \cv, le pipeline complet peut être très (très) lourd et long.
+\end{itemize}
+\vspace{1\baselineskip}
+Les mécanismes de \textit{feature selection} peuvent être regroupés en deux grandes familles \citep{guyon_introduction_2003, liu_classification_2008, das_filters_2001}: les \textit{Filter methods} et les \textit{Wrapper methods}.
 
-\subsection{Multi-features}
+\subsubsection{\textit{Filter methods}}
+Ces méthodes sont basées sur un critère et sont indépendantes du classifieur. Parmi elles, on retrouve des outils de corrélation, d'information mutuelle ou encore de statistiques. Ces derniers outils évaluent la contribution de chaque feature de manière indépendante sans tenir compte de la corrélation entre ces features. Pour résoudre ce problème, \cite{yu_redundancy_2004, ding_minimum_2005} introduisent le \textit{minimal-redundancy-maximal-relevance} qui en plus de trouver les features les plus pertinents, va permettre d'éliminer ceux qui sont redondants. \\
+Pour terminer, ces méthodes sont effectivement indépendantes de l'algorithme de classification mais elles peuvent s'avérer optimales pour tel ou tel classifieur (ex: l'utilisation du critère de Fisher pour filtrer les features est très performant lorsqu'il est ensuite associé au \lda \citep{duda2001pattern}).
 
+\subsubsection{\textit{Wrapper methods}}
+Contrairement aux méthodes de filtrage, les \textit{wrapper} utilisent le classifieur comme outil de sélection. Le premier inconvénient que l'on peut d'ors et déjà leur reprocher, c'est que le résultat final sera donc classifieur-dépendant, donc difficile pour la généralisation. \\
+Parmi ces \textit{Wrapper methods}, on peut citer:
 \begin{enumerate}
+	\item Sélection exhaustive: on teste toutes les combinaisons de features possibles puis on sélectionne la meilleure. Procédure qui ne peut être faisable qu'en présence d'un jeu de données particulièrement restreint.
+	\item Sélection sur la statistique de décodage: on utilise le classifieur pour évaluer l'acuité de décodage de chaque feature séparément pour en déduire une valeur p (cf: \ref{chance_level_stat}). Enfin, on sélectionne les features dont la valeur p est inférieur à un seuil désiré.
+	\item Sélection séquentielle: processus où l'on va ajouter/enlever des features de manière séquentielle jusqu'à atteindre un décodage optimal. Ce type de sélection se fait suivant deux directions:
+	\begin{enumerate}
+		\item \ffs (FFS): la première étape consiste à évaluer la performance de chaque attributs. On sélectionne le meilleur que l'on va ensuite combiner en couple avec tout les features restant. On sélectionne le meilleur couple puis on teste les combinaisons des meilleures triplettes... On continu tant que la performance s'améliore. Si le DA d'une étape $i$ est inférieur au DA de l'étape $i-1$, on considère le nouveau subset de features à $i-1$.
+		\figScaleX{1}{clf_forward}{Exemple d'une \ffs appliquée sur six features}
+		\begin{center} \rule{5cm}{0.2pt} \end{center}
+		
+		\item \bfe (BFE): la philosophie est la même que pour un \textit{forward}. On classifie d'abord les $N$ features pris ensemble, puis on enlève à tour de rôle chaque marqueur. On sélectionne le subset composé de $N-1$ features ayant fournit le meilleur résultat, puis on enlève de nouveau chaque feature... L'algorithme s'arrête de la même façon que le \textit{forward}.  
+		\figScaleX{1}{clf_backward}{Exemple d'une \bfe appliquée sur six features}
+		\begin{center} \rule{5cm}{0.2pt} \end{center}
+	\end{enumerate}
+	De manière générale, il est rapporté que la FFS converge plus rapidement que la BFE \citep{guyon_introduction_2003}. Toutefois, la FFS tombe plus facilement dans des minimums locaux et donc, mène à un décodage moins bon. En effet, la \textit{forward} sélectionne pas-à-pas les meilleurs attributs, elle est donc moins ensembliste que la \textit{backward}.
+\end{enumerate}
 
-\item Sélection statistique
+\vspace{1\baselineskip}
+Les méthodes de filtrage demandent moins de ressources et représentent donc un premier choix pour les larges sets de données. En revanche, elles peuvent ne pas déceler les phénomènes de complémentarité entre features. Pour cette dernière raison, les méthodes de wrapper fournissent en général de meilleurs résultats \citep{chai_evaluation_2004}.
+
+% ********************************************
+%              CONCLUSION
+% ********************************************
+\section{Configuration pour débuter}
+
+Dans la jungle des méthodes, il peut parfois être difficile de s'y retrouver. Cette section a pour objectif de fournir une liste de méthodes conseillées pour débuter. Rien ne dit que ce sont les meilleures méthodes mais elles ont le mérite d'avoir fait leurs preuves, que ce soit dans cette thèse et surtout, dans la littérature. Gardons à l'esprit que les meilleures méthodes dépendent des données mais certaines, sont plus polyvalentes.
 \begin{enumerate}
-\item Sélection binomiale
-\item sélection permutations
-\end{enumerate}
-\item Sélection séquentielle
-\begin{enumerate}
-\item Forward selection
-\item Backward selection
-\item exhaustive selection
+	\item Pour le \pacFR: \kld avec swapping des essais de phase et d'amplitude \citep{tort_measuring_2010}
+	\item Pour la classification:
+	\begin{enumerate}
+		\item Cross-validation: 10-folds
+		\item Classifieur: \svm avec noyau linéaire \citep{vladimir1995nature,lotte_review_2007}
+		\item Évaluation statistique: permutations \citep{ojala_permutation_2010,combrisson_exceeding_2015}
+		\item Multi-features: \bfe \citep{guyon_introduction_2003}
+	\end{enumerate}
 \end{enumerate}
 
-\end{enumerate}
+
+
+

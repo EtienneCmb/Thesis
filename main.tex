@@ -3,7 +3,7 @@
 
 
 \begin{document}
- 
+
 % ==================================================================
 % OPTIONS D'AFFICHAGE
 % non-définitif (soumis aux rapporteurs) ou  définitif
@@ -67,7 +67,7 @@
  
 % ==================================================================
 % CONTENU GÉNÉRAL
-%\pagestyle{headings}
+\pagestyle{headings}
 \include{Chap1/chap1}
 \include{Chap2/chap2}
 \include{Chap3/chap3}
@@ -76,15 +76,22 @@
 
 % ==================================================================
 % CONCLUSION
+\makeatletter
+\renewcommand*{\toclevel@chapter}{-1}
 \include{Ccl/concl}
- 
+
 % ==================================================================
 % ANNEXES
+\let\cleardoublepage\clearpage
 \appendix
+\renewcommand*{\toclevel@section}{0}
 \include{Annexes/annexe}
  
 % ==================================================================
 % BIBLIOGRAPHIE
+\makeatletter
+\renewcommand*{\toclevel@chapter}{-1}
+\backmatter
 \bibliographystyle{apalike}
 \bibliography{Manuscrit}
  
