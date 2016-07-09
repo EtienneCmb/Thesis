@@ -1,7 +1,7 @@
 % #############################################################################
 %                             METHODOLOGIE
 % #############################################################################
-\chapter{méthodologie}
+\chapter{Méthodologie}
 
 Cette partie méthodologique sera divisée en deux grandes sous parties visant à présenter :
 \begin{enumerate}
@@ -408,23 +408,79 @@ Parmi ces \textit{Wrapper methods}, on peut citer:
 \vspace{1\baselineskip}
 Les méthodes de filtrage demandent moins de ressources et représentent donc un premier choix pour les larges sets de données. En revanche, elles peuvent ne pas déceler les phénomènes de complémentarité entre features. Pour cette dernière raison, les méthodes de wrapper fournissent en général de meilleurs résultats \citep{chai_evaluation_2004}.
 
+
+% -> Généralisation temporelle
+\subsection{Généralisation temporelle}
+L'introduction du \textit{single-feature} faite plus haut était une présentation générique, \cad que celle-ci est vraie quelque soit les features étudiés. On pourra donc classifier des attributs de puissance, de PAC, de phase, d'entropie... On peut également envisage l'étude un seul marqueur mais dans sa dimension temporelle. En effet, cela consiste à entraîner et tester un classifieur à différents instants temporels pour voir si le décodage varie dans le temps. Une des limitations de cette utilisation d'un classifieur est que, à chaque instant, celui-ci change. Donc on ne peut inférer aucune généralisation. Pour envisager une généralisation, il faut entraîner le classifieur à un instant puis le tester à travers toute la dimension temporelle restante. Dans ce cas, on pourra parler de généralisation mais reste encore le problème du choix de l'instant temporel qui servira à entraîner le prédicateur.\\
+\figScaleX{0.55}{waldert_timeresolved}{Exemple de décodage temporel \citep{waldert_hand_2008}. Ici, l'auteur décode 4-directions de mouvements de la main dans le temps. A chaque instant, un classifieur est créé, entraîné puis testé à ce même instant.}
+
+Pour répondre à cette question, \cite{king_characterizing_2014} introduisent une idée particulièrement esthétique visant à généraliser le comportement d'un classifieur à travers le temps. Sans trop de surprise, ils ont nommé cette méthode la \textit{généralisation temporelle}. Elle permet de répondre à deux limitations:
+\begin{itemize}
+	\item Comment généraliser le comportement d'un classifieur lors d'une étude temporelle?
+	\item Comment choisir l'instant qui servira à entraîner le classifieur et quel impact ce choix aura-t-il sur le reste du décodage temporel? 
+\end{itemize}
+La méthodologie consiste à prendre un instant $i$, entraîner le classifieur et tester celui-ci sur tout les instants. Puis, on prend l'instant suivant $i+1$, on entraîne un nouveau classifieur et on teste... Et on répète cette procédure pour tout les instants. On obtient ainsi une représentation $2D$ où, par convention, l'axe des ordonnées matérialise l'endroit où le classifieur a été entraîné (\textit{Training time}) et l'axe des abscisses pour tester ce prédicateur sur le reste de la dimension temporelle (\textit{Generalization time}). La couleur permettra de signaler la performance de décodage.
+
+\figScaleX{0.5}{king_timegene}{Exemple de généralisation temporelle \citep{king_characterizing_2014}}
+
+\todo[color=orange!100]{Il y a aussi des interprétations neuro-scientiques possibles. Comme le fait d'entraîner dans une phase et de tester dans une autre. Si ça marche, ça veut aussi dire que ces phases partagent des corrélats neuronaux. A voir si j'inclue ceci.}
+%D'un point de vue neuro-scientifique, la \textit{généralisation temporelle} apporte également son lot d'informations complémentaires, même si, l'interprétation n'est pas toujours évidente. Si l'on imagine tâche au cours de laquelle se succèdent des phases (eg. Phase de repos/préparation motrice/exécution motrice). Ce n'est pas très étonnant si on entraîne
+
+
 % ********************************************
 %              CONCLUSION
 % ********************************************
 \section{Configuration pour débuter}
-
 Dans la jungle des méthodes, il peut parfois être difficile de s'y retrouver. Cette section a pour objectif de fournir une liste de méthodes conseillées pour débuter. Rien ne dit que ce sont les meilleures méthodes mais elles ont le mérite d'avoir fait leurs preuves, que ce soit dans cette thèse et surtout, dans la littérature. Gardons à l'esprit que les meilleures méthodes dépendent des données mais certaines, sont plus polyvalentes.
-\begin{enumerate}
-	\item Pour le \pacFR: \kld avec swapping des essais de phase et d'amplitude \citep{tort_measuring_2010}
-	\item Pour la classification:
+
+\vspace{1\baselineskip}
+
+\todo[inline,caption={},color=blue!20]{
+	\textbf{Couplage phase-amplitude :} \\
+	\kld avec swapping des essais de phase et d'amplitude \citep{tort_measuring_2010}
+}
+
+\vspace{1\baselineskip}
+
+\todo[inline,caption={},color=green!20]{
+	\textbf{Classification :} \\
 	\begin{enumerate}
 		\item Cross-validation: 10-folds
 		\item Classifieur: \svm avec noyau linéaire \citep{vladimir1995nature,lotte_review_2007}
 		\item Évaluation statistique: permutations \citep{ojala_permutation_2010,combrisson_exceeding_2015}
 		\item Multi-features: \bfe \citep{guyon_introduction_2003}
 	\end{enumerate}
+}
+
+% ********************************************
+%              BRAINPIPE
+% ********************************************
+\section{Implémentation des méthodes présentées}
+A force d'implémenter différentes méthodes afin de les tester, il se trouve que cet amas de fonction a formé assez naturellement une \textit{toolbox}. Avec un peu de mise en forme, une uniformisation à travers les fonctions et la constitution d'une aide, nous avons décidé de mettre cet ensemble d'outils \textit{online} et en libre accès. \\
+La toolbox s'appelle \brainpipe, entièrement codée en Python. Le choix de python a également été mûrement réfléchis. La première version était en Matlab. Toutefois, Python présente les avantages d'être libre, beaucoup plus souple et intuitif et bien plus puissant. De plus, la communauté s'est appropriée ce langage et est particulièrement réactive. Quant à la documentation, elle est excellente et permet d'apprivoiser ce langage très rapidement. Autre point fort qui est une conséquence du libre, c'est la multitudes d'outils existants. Par exemple, pour la classification, il existe \textit{scikit-leanr} dont la qualité est sans comparaison possible avec Matlab. Enfin, les derniers outils à la pointe (tel que \textit{tensorflow} de Google) ne seront jamais proposé en Matlab. Le Julia (qui est un autre langage de programmation) semble particulièrement prometteur mais, étant très jeune et ne disposant que d'une petite communauté, il a été écarté. Autre point, les outils que nous avons présenté dans cette partie méthode peuvent nécessiter énormément de ressources. \brainpipe a donc entièrement été développé pour le calcul parallèle qui est intégré par défaut. A titre de comparaison, le calcul du PAC sur tout un jeux de données a pris une semaine Matlab, contre une journée en Python.
+
+\vspace{1\baselineskip}
+\brainpipe est dédiée à la classification de signaux cérébraux. La construction globale peut être résumée avec les points suivants:
+\begin{itemize}
+	\item \textit{Pre-processing}: pré-traitement de données (filtrage, re-référencement, informations anatomiques en fonction de coordonnées MNI...)
+	\item \textit{Features}: extraction d'une large variété de features (amplitude, puissance, phase, PAC, PLV, ERPAC, entropie...)
+	\item \textit{Classification} des signatures cérébrales: repose sur \textit{scikit-learn} pour l'implémentation des algorithmes de classification. \brainpipe sert à faire le lien entre l'analyse de données neuro-scientifiques et le \textit{machine-learning}. Il y a également un module dédié au \textit{multi-features}.
+	\item \textit{Statistics}: tout les attributs disposent des méthodes statistiques ainsi que pour la classification et la correction multiple. 
+	\item \textit{Visualization}: enfin, un ensemble d'outils de visualisation sont également disponible afin de faciliter les représentations graphiques.
+\end{itemize}
+
+\vspace{1\baselineskip}
+Liens vers \brainpipe:
+\begin{itemize}
+	\item Téléchargement: \url{https://github.com/EtienneCmb/brainpipe}
+	\item Documentation en ligne: \url{https://etiennecmb.github.io/}
+\end{itemize}
+
+
+\begin{enumerate}
+	\item \textit{ipywksp}: pour les personnes désirant ou utilisant déjà python, un environnement de développement particulièrement agréable et puissant s'impose de plus en plus. Ce projet s'appelle 
+	\href{http://jupyter.org/}{Jupyter}. Pour l'introduire brièvement, c'est un notebook dans lequel le code est intégré dans des cellules qui peuvent être lancées individuellement. Une des lacunes de ce notebook pour les utilisateurs Matlab, c'est le manque d'un \textit{workspace} pour voir les variables en cours. \textit{ipywksp} est un petit module, également développé dans cette thèse qui vient combler ce manque. Toujours en libre accès: \url{https://github.com/EtienneCmb/ipywksp}  
+	\item \textit{visbrain}: enfin, un dernier module Python qui est en cours de développement mais qui proposera une interface graphique pour toute visualisation nécessitant un cerveau MNI $3D$ (connectivité, projection corticale...). Il existe de nombreux logiciels existants déjà. Le but de celui-ci sera de permettre une intégration totale avec \brainpipe. Le projet débute, mais le lien suivant permet de suivre son évolution: \url{https://github.com/EtienneCmb/visbrain} 
 \end{enumerate}
-
-
 
 

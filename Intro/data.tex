@@ -1,10 +1,128 @@
 % #############################################################################
 %                             DONNEES EXPERIMENTALES
 % #############################################################################
-\chapter{données expérimentales}
-\todo[color=green!40]{Ajouter le tableau de Marcela}
-% -----------------------------------------------------------------------------
-\section{Données "Center-out"}
+\chapter{Données expérimentales}
+Durant cette thèse, l'exploration s'est faite chez l'Homme par le biais, principalement, de données de type \seeg (SEEG). Ces données rares de très grande qualité (cf. \ref{seeg_av-in}) ont été acquise avant le début de la thèse, ce qui a permis de rentrer dans le vif du sujet très rapidement, après une période d'acclimatation aux différents traitements, propres à ce type d'enregistrement. D'autres types tel que l'EEG, la MEG ou les micro-électrodes ont également été approchés mais de manière ponctuelle, comme ce fût le cas dans l'Étude $1$ (cf. \ref{seuil_chance}) ou dans différentes collaborations. Toutefois, étant donné que le temps consacré à ces données ne représente qu'une faible portion du travail total, nous allons ici nous concentrer uniquement sur l'intra.
+
+\vspace{1\baselineskip}
+Pour commencer, nous verrons ce que l'analyse de la \seeg a de particulier (richesse des données, qualité, les traitements associés, les avantages et les limitations). Enfin, nous verrons concrètement les enregistrements qui ont été utilisés dans le cadre de cette thèse.
 
 % -----------------------------------------------------------------------------
-\section{Autres données}
+% -----------------------------------------------------------------------------
+%                     DONNEES INTRA
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+\section{Données intracrâniennes}
+
+% -> Acquisition des données
+\subsection{Acquisition}
+La première question que l'on est en droit de se poser, c'est comment est-il possible de travailler, chez l'Homme, avec des enregistrements qui nécessitent une implantation invasive, \cad dans le cortex? Certaines personnes présentent des formes agressives d'épilepsies, pouvant s'avérer pharmacorésistantes. En fonction de la localisation du foyer épileptogène, les méfaits engendrés par les décharges épileptiques peuvent être variés. Dans ce cas, il est nécessaire de localiser ce foyer avec, de préférence, des techniques non-invasives telles que l'EEG ou la MEG. Mais si ces dernières ne permettent pas une localisation précise le patient sera implanté avec des macro-électrodes comme la SEEG pour tenter de localiser puis d'enlever ce foyer par intervention chirurgicale. Cette implantation a un second objectif, déterminer quel est le rôle fonctionnel de la structure lésée (rôle moteur, langage, vision...). C'est dans ce contexte que les chercheurs proposent au patient de participer à une étude scientifique.
+
+% -> Avantages et limitations
+\subsection{Avantages et limitations des données intracrâniennes}
+\label{seeg_av-in}
+Le paragraphe précédent met en exergue la rareté de ces données. De plus, ce type d'acquisition enregistre l'activité cérébrale d'une population relativement restreinte de neurones. En conséquence, on peut espérer que ce petit groupe s'active dans des processus précis et ainsi, étudier des phénomènes fins. Enfin, le rapport signal sur bruit (RSB) de la SEEG est excellent, ce qui doit permettre l'étude de processus, même en essais unique là où d'autres types d'enregistrements auront besoin d'une large banque d'essais avant de pouvoir constater l?émergence d'un phénomène. \\
+La SEEG présente toutefois quelques limitations que l'on peut nuancer. Le problème majeur est certainement la généralisation d'un phénomène ou la reproductibilité à travers les sujets. La pathologie est propre à chaque patient, donc son implantation aussi. Ce qui signifie qu'il n'y a aucune chance que plusieurs sujets présentent rigoureusement la même implantation. Pour contourner cette limitation, ou pourra utiliser:
+\begin{itemize}
+	\item Des régions d'intérêt (ROI): on va regrouper les électrodes des différents sujets par "proximité" en faisant l'hypothèse que celles-ci s'activent de façon similaire face à un processus. Ces ROI pourront être par exemple les gyrus ou les aires de Brodmann. Bien sûr, ce que l'on gagne on généralisation, on le perd en précision.
+	\item Projection corticale: autour de chaque électrode, on définit une sphère d'intérêt (généralement 10 millimètres de rayon) puis on prend l'intersection de ces sphères avec la surface du cerveau. Cette technique permet une visualisation des activités proches de la surface à travers les sujets mais on perd de la lisibilité sur ce qui se passe en profondeur.
+\end{itemize}
+Une utilisation combinée des ROI et de la projection corticale permet de palier, au moins partiellement, au problème de reproductibilité inter-sujets. \\
+Autre limitation, on ne dispose que d'une couverture partielle puisque le neuro-chirurgien implante une quantité limitée d'électrodes. Ce dernier point est traité en augmentant le nombre de sujets. Enfin, la dernière limitation que l'on soulèvera ici, concerne le fait de travailler sur un cerveau "malade" empêchant donc une généralisation à des sujets sains. On limite ce problème par un ensemble de prétraitements \citep{jerbi_task-related_2009} décris dans le prochain paragraphe. \\
+Un dernier point que l'on peut argumenter à la fois comme avantage ou limitation, c'est de ne pas pouvoir contrôler l'implantation pour étudier un phénomène précis. Par exemple, si l'on analyse l'encodage moteur, on s'attendrait à concentrer les efforts sur le cortex moteur primaire ou pré-moteur. Or l'implantation SEEG peut très bien contenir du frontal, du pariétal, du temporal. Là où finalement on peut considérer ça comme un avantage, c'est que l'on a accès à un ensemble de structures jugées non-primordiales mais dont l'ajout pourrait permettre la compréhension d'un processus de manière plus globale.
+
+% -> Pré-processing
+\subsection{Prétraitements}
+Le premier prétraitement appliqué a été une réjection des sites bruités ou présentant une activité pathologique, \cad des décharges épileptiques. C'est par cette inspection manuelle que l'on augmente le potentiel de généralisation aux sujets sains. \\
+Autre prétraitement, les données peuvent être bipolarisées comme c'est le cas dans de nombreuses études \citep{bastin_direct_2016, ossandon_transient_2011, jerbi_task-related_2009}. La bipolarisation part du principe que deux sites proches enregistrent des activités neuronales différentes mais que toute source de bruit, ou influence de sources lointaines, se retrouvera sur ces deux sites. La technique de bipolarisation consiste donc à soustraire les activités neuronales de sites proches ce qui a pour effet de supprimer la partie commune, le bruit. Par exemple prenons une électrode contenant les sites $k9$, $k10$, $k11$ et $k12$. Après bipolarisation, on considérera les sites matérialisés par $k10-k9$, $k11-k10$ et $k12-k11$. Les bénéfices de la bipolarisation peuvent être résumés par:
+\begin{enumerate}
+	\item Limitation des influences des sources lointaines et de la tension secteur (50hz)
+	\item Augmentation de la spécificité qui, pour un site bipolarisé, est estimée à 3mm \citep{kahane_bancaud_2006, lachaux_intracranial_2003, jerbi_task-related_2009}
+\end{enumerate} 
+
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+%                            DONNEES CENTER OUT
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+\section{Données d'étude}
+Trois jeux de données intracrâniaux ont été exploré:
+\begin{enumerate}
+	\item \co: étude de l'encodage et du décodage des actions et des intentions motrices lors de mouvements de main
+	\item \textit{Occulo}: étude des intentions et décision de mouvements oculaires
+	\item \textit{Emotions}: étude de l'encodage des émotions
+\end{enumerate}
+
+% -> Données Center-out
+\subsection{Données \co}
+C'est le jeu de données qui a été le plus largement exploité. En effet, celui-ci a servis à étudier l'encodage (cf. \ref{Etude2_encodage}) et le décodage (cf. \ref{Etude3_decodage}) des actions motrices chez l'homme. 
+
+% -> Implantation
+\subsubsection{Descriptif des données}
+Six sujets (six femmes), implantés au département de l'épilepsie de l'hôpital de Grenoble ont donné leur consentement écrit pour passer l'expérience, sous la supervision du personnel médical. Le tableau \ref{subject_table} résume les détails clinique des différents sujets. \\
+
+\begin{figure}[H]
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|}
+		  \hline
+		   & Dominance & Age & Genre & Zone épileptique \\
+		   \hline
+		   P1 & D & 19 & F & Frontal (RH) \\
+		   \hline
+		   P2 & D & 23 & F & Frontal (LH) \\
+		   \hline
+		   P3 & D & 18 & F & Frontal (RH) \\
+		   \hline
+		   P4 & D & 18 & F & Frontal (RH) \\
+		   \hline
+		   P5 & D & 31 & F & Insula (RH) \\
+		   \hline
+		   P6 & D & 24 & F & Frontal (LH) \\
+		   \hline
+		  \multicolumn{5}{|l|}{Moyenne: $22.17 \pm 4.6$}\\
+		  \hline
+		\end{tabular}
+	\end{center}
+	\caption{Détails cliniques des sujets ayant participé à la tâche \co}
+\end{figure}
+\label{subject_table}
+
+% -> Matériel d'acquisition
+\subsubsection{Matériel d'acquisition}
+De 12 à 15 multi-électrodes ont été implantées dans différentes structures. Chaque multi-électrode possède entre 10 et 15 sites mesurant 0.8mm et séparés de 1.5mm. La localisation anatomique des électrodes s'est faite en utilisant le schéma d'implantation (exemple en annexe \ref{schema_implantation}) et l'atlas proportionnel de Talairach et Tournoux \citep{talairach_referentially_1993}. La visualisation de la pré-implantation s'est faite par $IRM-3D$ et un $CT-scan$ a été utilisé pour la post-implantation. Enfin, un $IRM$ a également servis pour visualiser les électrodes implantées dans la matière blanche. Les coordonnées Talairach ont été déduites du $CT-scan$ puis ont été transformées en MNI afin de pouvoir les superposer dans un cerveau standard (cf. figure ci-dessous).\\
+Le système Micromed a été utilisé pour visionner l'acquisition de l'activité neuronale. Une électrode prise dans la matière blanche a été prise comme référence et un filtrage \textit{passband} entre $[0.1, 200hz]$ a également été effectué \textit{online}. La fréquence d'échantillonnage est de $1024hz$.
+
+\figScaleX{1}{data_Cover}{Implantation intracrâniale et couverture corticale de six sujets épileptiques ayant passés la tâche \co}
+
+
+% -> Descriptif de la tâche
+\subsubsection{Descriptif de la tâche}
+La tâche est composée de trois phases:
+\begin{enumerate}
+	\item Phase de repos: on demande au sujet de rester immobile pendant une durée de une seconde
+	\item Phase de préparation motrice ($\textbf{CUE 1}$): une direction est imposée à l'écran (haut/bas/gauche/droite). On demande au sujet de se préparer pendant 1.5s à bouger la souris dans la direction imposée.
+	\item Phase d'exécution motrice: le sujet exécute le mouvement en bougeant la souris du centre à l'extrémité de l'écran indiquée (environ 1.5s) puis de revenir vers le centre.
+\end{enumerate}
+\figScaleX{1}{data_Task}{Descriptif de la tâche \co}
+
+Cette tâche à conduit à deux études essentielles:
+\begin{itemize}
+	\item L'étude de l'encodage des intentions motrices (cf. \ref{Etude2_encodage}): on étudiera le décodage du repos vs préparation, repos vs exécution et de la préparation vs exécution
+	\item L'étude du décodage des directions de mouvement (cf. \ref{Etude3_decodage}) que ce soit pendant la préparation ou pendant l'exécution motrice.
+\end{itemize}
+
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+%                                A VOIR
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+\subsection{Autres données}
+\todo[inline,caption={},color=red!20]{
+  \begin{itemize}
+	\item Occulo: Données occulo mais un seul sujet donc pas super cool. De plus, les résultats sont un peu vieux et mériteraient de se pencher dessus une fois pour toute.
+	\item Emotions: Ce serait pas mal que j'ai quelques résultats sur les émotions, histoire de montrer aussi un peu la diversité des données utilisées.
+  \end{itemize}
+}
+
+
+
