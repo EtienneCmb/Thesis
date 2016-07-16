@@ -3,34 +3,92 @@
 % #############################################################################
 \chapter{Présentation de la thématique}
 
+En 1964, Dr. Grey Walter connecte des électrodes directement dans le cortex moteur d'un patient et lui demande de presser un bouton pour faire avancer un rétro-projecteur. En même temps, il enregistre l'activité neuronale de telle sorte que elle aussi, puisse le faire avancer. Là où l'expérience devient remarquable, c'est que le rétro-projecteur avance avant que le patient ne presse le bouton ! Tout l'appareil musculaire du sujet est court-circuité et le contrôle se fait sans mouvement. Contrôler par la \textit{pensée}, un sujet de science fiction qui devient une réalité.\\
+Cette anecdote décrite par \cite{graimann_braincomputer_2009}, permet de placer la naissance des \icm (ICM) dans l'histoire. C'est le point d'entrée qui a ensuite conduit une grande diversité de chercheurs à se passionner pour ce sujet. \\
+
 % -----------------------------------------------------------------------------
-% Enregistrement de l'activité neuronale
-\section{Enregistrement de l'activité neuronale}
+% -> Définition d'une ICM
+\section{\icm: définition et objectifs}
 
-\begin{itemize}
-\item Présentation de chacun des types de données
-\item Résolution et RSB
-\item Avantages // inconvénients
-\end{itemize}
+\subsection{Interactions naturelles avec l'environnement}
+Pour interagir avec son environnement, l'individu se sert des voies de communications naturelles, \cad via son système nerveux et musculaire. Le processus de communication débute par une intention qui active certaines régions dans le cerveau. Il en résulte un signal cérébrale qui est ensuite envoyé par le système nerveux périphérique en directions des muscles. C'est ce processus simplifié qui permet à une personne d'interagir avec ce qui l'entoure.
 
-\citep{waldert_review_2009}
-\figScale{Waldert_2009_recording}{Techniques d'enregistrement de l'activité cérébrale}
+\subsection{ICM: une communication alternative}
+Une ICM (ou BCI en anglais pour \textit{Brain Computer Interface}) est un autre système de communication où les voies naturelles sont cout-circuitées. Au lieu de passer par le système nerveux puis musculaire, le signal cérébral est directement intercepté au niveau du cerveau et va ensuite être transformé en commandes. Une ICM est donc un système permettant de traduire une activité neuronale en commande extérieure. Le terme \textit{traduire} est à prendre au sens linguistique \cad que les signaux cérébraux forment un langage, composé de règles, de motifs ou \textit{pattern}, que l'on va essayé de décoder (via un ordinateur) pour les transformer en opérations. D'où le terme "\icm".
 
-\subsection{Enregistrement non-invasif}
-\subsubsection{\eeg}
-\subsubsection{\meg}
+\subsection{Composantes d'une ICM}
+\cite{pfurtscheller_rehabilitation_2008} et \citep{graimann_braincomputer_2009} introduisent quatre éléments qui composent une ICM:
+\begin{enumerate}
+	\item Enregistrer l'activité directement depuis le cerveau. Cet enregistrement pourra être invasif ou non-invasif (cf. \ref{invasif_non-invasif})
+	\item Générer un retour ou \textit{feedback} pour l'utilisateur
+	\item L'enregistrement et le \textit{feedback} doivent être en temps réel
+	\item Enfin, l'interface doit être contrôlable par l'utilisateur, de manière active, via un ensemble d'intentions. 
+\end{enumerate}
+A titre d'exemple et pour illustrer ce dernier point, un utilisateur pourrait par exemple décider de bouger un curseur de souris sur un écran en imaginant des mouvements soit de la main gauche soit de la main droite.
 
-\subsection{Enregistrement invasif}
-\subsubsection{\sua}
-\subsubsection{\mua}
-\subsubsection{\seeg}
-\subsubsection{\ecog}
+\figScaleDesciption{0.7}{Pfurtscheller2008_SchemaICM}{Schéma d'une \icm \citep{pfurtscheller_rehabilitation_2008}}{L'activité neuronale est enregistrée (Signal acquisition) puis nettoyée (Preprocessing). Ensuite, on extrait des motifs ou patterns qui caractérisent la commande que souhaite envoyer le sujet (Feature extraction). Enfin, la machine tente de reconnaître ces motifs (Classification) et de les transformer en commande (Application interface) \citep{pfurtscheller_rehabilitation_2008}}
+
+\subsection{Acquisition de l'activité neuronale}
+L'acquisition de l'activité neuronale constitue la première étape d'une ICM. Deux paramètres permettent de décrire ces différentes techniques:
+\begin{enumerate}
+	\item L'accessibilité: \cad si cette technique est plus ou moins facile à mettre en place. 
+	\item La qualité: \cad le rapport signal sur bruit (RSB)
+\end{enumerate}
+Si la technique d'enregistrement n'est pas facilement accessible, cela pourrait limiter le nombre de sujets potentiel pour l'étude. La qualité quant à elle va permettre d'avoir accès à des signaux cérébraux de plus ou moins grande qualité ce qui va influer sur la performance et sur les limitations d'une ICM. \\
+Les différents types d'acquisition peuvent être différenciés par leur degrés de pénétration dans le corps. Les enregistrements dits \textit{invasifs} vont nécessiter une intervention chirurgicale mais donnent accès à des signaux de grande qualité. Les enregistrements \textit{non-invasifs} sont globalement plus faciles à mettre en place car ne nécessitant aucune chirurgie mais la qualité du signal est moindre car l'activité neuronale est enregistrée en dehors de la boîte crânienne. \\
+Au sein de ces deux catégories, on trouvera un ensemble de méthodes d'acquisition qui se différencient par la taille des populations de neurones qu'elles enregistrent ou par le type de signal.
+
+\subsubsection{Enregistrements invasifs}
+On parlera d'intracrânien pour les enregistrements à l'intérieur de la boîte crânienne puis d'intracortical pour des électrodes implantées dans le cortex \citep{jerbi_task-related_2009, engel_invasive_2005}. Étant donné que les techniques ci-dessous nécessitent une intervention chirurgicale, \\
+
+\textbf{\sua (SUA)} et \textbf{\mua (MUA)} : ces micro-électrodes déposées directement au contact de neurones, disposent de la plus haute résolution et enregistrent des décharges neuronales. SUA et MUA se distinguent par la taille des populations enregistrées.\\
+
+\textbf{\seeg (SEEG)} : macro-électrodes enregistrant des populations plus larges que les micro-électrodes. contrairement à la SUA ou MUA où l'on peut compter le nombre de fois qu'un ou plusieurs neurones déchargent, la SEEG enregistre des potentiels électriques $(\mu V)$. \\
+
+\textbf{\ecog (ECoG)} : grille flexible composée d'une matrice d'électrodes. Cette grille est ensuite déposée à la surface corticale. Parce que cette méthode n'est pas intracortical elle est dite \textit{semi-invasive}.
+
+\subsubsection{Enregistrements non-invasifs}
+Les méthodes \textit{non-invasives} représentent le but ultime de l'implémentation concrète d'une \icm. En effet, ne nécessitant aucune intervention chirurgicale, leur utilisation est très répandue. Actuellement, bien qu'ayant une bonne résolution temporelle permettant ainsi de capturer les phénomènes courts, elles souffrent encore d'un manque de résolution spatiale et d'un rapport signal sur bruit plus faible que les techniques invasives. \\
+
+\textbf{\eeg (EEG)} : c'est la technique la plus utilisée dans le domaine des ICM pour son aspect pratique et portatif. On dispose à la surface de la boîte crânienne un ensemble d'électrodes qui enregistrent l'activité électrique émanant de populations larges de neurones. On trouve même denouveaux systèmes sans fils, prometteurs.\\
+
+\textbf{\meg (MEG)} : autre méthode \textit{non-invasive} mais nettement moins portable que l'EEG, la MEG enregistre les champs magnétiques résultant de l'activité électrique du cerveau. Ces champs magnétiques peuvent être jusqu'à 10 milliards de fois plus faibles que le champs magnétique terrestre. L'aspect inamovible de la MEG limite son utilisation pour les ICM mais on trouve quand même quelque études ayant testé son utilisation \citep{mellinger_meg-based_2007, waldert_hand_2008}.
+
+\figScaleDesciption{1}{Waldert_2009_recording}{Méthodes d'acquisition de l'activité cérébrale \citep{waldert_review_2009}}{Méthodes d'acquisition de l'activité cérébrale \citep{waldert_review_2009} classées par invasivité. La figure indique également la taille des populations de neurones enregistrés ainsi que la résolution spatiale intimement liée à l'invasivité.}
+
+\subsection{Neuro-réhabilitation et handicap moteur}
+Prélever directement l'activité neuronale et donc, \textit{bypasser} les voies naturelles, permet de s'affranchir d'éventuelles limitations physiologiques. C'est pourquoi les ICM représentent un enjeu majeur pour la réhabilitation motrice ou handicap moteur ou encore pour la communication palliative.
+Les applications concrètes des \icm visent donc les personnes disposant de leurs capacités cognitives mais qui sont privées de facultés motrices. \\
+Par exemple, le \textit{syndrome d'enfermement} ou \textit{locked-in syndrome} qui surviennent majoritairement à la suite d'un accident vasculaire cérébrale. Les personnes touchées par ce syndrome sont pleinement consciente de leur corps, de l'environnement, ils peuvent ressentir les sensations de toucher et de douleur mais n'ont plus de facultés motrices, hormis peut-être, les mouvements de paupières ou des yeux. Un autre exemple est celui de la la sclérose latérale amyotrophique (ou SLA) qui est une dégénérescence des neurones moteur. Progressivement, les personnes atteintes de SLA perdent l'usage des bras, des jambes, de la parole des muscles faciaux et enfin de la déglutition. Toutefois, a l'instar du \textit{locked-in syndrome}, la conscience et les facultés cognitives demeurent intactes. \\
+
+SLA et \textit{locked-in syndrome} ne sont que deux exemples expliquant l'intérêt social du développement des ICM. Redonner un peu de contrôle ou établir un canal de communication avec les familles des patients expliquent l'engouement qui existe depuis maintenant plus de 40 ans pour les ICM.
+
+% Une description détaillée des ICM existantes est proposée dans la section \ref{etat_de_lart_ICM}.
+
 
 % -----------------------------------------------------------------------------
 % Etat de l'art
 \section{État de l'art des interfaces cerveau-machine}
+\label{etat_de_lart_ICM}
+
+Mettre des ICM plus récentes voir faire un schéma récapitulatif à mettre en annexe. Good idea
+
 \citep{bekaert_les_2009}
 \figScale{bekaert_2009_ICM}{Pipeline général d'un \icm}
+
+\subsection{Les différents types d'\icm}
+Okokok, ref vers ces différents types
+\subsubsection{ICM \textit{synchrones} et \textit{asynchrones}}
+Intro blabla \\
+\textbf{ICM \textit{synchrones}: } description\\
+\textbf{ICM \textit{asynchrones}: } description
+
+\subsubsection{ICM \textit{invasives} et \textit{non-invasives}}
+\label{invasif_non-invasif}
+Blabla intro \\
+\textbf{ICM \textit{invasives} :} description \\
+\textbf{ICM \textit{non-invasives} :} description \\
+La partie qui va suivre introduit les différents types d'enregistrement cérébraux.
 
 \subsection{ICM non-invasives}
 P300 speller
@@ -45,14 +103,14 @@ okok
 
 % -----------------------------------------------------------------------------
 \section{Encodage et décodage moteur: bases physiologiques}
+Pomper les résultas de rodrigo + besserve + inclure schéma global du cerveau
+
+% -----------------------------------------------------------------------------
+\section{Intention, exécution et imagerie motrice}
 La figure \ref{fig:hanakawa_2008}   représente  une   trajectoire  d'un
 processus markovien de saut, avec les notations associées.
 \citep{hanakawa_motor_2008}
 \figScale{hanakawa_2008}{Comparatif}
-
-% -----------------------------------------------------------------------------
-\section{Intention et exécution}
-okok
 
 % -----------------------------------------------------------------------------
 \section{Delayed task: protocole expérimental}

@@ -244,7 +244,7 @@
 % Le résumé + le minitoc éventuel
 \newenvironment{chapintro}{%
   \if@sommairechap \nomtcrule \vspace{1.5cm} \minitoc[l] \fi}{%
-  \cleardoublepage
+%  \cleardoublepage
 }
  
 % chapitre numéroté
@@ -399,6 +399,17 @@
     \label{fig:#2}
   \end{figure}
 }
+
+\newcommand{\figScaleDesciption}[4]{
+  \begin{figure}[H]%[htp!]
+  	\centering
+  	\captionsetup{justification=centering}
+    \includegraphics[width=#1\textwidth]{./figures/#2}
+    \caption[#3]{#4}
+    \label{fig:#2}
+  \end{figure}
+}
+
 \newcommand{\figScale}[2]{
  \figScaleX{0.8}{#1}{#2}
 }
@@ -432,7 +443,7 @@
 \newcommand{\brainpipe}{\textbf{brainpipe} }
 
 % Thématique
-\newcommand{\icm}{Interface Cerveau-Machine}
+\newcommand{\icm}{Interface Cerveau-Machine }
 
 % Classification
 \newcommand{\cv}{cross-validation }

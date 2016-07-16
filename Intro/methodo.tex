@@ -3,6 +3,7 @@
 % #############################################################################
 \chapter{Méthodologie}
 
+\todo[color=red!100]{Inclure une meilleure description des figures}
 Cette partie méthodologique sera divisée en deux grandes sous parties visant à présenter :
 \begin{enumerate}
 	\item L'extraction des features: présentation des méthodes utilisées dans le cadre de l'extraction d'attributs issus de l'activité neuronale. De manière générale, nous avons étudiés des attributs spectraux comprenant:
@@ -24,6 +25,7 @@ Comme nous l'avons décrit précédemment, l'objectif du décodage de l'activité neu
 Tout les attributs testés dans le cadre de cette thèse sont des attributs spectraux, donc issus de bandes de fréquences. La plupart de ces outils partagent donc une partie méthodologique commune à savoir, le filtrage. De plus, la plupart sont extraits en utilisant la transformée d'Hilbert. Pour éviter une redondance à travers les attributs, nous allons tout d'abord introduire quelques pré-requis.
 
 \subsection{Pré-requis}
+\todo[color=red!100]{Cette partie ne devrait pas figurer dans l'extraction des features}
 % ********************************************
 %               PRE-REQUIS
 % ********************************************
@@ -286,8 +288,8 @@ Pour en revenir à la question du machine learning, on définit un une partie des 
 Se pose maintenant la question de comment l'on choisit de couper les données en \train et \test. Une méthode serait de prendre une partie des données de manière aléatoire, de la définir comme \train et sur tester sur les données restantes. Toutefois, ce choix ne représenterai qu'une partie des données. Une méthode plus exhaustive et plus rigoureuse consiste à utiliser une \cvfr (ou \cv).
 
 \subsubsection{Validation-croisée}
-La \cvfr (CV) est une procédure permettant de séparer les données en \train et \test. Pour comprendre comment cela fonctionne, prenons un ensemble composé de $N$ échantillons. Il existe plusieurs de CV mais de manière générale, toutes dérivent du même principe qui est la \cv \kfold \citep{efron1994introduction, kohavi1995study}. On coupe les $N$ échantillons en $k$ paquets de tailles égales (ou proches). Ensuite, le classifieur est entraîné sur $k-1$ paquets puis on le test sur le paquet restant. Cette procédure est ensuite appliquée $k$ fois afin que chaque paquet passe au \test. On dira que la \cv est \textit{stratified} si la proportion de classes représentées au sein de chaque dossier est approximativement uniforme à travers les folds. on pourra aussi rencontrer le terme \textit{shuffle} si il y a un mélange supplémentaire. Tout cela nous emmène à des CV k-fold, k-fold stratified, k-fold shuffle ou encore k-fold stratified shuffle. \\
-Concernant le nombre de folds, on rencontre en générale 3 valeurs à travers la littérature: 3-folds, 5-folds ou 10-folds \citep{latinne2001limiting, yanagisawa_neural_2009, besserve_classification_2007, waldert_hand_2008}. Un cas particulier, mais si le nombre de folds $k=N$, ça revient à entraîner la machine sur $N-1$ échantillons tester sur celui qui a été isolé et on répète cette procédure $N$ fois. C'est ce que l'on appelle le \textit{\loo}. Toutefois cette dernière possède une grande variance et peut conduire à des estimations non fiables \citep{efron1994introduction, kohavi1995study}. \\
+La \cvfr (CV) est une procédure permettant de séparer les données en \train et \test. Pour comprendre comment cela fonctionne, prenons un ensemble composé de $N$ échantillons. Il existe plusieurs de CV mais de manière générale, toutes dérivent du même principe qui est la \cv \kfold \citep{efron1994introduction, kohavi_study_1995}. On coupe les $N$ échantillons en $k$ paquets de tailles égales (ou proches). Ensuite, le classifieur est entraîné sur $k-1$ paquets puis on le test sur le paquet restant. Cette procédure est ensuite appliquée $k$ fois afin que chaque paquet passe au \test. On dira que la \cv est \textit{stratified} si la proportion de classes représentées au sein de chaque dossier est approximativement uniforme à travers les folds. on pourra aussi rencontrer le terme \textit{shuffle} si il y a un mélange supplémentaire. Tout cela nous emmène à des CV k-fold, k-fold stratified, k-fold shuffle ou encore k-fold stratified shuffle. \\
+Concernant le nombre de folds, on rencontre en générale 3 valeurs à travers la littérature: 3-folds, 5-folds ou 10-folds \citep{latinne2001limiting, yanagisawa_neural_2009, besserve_classification_2007, waldert_hand_2008}. Un cas particulier, mais si le nombre de folds $k=N$, ça revient à entraîner la machine sur $N-1$ échantillons tester sur celui qui a été isolé et on répète cette procédure $N$ fois. C'est ce que l'on appelle le \textit{\loo}. Toutefois cette dernière possède une grande variance et peut conduire à des estimations non fiables \citep{efron1994introduction, kohavi_study_1995}. \\
 Un autre cas particulier, est celui du \textit{Leave-p-Subject-Out} \citep{vidaurre2009time, lajnef_learning_2015} qui consiste à entraîner sur $p$ sujets et tester sur les sujets restants. Cette procédure est particulièrement exigeante puisqu'elle nécessite d'avoir une certaine reproductibilité entre les sujets. Cette \cvfr est fréquente avec des données EEG mais impossible à mettre en  \oe{}uvre pour la sEEG à cause de l'implantation unique de chaque sujet. 
 \figScaleX{1}{clf_cv}{Exemple d'une cross validation 3-folds}
 
@@ -305,7 +307,7 @@ Un autre cas particulier, est celui du \textit{Leave-p-Subject-Out} \citep{vidau
 	
 	% SUPPORT VECTOR MACHINE
 	\item \svm (SVM)\\
-	Le SVM \citep{boser_training_1992, cortes_support-vector_1995, vladimir1995nature} utilise également un hyperplan pour séparer deux classes. Toutefois, cet hyperplan optimal est trouvé en maximisant les marges (ou distance) entre ce plan et les attributs les plus proches. Le SVM possède une particularité, il utilise un noyau qui peut permettre de résoudre les problèmes linéaire (\textit{linear SVM}) mais également les problèmes non-linéaire en projetant les données dans un espace de dimension supérieure (\textit{kernel trick}). Un noyau que l'on retrouve assez régulièrement est le \textit{Radial Basis Function (RBF)} \citep{burges1998tutorial}. Les problèmes multi-classes peuvent également être traités en \textit{One-vs-All}
+	Le SVM \citep{boser_training_1992, cortes_support-vector_1995, vladimir1995nature} utilise également un hyperplan pour séparer deux classes. Toutefois, cet hyperplan optimal est trouvé en maximisant les marges (ou distance) entre ce plan et les attributs les plus proches. Le SVM possède une particularité, il utilise un noyau qui peut permettre de résoudre les problèmes linéaire (\textit{linear SVM}) mais également les problèmes non-linéaire en projetant les données dans un espace de dimension supérieure (\textit{kernel trick}). Un noyau que l'on retrouve assez régulièrement est le \textit{Radial Basis Function (RBF)} \citep{burges_tutorial_1998}. Les problèmes multi-classes peuvent également être traités en \textit{One-vs-All}
 	\figScaleX{0.4}{SVM_Lotte_2007}{Principe du \svm \citep{lotte_review_2007}}
 	
 	% K-NEAREST NEIGHBOR
