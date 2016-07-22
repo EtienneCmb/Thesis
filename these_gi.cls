@@ -38,7 +38,9 @@
 			pdftitle={Décodage des intentions et des représentations motrices chez l'homme: analyse multi-échelle et application aux interfaces cerveau-machine},
 			pdfsubject={Thesis},
 			pdfkeywords={Décodage; encodage; machine-learning; puissance; phase; phase-amplitude coupling; seeg}]{hyperref}
-\hypersetup{hidelinks=true,urlcolor=blue}
+\usepackage[dvipsnames]{xcolor}
+\hypersetup{hidelinks=true,urlcolor=MidnightBlue,citecolor=PineGreen,colorlinks,linkcolor=BrickRed}
+
 
 %\usepackage{babel}
 \frenchspacing

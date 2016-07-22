@@ -1,0 +1,295 @@
+% #############################################################################
+%                         Les Interfaces Cerveau-Machine
+% #############################################################################
+\chapter{Les Interfaces Cerveau-Machine}
+
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+%                            DEFINITION D UNE ICM
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+\section{Définition et objectifs}
+
+% ********************************************
+%           CONTEXTE D'APPARITION
+% ********************************************
+\subsection{Contexte d'apparition des ICM}
+En 1964, Dr. Grey Walter connecte des électrodes directement dans le cortex moteur d'un patient et lui demande de presser un bouton pour faire avancer un rétro-projecteur. En même temps, il enregistre l'activité neuronale de telle sorte que elle aussi, puisse le faire avancer. Là où l'expérience devient remarquable, c'est que le rétro-projecteur avance avant que le patient ne presse le bouton ! Tout l'appareil musculaire du sujet est court-circuité et le contrôle se fait sans mouvement. Contrôler par la \textit{pensée}, un sujet de science fiction qui devient une réalité. Cette anecdote décrite par \cite{graimann_braincomputer_2009}, permet de placer la naissance de la possibilité d'une \icm (ICM) dans l'histoire. C'est le point d'entrée qui a ensuite conduit une grande diversité de chercheurs à se passionner pour ce sujet. \\
+Le terme \textit{Brain Computer Interface} (BCI) fait son apparition, au début des années 70, dans les publications de Jacques Vidal \citep{vidal_toward_1973, vidal1977real} où il était question de contrôler un curseur sur un écran. \\
+If faudra attendre les années 2000 pour que les ICM connaissent un avancement majeur grâce au développement des techniques de neuroimagerie et des connaissances en neurosciences.
+
+% ********************************************
+%               INTERACTIONS NATURELLES
+% ********************************************
+\subsection{Interactions naturelles avec l'environnement}
+Pour interagir avec son environnement, l'individu se sert des voies de communications naturelles, \cad via son système nerveux et musculaire. Le processus de communication débute par une intention qui active certaines régions dans le cerveau. Il en résulte un signal cérébrale qui est ensuite envoyé par le système nerveux périphérique en directions des muscles \citep{besserve_analyse_2007}. C'est ce processus simplifié qui permet à une personne d'interagir avec ce qui l'entoure.
+
+% ********************************************
+%           COMMUNICATION ALTERNATIVE
+% ********************************************
+\subsection{ICM: une communication alternative}
+Une ICM (ou BCI en anglais pour \textit{Brain Computer Interface}) est un autre système de communication où les voies naturelles sont cout-circuitées. Au lieu de passer par le système nerveux puis musculaire, le signal cérébral est directement intercepté au niveau du cerveau et va ensuite être transformé en commandes. Une ICM est donc un système permettant de traduire une activité neuronale en commande extérieure. Le terme \textit{traduire} est à prendre au sens linguistique \cad que les signaux cérébraux forment un langage, composé de règles, de motifs ou \textit{pattern}, que l'on va essayé de décoder (via un ordinateur) pour les transformer en opérations. D'où le terme "\icm". \\
+
+\cite{pfurtscheller_rehabilitation_2008} et \citep{graimann_braincomputer_2009} introduisent quatre éléments qui composent une ICM:
+\begin{enumerate}
+	\item Enregistrer l'activité directement depuis le cerveau. Cet enregistrement pourra être invasif ou non-invasif (cf. \ref{invasif_non-invasif})
+	\item Générer un retour ou \textit{feedback} pour l'utilisateur
+	\item L'enregistrement et le \textit{feedback} doivent être en temps réel
+	\item Enfin, l'interface doit être contrôlable par l'utilisateur, de manière active, via un ensemble d'intentions. 
+\end{enumerate}
+A titre d'exemple et pour illustrer ce dernier point, un utilisateur pourrait par exemple décider de bouger un curseur de souris sur un écran en imaginant des mouvements soit de la main gauche soit de la main droite.
+
+
+% ********************************************
+%         COMPOSANTES D'UNE ICM
+% ********************************************
+\subsection{Principales composantes d'une ICM}
+Même si chaque \icm se destine à une utilisation particulière et contient des traitements qui lui sont propres (cf. \ref{etat_de_lart_ICM}), on peut globalement dire qu'une ICM s'articule autour de cinq grandes étapes ordonnées \citep{pfurtscheller_rehabilitation_2008,graimann_braincomputer_2009}:
+\begin{enumerate}
+	\item L'acquisition de l'activité neuronale
+	\item Les pré-traitements
+	\item L'extraction de marqueurs
+	\item La classification
+	\item La transformation en commande
+\end{enumerate}
+Ces étapes sont interdépendantes \cad que chacune s'appuie sur les résultats de l'étape précédente. De plus, cette cascade de stades doit se faire en temps réel pour que l'expérience utilisateur soit la plus fluide possible et qu'elle reflète fidèlement ce qui se déroule à chaque instant.
+
+% -> Acquisition de l'activité neuronale :
+\subsubsection{Acquisition de l'activité neuronale}
+L'acquisition de l'activité neuronale constitue le point d'entrée d'une ICM. Les différentes techniques pour enregistrer sont plus ou moins accessibles (certaines sont portatives, d'autres nécessitent un appareil très lourd...). C'est, entre autre, l'accessibilité qui va influer sur le nombre de sujets d'une étude. Autre point très important que nous décrirons plus bas, la qualité du signal (ou le rapport signal sur bruit (RSB)) qui aura un impact immédiat sur les performances et sur les limitations d'une ICM. Enfin, on parlera d'enregistrements \textit{invasifs} (cf. \ref{sec_invasif_recordings}) quand ceux-ci nécessiteront une implantation chirurgicale d'électrodes et \textit{non-invasif} (cf. \ref{sec_noninvasif_recordings}) pour les techniques d'acquisition se faisant en dehors de la boîte crânienne.
+
+% -> Pré-traitements :
+\subsubsection{Pré-traitements}
+Les pré-traitements regroupent un ensemble de techniques destinées à nettoyer le signal pour faire ressortir, autant que possible, le signal utile par rapport au signal bruité. Parmi ces traitements, on peut citer le nettoyage d'artefacts oculaires, cardiaques ou musculaires, le référencement (essentiellement pour l'EEG), la bipolarisation (pour la SEEG), le filtrage pour supprimer certaines composantes spectrales... Ces pré-traitements sont propres à chaque technique d'enregistrement. Une description plus détaillée des pré-traitements appliqués dans le cadre de données SEEG est proposée dans la section \ref{SEEG_preprocessing}.
+
+% -> Extraction des marqueurs :
+\subsubsection{Extractions de marqueurs}
+\label{subsec_marqueurs_ICM}
+En imaginant que l'on répète dix fois le même mouvement, il y aura dans l'activité neuronale une partie similaire permettant de reproduire chacune de ces répétitions. Le signal entier sera très probablement différent à chaque fois, mais, à l'intérieur de ce signal, on pourra trouver un "sous-signal" dont le contenu sera similaire à chacune de ces répétitions. \\
+C'est le but de cette étape d'extraction de marqueurs, la recherche de ce "sous-signal". Une fois l'activité cérébrale nettoyée, on va chercher à extraire des marqueurs qui matérialisent l'état instantané d'un sujet. Par exemple, si celui-ci bouge le bras vers la gauche ou vers la droite, on doit pouvoir extraire une information de ce signal qui encode chacun de ces états. En pratique, on peut distinguer deux types de marqueurs: les marqueurs \textit{locaux}, qui reflètent l'activité d'une "petite" population de neurones prises localement (cf. \ref{marqueurs_icm_sync_and_async}), et les marqueurs d'\textit{interaction} qui quantifie un degrés de couplage à distance entre deux régions du cerveau. \\
+Cette étape est véritablement au c\oe ur du bon fonctionnement d'une ICM puisque, en fonction de la qualité de ce marqueur, la machine sera plus moins encline à reconnaître les différentes commandes d'un sujet. \\    
+En lieu et place du terme \textit{marqueur}, on pourra utiliser indifféremment \textit{motif}, \textit{pattern}, \textit{feature} ou \textit{attribut}.  
+
+% -> Classification :
+\subsubsection{Classification}
+En conservant l'exemple de la section précédente, supposons que l'on dispose d'un marqueur et on cherche à savoir si celui-ci appartient à une des deux classes de mouvement de bras, vers la gauche ou vers la droite. C'est le problème de classification. A partir d'un motif dont on ignore la provenance, on utilise un algorithme permettant de reconnaître la classe dont est issue ce pattern. Parmi les algorithmes les plus fréquemment rencontrés, on peut citer le \lda, le \svm ou le \knn.\\
+En pratique, cette reconnaissance de classes est mise en place en deux étapes:
+\begin{enumerate}
+	\item L'entraînement ( ou \train): durant une certaine période, on va apprendre à une machine à reconnaître des événements. Pour cela, on utilise des données dont on connaît la provenance (c'est ce que l'on appelle la \textit{labellisation})
+	\item Le test ( ou \test): une fois la machine entraînée à partir d'une série de marqueurs labélisés, on teste l'algorithme avec des nouvelles données pour évaluer l'acuité de la machine à identifier ces événements.
+\end{enumerate}
+Cette étape de classification, décrite plus largement dans la section \ref{methodo_classification}, est très fortement dépendante de la qualité des marqueurs extraits en amont. Autrement dit, plus ces \textit{features} reflètent fidèlement un état, plus le travail de la machine à identifier ces événements sera facilité.
+
+% -> Commande :
+\subsubsection{Transformation en commande}
+Dernière étape du processus d'une ICM, lorsque l'algorithme de classification pense avoir identifier le type de marqueurs, on attribue une commande physique. Par exemple, si la machine reconnaît un mouvement de bras vers la droite, on pourrait attribuer une commande où l'on déplace le curseur d'une souris sur un écran dans la même direction. Ainsi, on procure à l'utilisateur un \textit{feedback} sur la transformation que la machine a réussit à faire à partir de l'activité de son cerveau.\\
+Cette transformation en commande est ensuite physiquement appliquée à un système externe. L'efficacité de l'ensemble de l'ICM est donc évaluée en fonction de son acuité à restituer, avec plus ou moins de fidélité, la commande désirée par l'utilisateur.
+
+\figScaleDesciption{0.7}{Pfurtscheller2008_SchemaICM}{Schéma d'une \icm \citep{pfurtscheller_rehabilitation_2008}}{L'activité neuronale est enregistrée (Signal acquisition) puis nettoyée (Preprocessing). Ensuite, on extrait des motifs ou patterns qui caractérisent la commande que souhaite envoyer le sujet (Feature extraction). Enfin, la machine tente de reconnaître ces motifs (Classification) et de les transformer en commande (Application interface). Cette boucle se termine en donnant un feedback à l'utilisateur sur l'état actuel de la machine. \citep{pfurtscheller_rehabilitation_2008}}
+
+Les ICM partagent globalement ces cinq étapes mais se différencient donc le type d'enregistrement de l'activité neuronale, par les pré-traitements associés, par le type de marqueurs étudié, par l'algorithme de classification choisi et surtout, par l'application concrète de cette \icm.
+
+
+% ********************************************
+%                 OPEN DATA
+% ********************************************
+\subsection{\textit{BCI competition} et \textit{open-data}}
+Les \textit{BCI competition} sont proposées par l'équipe du \textit{Berlin Brain-Computer Interface} (BBCI). L'idée de ces compétitions est, sur un même jeux de données découpées en \train et \test (cf. \ref{subsec_training_testing}) mettre les équipes de recherche en ICM en compétitions puis élire celle qui arrivera au meilleur décodage. A l'heure où cette thèse est écrite, quatre de ces compétitions ont eut lieu et chacune est associée à un article de présentation (\textit{BCI competition I}: \cite{sajda_data_2003}, \textit{II}: \cite{blankertz_bci_2004}, \textit{III}: \cite{blankertz_bci_2006}, \textit{IV}: \cite{tangermann_review_2012}). La liste des \textit{datasets} en accès libres est disponible en annexe (cf. \ref{annexe_bci_competition})\\
+
+Ces compétitions présentent de nombreux avantages:
+\begin{enumerate}
+	\item Visibilité des équipes: ces compétitions sont de plus en plus "virales" et sont relayées par la suite par de nombreux articles (voir figure ci-dessous). 
+	\item Permet aux équipes de disposant pas de systèmes d'acquisition de profiter de jeux de données pour développer des méthodes. C'est également un moyen d'initier les étudiants à un ensemble de techniques.
+	\item Autre avantage, tout le monde se retrouve sur un pied d'égalité en travaillant sur les mêmes données. Ce qui représente par la suite, une méthode rigoureuse pour sélectionner les meilleurs algorithmes.
+\end{enumerate}
+
+\figScaleDesciption{1}{bcicomp_visi}{\textit{BCI competition} et visibilité \cite{tangermann_review_2012}}{(A gauche) Évolution du nombre de citations par an des articles de présentation pour les compétitions \textit{I, II et III}, (A droite) Évolution du nombre de citations par an pour l'équipe ayant gagné la deuxième compétitions \citep{tangermann_review_2012}}
+
+% ********************************************
+%                CONClUSION
+% ********************************************
+\vspace{2\baselineskip}
+\todo[inline,caption={},color=blue!10]{
+	\textbf{Conclusion sur la présentation des ICM} \\
+}
+
+
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+%                         ACQUISITION DE L'AN
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+\section{Techniques d'acquisition de l'activité neuronale}
+\label{invasif_non-invasif}
+Les types d'acquisition peuvent être classés par leur degrés de pénétration dans le corps. Les enregistrements dits \textit{invasifs} vont nécessiter une intervention chirurgicale, donc avec risque potentiel d'infection, mais donnent accès à des signaux de grande qualité permettant des contrôles complexes comme une prothèse ou un bras robotisé \citep{hochberg_reach_2012, taylor_direct_2002}. Les enregistrements \textit{non-invasifs} sont globalement plus faciles à mettre en place car ne nécessitant aucune chirurgie mais la qualité du signal est moindre car l'activité neuronale est enregistrée en dehors de la boîte crânienne, donc filtrée par l'os et la peau. \\
+Au sein de ces deux catégories, on trouvera un ensemble de méthodes d'acquisition qui se différencient par la taille des populations de neurones qu'elles enregistrent ou par le type de signal.
+
+% ********************************************
+%                  INVASIFS
+% ********************************************
+\subsection{Enregistrements invasifs}
+\label{sec_invasif_recordings}
+On parlera d'intracrânien pour les enregistrements à l'intérieur de la boîte crânienne puis d'intracortical pour des électrodes implantées dans le cortex \citep{engel_invasive_2005, jerbi_task-related_2009}.
+
+% -> Microélectrodes :
+\subsubsection{Enregistrements unitaires}
+\textit{\sua (SUA)} et \textit{\mua (MUA)} sont des micro-électrodes déposées directement au contact de neurones et  enregistrent des décharges neuronales. SUA et MUA se distinguent par la taille des populations enregistrées. \\
+Dans le cadre des ICM, les micro-électrodes peuvent être implantées directement dans le cortex moteur primaire et permettre un contrôle de BCI de la plus haute précision et fidélité. Chez l'animal, des rats ont pu contrôler en temps réel un bras robotisé pour obtenir de l'eau \citep{chapin1999real} et des singes ont également pu contrôler un bras robotisé ainsi qu'une pince au bout \citep{velliste2008cortical}. Auparavant, en 2006, \cite{hochberg_neuronal_2006} démontre qu'un patient tétraplégique implanté avec 96 micro-électrodes, peut contrôler un curseur sur un écran d'ordinateur, d'ouvrir et fermer une main artificielle ainsi que d'effectuer des mouvements rudimentaires à l'aide d'un bras robotisé. En complément, \cite{sung-phil_kim_point-and-click_2011} utilise les micro-électrodes pour contrôler et cliquer à l'aide un pointeur sur un écran 2D. Mais c'est en 2012 que le sujet contrôle complètement le bras robotisé, dans l'espace, lui permettant d'attraper et de boire son café \citep{hochberg_reach_2012}. Même si le mouvement n'est pas aussi fluide et rapide qu'un mouvement réel, ce fût une avancée majeure et une  preuve du concept chez l'homme. 
+
+\figScaleDesciption{1}{hochberg_2006_2012}{ICM utilisant des micro-électrodes \citep{hochberg_neuronal_2006, hochberg_reach_2012}}{(\textit{A gauche}) \citep{hochberg_neuronal_2006}, (\textit{A droite}) \citep{hochberg_reach_2012}}
+
+
+% -> Stéréoélectroencéhalographie :
+\subsubsection{\seeg (SEEG)}
+Macro-électrodes enregistrant des populations plus larges que les micro-électrodes. Contrairement à la SUA ou MUA où l'on peut compter le nombre de fois qu'un ou plusieurs neurones déchargent, la SEEG enregistre des potentiels électriques $(\mu V)$. \\
+Les données utilisant la \seeg sont globalement rares dans la littérature. Leur utilisation dans le cadre des ICM n'est pas fréquente mais a quand même été exploré dans le cadre d'ICM dédiée à la communication \citep{krusienski_control_2011-1,shih_signals_2012} ou au contrôle de curseur 2D \citep{vadera_stereoelectroencephalography_2013} \\
+C'est le type d'enregistrement qui a été le plus exploité durant cette thèse. Une section complète lui est donc accordée (cf. \ref{sec_intra_data}).
+
+% -> Electrocorticographie :
+\subsubsection{\ecog (ECoG)}
+L'ECoG est une grille flexible composée d'une matrice d'électrodes. Celle-ci est ensuite déposée à la surface corticale. Parce que cette méthode n'est pas intracortical elle est dite \textit{semi-invasive}. En comparaison avec l'EEG (voir section suivante), l'ECoG présente de nombreux atouts \citep{schalk_brain-computer_2011}. Tout d'abord, la résolution spatiale est meilleure (de l'ordre du millimètre contre quelques centimètres pour l'EEG). Une meilleure amplitude dont le maximum peut-être jusqu'à 5 fois supérieure à celle de l'EEG (amplitude max pour l'EEG est d'environ 10-20$\mu V$). L'ECoG est également moins sensible aux artefacts (mouvements musculaires et oculaires). Enfin, elle permet d'enregistrer des phénomènes plus large bande (entre 0 et 500Hz contre 0-40Hz pour l'EEG). \\
+L'utilisation de l'ECoG dans le cadre des ICM est fréquente \citep{schalk_brain-computer_2011, shih_brain-computer_2012}, que ce soit pour le décodage appliqué aux membres supérieurs comme les mouvements de doigts \citep{scherer2009classification, acharya2010electrocorticographic}, de trajectoire de main \citep{schalk2007decoding, gunduz2009mapping} ou de bras \citep{pistohl_prediction_2008}. Il a également été démontré qu'il est possible de décoder des mouvements fins de saisie avec la main, comme des saisies précises avec le bout des doigts versus des saisies avec la main entière \citep{pistohl_decoding_2012}, ou encore des mouvements de saisie, de pincée, d'ouverture de la main, de flexion et d'extension du coude ou de bras robotisé \citep{muller-putz_control_2008, yanagisawa_electrocorticographic_2012-1}. De plus, l'ECoG a également été exploité pour le contrôle d'un curseur 1 ou 2D \citep{leuthardt_braincomputer_2004, wilson2006ecog, felton2007electrocorticographically, milekovic_online_2012} ainsi que pour la communication palliative \citep{brunner2011rapid, krusienski2011control}.
+
+\figScaleDesciption{1}{shalk_and_yanagisawa_ecog}{Micro et macro-électrodes pour l'\ecog \citep{schalk_brain-computer_2011, yanagisawa_electrocorticographic_2012-1}}{\textit{A gauche} - (\textbf{A-B}) Micro-électrode, (\textbf{C}) Représentation schématique d'une électrode, (\textbf{D}) Grille d'électrodes déposée directement au contact du cortex, (\textbf{E}) Placement chirurgical de la grille d'électrodes \citep{schalk_brain-computer_2011}. \textit{A Droite} - Décodage de mouvements de la main et contrôle d'un bras robotisé \citep{yanagisawa_electrocorticographic_2012-1}}
+
+
+% ********************************************
+%               NON-INVASIF
+% ********************************************
+\subsection{Enregistrements non-invasifs}
+\label{sec_noninvasif_recordings}
+
+% -> Champs électrique et magnétiques
+\subsubsection{Introduction à la production des champs électriques et magnétiques}
+Avant de présenter les différentes techniques d'enregistrement non-invasives, il m'est apparu intéressant de présenter succinctement la façon dont une population de neurones peut produire des champs électriques et magnétiques. Cela permettra d'une part de comprendre un peu mieux les mécanismes sous-jacents à l'EEG et à la MEG, leur limitations et surtout, leur complémentarité. \\
+L'explication des production de champs électromagnétique s'appuiera sur la figure ci-dessous, issue de \cite{sato_principles_1991} ainsi que sur l'article de \cite{garnero_magnetoencephalographie_1998}.
+
+\figScaleX{0.6}{sato_champsEM}{Production des champs électriques et magnétiques. Recueil EEG et MEG, limitations et complémentarité \citep{sato_principles_1991}}
+
+\textbf{a} et \textbf{b} sont deux capteurs EEG disposés au contact du scalp. \textbf{M} est un capteur MEG. \textbf{A} et \textbf{B} sont deux dipôles matérialisant la somme des courants issus d'une macro-colonne de neurones. Lorsqu'un neurone est excité, il y a libération d'ions at niveau de la membrane des synapses. Ces flux ioniques vont engendrés des courants dits \textit{primaires} ou \textit{sources} et qui seront à l'origine des signaux EEG et MEG. Ces courants primaires vont à leur tour engendrés des courants dits \textit{secondaires} ou \textit{volumiques}, circulant dans tout le volume de la tête (\textit{extracellular current}). Un signal MEG résultera principalement des champs magnétiques produits par les courants sources, contrairement au signaux EEG qui sont majoritairement issus des courants extracellulaires et volumiques. \textbf{A} est un dipôle tangentielle (donc parallèle à la surface du crâne) disposé dans un sillon. Le champs magnétique \textbf{C} produit par ce dipôle, qui n'est pas filtré par les méninges, l'os et la peau, est bien capté par le capteur MEG. La colonne \textbf{B}, qui correspond aux activations situées dans les parties courbes du cortex (gyri) est un dipôle radiale donc perpendiculaire au scalp. Celui-ci produit un champs magnétique \textbf{D}, parallèle à la bobine \textbf{M}, qui sera donc pas ou peu détecté par la MEG. En revanche, cette source radiale entraîne un fort potentiel électrique. C'est donc un premier point de complémentarité entre la MEG et l'EEG. \textbf{A et B} engendrent des champs électriques qui seront fortement dispersés, atténués et distordus par la dure-mère, l'os et la peau. Ce phénomène de dispersion explique pourquoi il est beaucoup plus difficile de reconstruire les sources (problème inverse) en EEG plutôt qu'en MEG. Enfin, les propriétés physiques du champs magnétique font qu'il décroît davantage avec la distance que les champs électrique, ce qui limite l'étude des sources profondes mais c'est un deuxième argument justifiant leur complémentarité pour observer l'ensemble des phénomènes.
+
+% -> Electroencéphalographie :
+\subsubsection{\eeg (EEG)}
+C'est la technique la plus utilisée dans le domaine des ICM pour son aspect pratique, portatif et peu dispendieux. On dispose à la surface de la boîte crânienne un ensemble d'électrodes qui enregistrent, sous forme de potentiel électrique, l'activité résultant d'une population relativement large de neurones. Une électrode (souvent sur le front ou le nez) est considérée comme référence. Le potentiel de cette électrode de référence est ensuite soustrait à toutes les autres pour obtenir une tension. On pourra utiliser un gel entre l'électrode et la boîte crânienne pour adapter l'impédance. L'EEG dispose d'une excellente résolution temporelle mais sa résolution spatiale est moins bonne (en partie dû au fait que les méninges, l'os puis la peau filtre le signal). \\
+Les premiers enregistrements non-invasifs utilisant l'EEG chez l'homme, ont été reporté par \cite{berger1929ueber}. Depuis, ils n'ont cessé de s'améliorer et à l'heure actuelle on peut trouver des systèmes sans fils et peu dispendieux permettant le contrôle d'une BMI \citep{lin_eeg_2010, liao_gaming_2012, liu_implementation_2012}. La transmission sans fil occasionne une perte de signal supplémentaire, donc la plupart des études utilisant l'EEG continu avec les bons vieux câbles et amplificateur. Il existe plusieurs sous-catégories d'ICM utilisant l'EEG. Celles-ci sont basées sur différents types de marqueurs (cf. \ref{sec_marqueurs_AN}).
+
+\figScaleDesciption{1}{casque_eeg}{Exemple de casque EEG}{Exemple de casque EEG (figure extraite et adaptée de \url{http://www-psych.nmsu.edu/~jkroger/lab/principles.html}}
+
+% -> Magnétoencéphalographie :
+\subsubsection{\meg (MEG)}
+Nettement moins portable que l'EEG, la MEG enregistre les champs magnétiques résultant d'une production de courants intracellulaires. Ces champs magnétiques peuvent être jusqu'à 10 milliards de fois plus faibles que le champs magnétique terrestre ce qui explique l'utilisation d'un blindage pour limiter les artefacts (un blindage en $\mu$-métal peut atténuer de $10^{3}$ à $10^{4}$ l'influence des champs externes). Cet appareil, qui peut être composé de 100 à 300 capteurs, dispose également d'une excellente résolution temporelle et d'une résolution spatiale supérieure à celle de l'EEG. \\
+L'aspect inamovible de la MEG limite son utilisation pour les ICM mais on trouve quand même quelque études ayant testé son utilisation \citep{mellinger_meg-based_2007, waldert_hand_2008}.
+
+% -> Imagerie par Résonance Magnétique fonctionnelle :
+\subsubsection{\IRMf (IRMf)}
+L'IRMf permet de mesurer l'oxygénation d'aires actives grâce à l'apport en sang. Cette technique se base sur des différences de susceptibilité magnétique du fer entre le sang oxygéné (diamagnétique) et désoxygéné (paramagnétique). Le signal BOLD (\BOLD) mesure les variations locales du temps de relaxation causées par les modifications hémodynamiques. Si la résolution spatiale de l'IRMf est excellente puisqu'elle est de l'ordre du millimètre, la résolution temporelle, quant à elle, est assez faible (de l'ordre de la seconde) ce qui limite la captation de phénomènes temporellement courts. \\
+L'utilisation de l'IRMf pour les ICM a été exploité \cite{sitaram_fmri_2007}. Cette étude, qui proposent plusieurs ICM-IRMf existantes, explique qu'une des principales limitations de cette technique d'enregistrement est son coût et la complexité lié à son usage. Enfin, \cite{weiskopf_principles_2004} explique qu'une autre limitation est qu'il peut s'écouler entre 3 et 6 secondes pour observer les changements hémodynamiques.  
+
+% -> Imagerie par infrarouge :
+\subsubsection{\fNIRS (fNIRS)}
+Technique d'imagerie relativement récente, puisque la première description du principe fut décrite par \citep{jobsis1977noninvasive}, celle-ci exploite la lumière infra-rouge (longueur d'ondes entre 650 et 1000nm) pour mesurer les variations de concentration de l'hémoglobine oxygénée (HbO) et l'hémoglobine désoxygénée (HbR). La principale limitation de cette technique est qu'elle ne permet pas l'étude de structures profondes (profondeur de 3cm maximum à partir du sommet du crâne). \\
+Cette technique est de plus en plus rencontrée dans la littérature ICM dû à son moindre coût et à sa portabilité. La première ICM utilisant la fNIRS a été décrite par \cite{coyle_suitability_2004}. Dans cette étude, les auteurs utilisent l'imagerie motrice (compression d'une balle en caoutchouc) et déterminant si l'activité du sujet et en activité ou au repos. Depuis, bien d'autres études ont suivi, dont beaucoup se focalisent sur l'imagerie motrice \citep{nagaoka2010development, fazli2012enhanced, mihara2013near, kaiser2014cortical}. \cite{naseer_fnirs_2015} propose une review récente des principales ICM-fNIRS.
+
+\figScaleDesciption{0.8}{Waldert_2009_recording}{Méthodes d'acquisition de l'activité cérébrale \citep{waldert_review_2009}}{Méthodes d'acquisition de l'activité cérébrale \citep{waldert_review_2009} classées par invasivité. La figure indique également la taille des populations de neurones enregistrés ainsi que la résolution spatiale intimement liée à l'invasivité.}
+
+% ********************************************
+%                CONClUSION
+% ********************************************
+\vspace{2\baselineskip}
+\todo[inline,caption={},color=blue!10]{
+	\textbf{Conclusion sur les techniques d'enregistrements} \\
+	Les méthodes non-invasives ne nécessitent aucune intervention chirurgicale et peuvent donc être appliquées sur n'importe quel individu. De plus, elles sont particulièrement accessibles, \cad que leur mise en place est relativement simple. \\
+	Toutefois, ces méthodes de mesures souffrent encore de compromis. Si l'EEG et la MEG ont une excellente résolution temporelle, la résolution spatiale est peu précise. A contrario, l'IRMf ou la PET offrent une excellente résolution spatiale mais la dimension temporelle est lésée. Les méthodes invasives ne souffrent pas de ces compromis, puisqu'elles offrent à la fois une excellente résolution temporelle et spatiale, au détriment d'une chirurgie invasive. Enfin, les méthodes non-invasives sont beaucoup plus sensibles aux artefacts (musculaires et oculaires) et ont un rapport signal sur bruit (RSB) inférieur aux enregistrements invasifs.\\
+	Malgré tout, les techniques d'enregistrement non-invasives jouissent d'un engouement certain de la part de la communauté scientifique, notamment grâce au critère d'accessibilité. L'EEG a très certainement un bel avenir devant lui, en attendant que des chercheurs réussissent à mettre des roulettes à la MEG ou à l'IRM. Sans nul doute, les techniques non-invasives devraient être au c\oe ur des Interfaces Cerveau-Machine du futur.
+}
+
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+%                         DIFFERENTS TYPES D'ICM
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+\section{Les différents types d'ICM}
+On peut distinguer différents types d'ICM, sur la base de deux critères \citep{donoghue_connecting_2002, lebedev_brainmachine_2006, besserve_analyse_2007, bekaert_les_2009}:
+\begin{itemize}
+	\item \textbf{La synchronisation}: ce critère va définir le fonctionnement interne de l'ICM \cad qu'il va fixer la façon dont un utilisateur va pouvoir interagir avec elle. Soit de façon volontaire en modifiant son activité neuronale, ce sont les \textit{ICM asynchrones}, soit de façon imposée par l'utilisation de stimuli externes qui permettront de piloter l'interface, ce sont les \textit{ICM synchrones}.
+	\item \textbf{Le type d'enregistrement}: on distinguera les \textit{ICM invasives} des \textit{ICM non-invasives} de part l'utilisation de technique d'enregistrement nécessitant ou non, une chirurgie pour implanter des d'électrodes (cf. \ref{invasif_non-invasif}).
+\end{itemize}
+
+% ********************************************
+%         Synchrones et Asynchrones
+% ********************************************
+\subsection{Synchronisation: ICM synchrones et asynchrones}
+\begin{enumerate}
+	\item \textit{ICM synchrones} ou \textit{exogènes}: exploitent la réponse du cerveau à des stimuli externe (visuels, auditifs...). Par exemple, un damier composé de cases blanches et noires entraînera une forte variation dans les potentiels visuels. Cette différence de potentiel peut ensuite être détectée puis transformer en commande. Ce type d'ICM présente l'avantage de nécessiter que très peu d'entraînement. En revanche, la réponse étant dépendante du stimulus, le comportement est booléen ce qui limite dans les possibilités pour un contrôle progressif et continu.
+	\item \textit{ICM asynchrones} ou \textit{endogène}: ici, grâce à un \textit{feedback}, l'utilisateur change volontairement son activité neuronale pour influer sur le comportement de l'ICM. En pratique, on pourra par exemple se servir de l'imagerie motrice pour avoir un contrôle continu et progressif d'un curseur de souris. Toutefois, les ICM asynchrones nécessitent une longue période d'apprentissage avant de pouvoir reconnaître les \textit{patterns} propres à chaque sujet.
+\end{enumerate}
+
+% ********************************************
+%         Invasives et Non-invasives
+% ********************************************
+\subsection{Enregistrement: ICM invasives et non-invasives}
+\begin{enumerate}
+	\item \textit{ICM invasives} ou \textit{directes}: basées sur un enregistrement invasif de l'activité neuronal, la qualité du signal étant excellente les possibilités d'exploitations et d'améliorations futures sont grandes. En revanche, cela va avec les risques que comporte la chirurgie.
+	\item \textit{ICM non-invasives} ou \textit{indirectes}: de la même manière, ces ICM utilisent des enregistrements non-invasifs. Le terme \textit{indirecte} signifie que l'on enregistre pas directement des décharges de neurones mais un phénomène lié à une population de neurones (consommation d'oxygène pour \IRMf, champs électrique et magnétique pour l'EEG et la MEG). Ces ICM sont les plus répandues et représentent un enjeu majeure de part leur accessibilité.
+\end{enumerate}
+
+
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+%                         APPLICATION DES ICMs
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+\section{Applications cliniques et non-cliniques}
+\label{etat_de_lart_ICM}
+
+%Prélever directement l'activité neuronale et donc, \textit{bypasser} les voies naturelles, permet de s'affranchir d'éventuelles limitations physiologiques. C'est pourquoi les ICM représentent un enjeu majeur pour la réhabilitation motrice ou handicap moteur ou encore pour la communication palliative.
+%Les applications concrètes des \icm visent donc les personnes disposant de leurs capacités cognitives mais qui sont privées de facultés motrices. \\
+%Par exemple, le \textit{syndrome d'enfermement} ou \textit{locked-in syndrome} qui surviennent majoritairement à la suite d'un accident vasculaire cérébrale. Les personnes touchées par ce syndrome sont pleinement consciente de leur corps, de l'environnement, ils peuvent ressentir les sensations de toucher et de douleur mais n'ont plus de facultés motrices, hormis peut-être, les mouvements de paupières ou des yeux. Un autre exemple est celui de la la sclérose latérale amyotrophique (ou SLA) qui est une dégénérescence des neurones moteur. Progressivement, les personnes atteintes de SLA perdent l'usage des bras, des jambes, de la parole des muscles faciaux et enfin de la déglutition. Toutefois, a l'instar du \textit{locked-in syndrome}, la conscience et les facultés cognitives demeurent intactes. \\
+%
+%SLA et \textit{locked-in syndrome} ne sont que deux exemples expliquant l'intérêt social du développement des ICM. Redonner un peu de contrôle ou établir un canal de communication avec les familles des patients expliquent l'engouement qui existe depuis maintenant plus de 40 ans pour les ICM.
+
+
+% ********************************************
+%         Communication palliative
+% ********************************************
+\subsection{Communication palliative}
+\textit{P300 speller} : blablabla\\
+
+\textit{Hex-o-spell} : ICM indirecte asynchrone développée par \cite{blankertz_berlin_2006, blankertz_note_2007}, elle utilise l'imagerie motrice pour sélectionner des caractères. Le sujet imagine un mouvement de la main droite pour faire tourner la roue puis, stoppe la rotation et sélectionne un groupe de lettres en imaginant un mouvement de pied droit. Ce dispositif a permis à un sujet d'atteindre la vitesse de 7.6 caractères/min
+\figScaleX{0.9}{hex_o_spell_color}{Hex-o-spell \citep{blankertz_note_2007}}
+
+% ********************************************
+%         Robotique et prothèse
+% ********************************************
+\subsection{Robotique et prothèse}
+Une autre en non-invasive
+\figScaleX{0.6}{hochberg_2012}{Contrôle d'un bras robotisé \citep{hochberg_reach_2012}}
+
+% ********************************************
+%              Mobilité
+% ********************************************
+\subsection{Mobilité}
+
+
+% ********************************************
+%       Applications non-cliniques
+% ********************************************
+\subsection{Autres applications non-cliniques}
+
+% -> Jeux
+\subsubsection{Jeux}
+
+\subsubsection{Web-browsing}
+un peu plus de légèreté
+
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+%                      CONCLUSION DU CHAPITRE 1
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+\vspace{3\baselineskip}
+\todo[inline,caption={},color=red!20]{
+	\textbf{Conclusion du chapitre 1} \\
+	Les méthodes non-invasives ne nécessitent aucune intervention chirurgicale et peuvent donc être appliquées sur n'importe quel individu. De plus, elles sont particulièrement accessibles, \cad que leur mise en place est relativement simple. \\
+	Toutefois, ces méthodes de mesures souffrent encore de compromis. Si l'EEG et la MEG ont une excellente résolution temporelle, la résolution spatiale est peu précise. A contrario, l'IRMf ou la PET offrent une excellente résolution spatiale mais la dimension temporelle est lésée. Les méthodes invasives ne souffrent pas de ces compromis, puisqu'elles offrent à la fois une excelle
+}

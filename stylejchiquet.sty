@@ -150,7 +150,7 @@
   \vfill
   \textsc{Mots-clés :} \@keywordsFR
   \fi
-  \cleardoublepage
+%  \cleardoublepage
 }
 
 % ===========================================================
@@ -159,7 +159,7 @@
   \begin{flushright}
     \large\em\null\vskip1in\dedication@text\vfill
   \end{flushright}
-  \cleardoublepage
+%  \cleardoublepage
 }
 
 \newcommand{\abstractpage}{%
@@ -187,14 +187,27 @@
 % ==========================================================================
 % MISE EN PAGE
 \RequirePackage{geometry}
-\geometry{textheight=145ex,textwidth=33em,top=85pt,headheight=30pt,headsep=30pt,inner=120pt}
+%\geometry{textheight=145ex,textwidth=33em,top=85pt,headheight=30pt,headsep=30pt,inner=120pt}
+\geometry{textheight=145ex,textwidth=37em,top=85pt,headheight=30pt,headsep=30pt,inner=100pt}
 \addtolength{\marginparwidth}{-20pt}
-\addtolength{\headwidth}{\marginparsep}
-\addtolength{\headwidth}{\marginparwidth}
+%\addtolength{\headwidth}{\marginparsep}
+%\addtolength{\headwidth}{\marginparwidth}
 
 % ==========================================================================
 % ENTÊTES
 % Entêtes standards
+
+\fancypagestyle{headings}{
+  \fancyhf{}
+  % Head :
+  \fancyhead[RE,LO]{\nouppercase{\rightmark}}
+  \fancyhead[RO,LE]{\thepage}
+  % Foot :
+  \fancyfoot[C]{\nouppercase{\leftmark}}
+  \renewcommand{\headrulewidth}{0.5pt}
+  \renewcommand{\footrulewidth}{0.5pt}
+}
+
 
 \fancypagestyle{plain}{
   \fancyhf{}
@@ -307,18 +320,18 @@
 %  \fi}
 
 % Page blanche après chapitre si nécessaire
-\makeatletter
-\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
-  \hbox{}
-  \vspace*{\fill}
-  \begin{center}
-    ~
-  \end{center}
-  \vspace{\fill}
-  \thispagestyle{empty}
-  \newpage
-  \if@twocolumn\hbox{}\newpage\fi\fi\fi}
-\makeatother
+%\makeatletter
+%\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
+%  \hbox{}
+%  \vspace*{\fill}
+%  \begin{center}
+%    ~
+%  \end{center}
+%  \vspace{\fill}
+%  \thispagestyle{empty}
+%  \newpage
+%  \if@twocolumn\hbox{}\newpage\fi\fi\fi}
+%\makeatother
 
 % ---------------------------------------------------------------
 % LETTRINE
@@ -488,6 +501,9 @@
 \newcommand{\sua}{Single Unit Activity }
 \newcommand{\mua}{Multi Unit Activity }
 \newcommand{\co}{\textit{Center-out} }
+\newcommand{\IRMf}{Imagerie par R\'esonance Magn\'etique fonctionnelle }
+\newcommand{\BOLD}{Blood Oxygenation Level Dependent}
+\newcommand{\fNIRS}{Functional near-infrared spectroscopy }
 
 
 
