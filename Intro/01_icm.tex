@@ -44,7 +44,7 @@ A titre d'exemple et pour illustrer ce dernier point, un utilisateur pourrait pa
 %         COMPOSANTES D'UNE ICM
 % ********************************************
 \subsection{Principales composantes d'une ICM}
-Même si chaque \icm se destine à une utilisation particulière et contient des traitements qui lui sont propres (cf. \ref{etat_de_lart_ICM}), on peut globalement dire qu'une ICM s'articule autour de cinq grandes étapes ordonnées \citep{pfurtscheller_rehabilitation_2008,graimann_braincomputer_2009}:
+Même si chaque \icm se destine à une utilisation particulière et contient des traitements qui lui sont propres (cf. \ref{sec_application_ICM}), on peut globalement dire qu'une ICM s'articule autour de cinq grandes étapes ordonnées \citep{pfurtscheller_rehabilitation_2008,graimann_braincomputer_2009}:
 \begin{enumerate}
 	\item L'acquisition de l'activité neuronale
 	\item Les pré-traitements
@@ -66,7 +66,7 @@ Les pré-traitements regroupent un ensemble de techniques destinées à nettoyer le
 \subsubsection{Extractions de marqueurs}
 \label{subsec_marqueurs_ICM}
 En imaginant que l'on répète dix fois le même mouvement, il y aura dans l'activité neuronale une partie similaire permettant de reproduire chacune de ces répétitions. Le signal entier sera très probablement différent à chaque fois, mais, à l'intérieur de ce signal, on pourra trouver un "sous-signal" dont le contenu sera similaire à chacune de ces répétitions. \\
-C'est le but de cette étape d'extraction de marqueurs, la recherche de ce "sous-signal". Une fois l'activité cérébrale nettoyée, on va chercher à extraire des marqueurs qui matérialisent l'état instantané d'un sujet. Par exemple, si celui-ci bouge le bras vers la gauche ou vers la droite, on doit pouvoir extraire une information de ce signal qui encode chacun de ces états. En pratique, on peut distinguer deux types de marqueurs: les marqueurs \textit{locaux}, qui reflètent l'activité d'une "petite" population de neurones prises localement (cf. \ref{marqueurs_icm_sync_and_async}), et les marqueurs d'\textit{interaction} qui quantifie un degrés de couplage à distance entre deux régions du cerveau. \\
+C'est le but de cette étape d'extraction de marqueurs, la recherche de ce "sous-signal". Une fois l'activité cérébrale nettoyée, on va chercher à extraire des marqueurs qui matérialisent l'état instantané d'un sujet. Par exemple, si celui-ci bouge le bras vers la gauche ou vers la droite, on doit pouvoir extraire une information de ce signal qui encode chacun de ces états. En pratique, on peut distinguer deux types de marqueurs: les marqueurs \textit{locaux}, qui reflètent l'activité d'une "petite" population de neurones prises localement (cf. \ref{sec_marqueurs_AN}), et les marqueurs d'\textit{interaction} qui quantifie un degrés de couplage à distance entre deux régions du cerveau. \\
 Cette étape est véritablement au c\oe ur du bon fonctionnement d'une ICM puisque, en fonction de la qualité de ce marqueur, la machine sera plus moins encline à reconnaître les différentes commandes d'un sujet. \\    
 En lieu et place du terme \textit{marqueur}, on pourra utiliser indifféremment \textit{motif}, \textit{pattern}, \textit{feature} ou \textit{attribut}.  
 
@@ -94,7 +94,7 @@ Les ICM partagent globalement ces cinq étapes mais se différencient donc le type
 %                 OPEN DATA
 % ********************************************
 \subsection{\textit{BCI competition} et \textit{open-data}}
-Les \textit{BCI competition} sont proposées par l'équipe du \textit{Berlin Brain-Computer Interface} (BBCI). L'idée de ces compétitions est, sur un même jeux de données découpées en \train et \test (cf. \ref{subsec_training_testing}) mettre les équipes de recherche en ICM en compétitions puis élire celle qui arrivera au meilleur décodage. A l'heure où cette thèse est écrite, quatre de ces compétitions ont eut lieu et chacune est associée à un article de présentation (\textit{BCI competition I}: \cite{sajda_data_2003}, \textit{II}: \cite{blankertz_bci_2004}, \textit{III}: \cite{blankertz_bci_2006}, \textit{IV}: \cite{tangermann_review_2012}). La liste des \textit{datasets} en accès libres est disponible en annexe (cf. \ref{annexe_bci_competition})\\
+Les \textit{BCI competitions} sont proposées par l'équipe du \textit{Berlin Brain-Computer Interface} (BBCI). L'idée de ces compétitions est, sur un même jeux de données découpées en \train et \test (cf. \ref{subsec_training_testing}) mettre les équipes de recherche en ICM en compétitions puis élire celle qui arrivera au meilleur décodage. A l'heure où cette thèse est écrite, quatre de ces compétitions ont eut lieu et chacune est associée à un article de présentation (\textit{BCI competition I}: \cite{sajda_data_2003}, \textit{II}: \cite{blankertz_bci_2004}, \textit{III}: \cite{blankertz_bci_2006}, \textit{IV}: \cite{tangermann_review_2012}). La liste des \textit{datasets} en accès libres est disponible en annexe (cf. \ref{annexe_bci_competition}. Remarque: il semble que les données de la première compétition ne soient plus accessibles, c'est la raison pour laquelle elles n'apparaissent pa dans le tableau)\\
 
 Ces compétitions présentent de nombreux avantages:
 \begin{enumerate}
@@ -134,7 +134,7 @@ On parlera d'intracrânien pour les enregistrements à l'intérieur de la boîte crâ
 % -> Microélectrodes :
 \subsubsection{Enregistrements unitaires}
 \textit{\sua (SUA)} et \textit{\mua (MUA)} sont des micro-électrodes déposées directement au contact de neurones et  enregistrent des décharges neuronales. SUA et MUA se distinguent par la taille des populations enregistrées. \\
-Dans le cadre des ICM, les micro-électrodes peuvent être implantées directement dans le cortex moteur primaire et permettre un contrôle de BCI de la plus haute précision et fidélité. Chez l'animal, des rats ont pu contrôler en temps réel un bras robotisé pour obtenir de l'eau \citep{chapin1999real} et des singes ont également pu contrôler un bras robotisé ainsi qu'une pince au bout \citep{velliste2008cortical}. Auparavant, en 2006, \cite{hochberg_neuronal_2006} démontre qu'un patient tétraplégique implanté avec 96 micro-électrodes, peut contrôler un curseur sur un écran d'ordinateur, d'ouvrir et fermer une main artificielle ainsi que d'effectuer des mouvements rudimentaires à l'aide d'un bras robotisé. En complément, \cite{sung-phil_kim_point-and-click_2011} utilise les micro-électrodes pour contrôler et cliquer à l'aide un pointeur sur un écran 2D. Mais c'est en 2012 que le sujet contrôle complètement le bras robotisé, dans l'espace, lui permettant d'attraper et de boire son café \citep{hochberg_reach_2012}. Même si le mouvement n'est pas aussi fluide et rapide qu'un mouvement réel, ce fût une avancée majeure et une  preuve du concept chez l'homme. 
+Dans le cadre des ICM, les micro-électrodes peuvent être implantées directement dans le cortex moteur primaire et permettre un contrôle de BCI de la plus haute précision et fidélité. Chez l'animal, des rats ont pu contrôler en temps réel un bras robotisé pour obtenir de l'eau \citep{chapin1999real} et des singes ont également pu contrôler un bras robotisé ainsi qu'une pince au bout \citep{velliste2008cortical}. Auparavant, en 2006, \cite{hochberg_neuronal_2006} démontre qu'un patient tétraplégique implanté avec 96 micro-électrodes, peut contrôler un curseur sur un écran d'ordinateur, d'ouvrir et fermer une main artificielle ainsi que d'effectuer des mouvements rudimentaires à l'aide d'un bras robotisé. En complément, \cite{sung-phil_kim_point-and-click_2011} utilise les micro-électrodes pour contrôler et cliquer à l'aide un pointeur sur un écran 2D. Mais c'est en 2012 que le sujet contrôle complètement le bras robotisé, dans l'espace, lui permettant d'attraper et de boire son café \citep{hochberg_reach_2012}. Même si le mouvement n'est pas aussi fluide et rapide qu'un mouvement réel, ce fût une avancée majeure et une  preuve du concept chez l'homme. \cite{collinger2013high} décrivent également le contrôle d'un bras robotisé par un patient implanté avec 96-microélectrodes. Avec des taux de décodage élevés, le sujet réussit à contrôler un bras robotisé à 7-dimensions (3 degrès de translation, 3 degrés de rotation et un degrés de saisie).
 
 \figScaleDesciption{1}{hochberg_2006_2012}{ICM utilisant des micro-électrodes \citep{hochberg_neuronal_2006, hochberg_reach_2012}}{(\textit{A gauche}) \citep{hochberg_neuronal_2006}, (\textit{A droite}) \citep{hochberg_reach_2012}}
 
@@ -179,6 +179,7 @@ Les premiers enregistrements non-invasifs utilisant l'EEG chez l'homme, ont été 
 \subsubsection{\meg (MEG)}
 Nettement moins portable que l'EEG, la MEG enregistre les champs magnétiques résultant d'une production de courants intracellulaires. Ces champs magnétiques peuvent être jusqu'à 10 milliards de fois plus faibles que le champs magnétique terrestre ce qui explique l'utilisation d'un blindage pour limiter les artefacts (un blindage en $\mu$-métal peut atténuer de $10^{3}$ à $10^{4}$ l'influence des champs externes). Cet appareil, qui peut être composé de 100 à 300 capteurs, dispose également d'une excellente résolution temporelle et d'une résolution spatiale supérieure à celle de l'EEG. \\
 L'aspect inamovible de la MEG limite son utilisation pour les ICM mais on trouve quand même quelque études ayant testé son utilisation \citep{mellinger_meg-based_2007, waldert_hand_2008}.
+\todo[color=red!100]{Cette BCI est basée sur le rythme mu. Ca a l'air cool, pe la décrire buch think 2008}
 
 % -> Imagerie par Résonance Magnétique fonctionnelle :
 \subsubsection{\IRMf (IRMf)}
@@ -240,14 +241,26 @@ On peut distinguer différents types d'ICM, sur la base de deux critères \citep{d
 % -----------------------------------------------------------------------------
 % -----------------------------------------------------------------------------
 \section{Applications cliniques et non-cliniques}
-\label{etat_de_lart_ICM}
+\label{sec_application_ICM}
+Prélever directement l'activité neuronale et donc, \textit{bypasser} les voies naturelles, permet de s'affranchir d'éventuelles limitations physiologiques. C'est pourquoi les ICM représentent un enjeu majeur pour la réhabilitation motrice ou handicap moteur ou encore pour la communication palliative.
+Les applications concrètes des \icm visent donc les personnes disposant de leurs capacités cognitives mais qui sont privées de facultés motrices. \\
+Par exemple, le \textit{syndrome d'enfermement} ou \textit{locked-in syndrome} qui surviennent majoritairement à la suite d'un accident vasculaire cérébrale. Les personnes touchées par ce syndrome sont pleinement consciente de leur corps, de l'environnement, ils peuvent ressentir les sensations de toucher et de douleur mais n'ont plus de facultés motrices, hormis peut-être, les mouvements de paupières ou des yeux. Un autre exemple est celui de la la sclérose latérale amyotrophique (ou SLA) qui est une dégénérescence des neurones moteur. Progressivement, les personnes atteintes de SLA perdent l'usage des bras, des jambes, de la parole des muscles faciaux et enfin de la déglutition. Toutefois, a l'instar du \textit{locked-in syndrome}, la conscience et les facultés cognitives demeurent intactes. \\
 
-%Prélever directement l'activité neuronale et donc, \textit{bypasser} les voies naturelles, permet de s'affranchir d'éventuelles limitations physiologiques. C'est pourquoi les ICM représentent un enjeu majeur pour la réhabilitation motrice ou handicap moteur ou encore pour la communication palliative.
-%Les applications concrètes des \icm visent donc les personnes disposant de leurs capacités cognitives mais qui sont privées de facultés motrices. \\
-%Par exemple, le \textit{syndrome d'enfermement} ou \textit{locked-in syndrome} qui surviennent majoritairement à la suite d'un accident vasculaire cérébrale. Les personnes touchées par ce syndrome sont pleinement consciente de leur corps, de l'environnement, ils peuvent ressentir les sensations de toucher et de douleur mais n'ont plus de facultés motrices, hormis peut-être, les mouvements de paupières ou des yeux. Un autre exemple est celui de la la sclérose latérale amyotrophique (ou SLA) qui est une dégénérescence des neurones moteur. Progressivement, les personnes atteintes de SLA perdent l'usage des bras, des jambes, de la parole des muscles faciaux et enfin de la déglutition. Toutefois, a l'instar du \textit{locked-in syndrome}, la conscience et les facultés cognitives demeurent intactes. \\
-%
-%SLA et \textit{locked-in syndrome} ne sont que deux exemples expliquant l'intérêt social du développement des ICM. Redonner un peu de contrôle ou établir un canal de communication avec les familles des patients expliquent l'engouement qui existe depuis maintenant plus de 40 ans pour les ICM.
+SLA et \textit{locked-in syndrome} ne sont que deux exemples expliquant l'intérêt social du développement des ICM. Redonner un peu de contrôle ou établir un canal de communication avec les familles des patients expliquent l'engouement qui existe depuis maintenant plus de 40 ans pour les ICM.
 
+
+% //////////////////////////////////////////////////////////
+\citep{chaudhary_brain-machine_2015}
+ALS deux possibilités:
+- Accepter respi artificielle + se faire nourrir
+- Mourir d'insufisace respiratoire
+Dans le premier cas, maladie progresse jusqu'à perdre tout contrôle musculaire, qui finit souvent par le contrôle des muscles des yeux. C'est un état d'enfermement complet (\textit{completely locked-in state}). Si il reste encore un peu de contrôle musculaire, on parle alors de \textit{locked-in state}
+
+Conclusion:
+- Avenir prometteur
+- ICM hybrid \citep{muller-putz_towards_2015}
+- \citep{zimmermann_detection_2013} montre que les ICM-fnirs hybrides sont plus efficaces pour détecter les intentions motrices
+% ///////////////////////////////////////////////////////////
 
 % ********************************************
 %         Communication palliative
@@ -279,8 +292,14 @@ Une autre en non-invasive
 % -> Jeux
 \subsubsection{Jeux}
 
-\subsubsection{Web-browsing}
-un peu plus de légèreté
+% -> Internet
+\subsubsection{\textit{Web-browsing}}
+
+% -> Artistique
+\subsubsection{Artistique}
+ICM painting
+
+Conclusion sur les hybrides
 
 % -----------------------------------------------------------------------------
 % -----------------------------------------------------------------------------

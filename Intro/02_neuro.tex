@@ -23,14 +23,62 @@ Pomper les résultas de rodrigo + besserve + inclure schéma global du cerveau
 %                        MARQUEURS DE L'AN
 % -----------------------------------------------------------------------------
 % -----------------------------------------------------------------------------
-\section{Marqueurs de l'activité neuronale}
+\section{Signaux physiologiques pour le contrôle d'une ICM}
 \label{sec_marqueurs_AN}
 
-\subsection{Activité \textit{spike}}
-\subsection{P300}
-\subsection{Ondes lentes}
-\subsection{Rythmes sensorimoteurs}
-\subsection{SSVEP}
+PE, ME, ERD, ERS
+Les signaux peuvent classés en deux catégories \citep{wolpaw_brain_2002, curran_learning_2003, pfurtscheller_rehabilitation_2008}:
+\begin{itemize}
+	\item \textbf{Les signaux évoqués}: sont produits, sans que le sujet en ai conscience, suite à un stimulus externe pouvant être tactile, auditif ou visuel. En \eeg, on parlera de \textit{Potentiel Évoqué} (PE) et en \meg, \textit{Champs magnétique Évoqué}
+	\item \textbf{Signaux spontanés}: ceux-ci peuvent être volontairement modifiés par l'utilisateur.
+\end{itemize}
+
+% ********************************************
+%         Signaux évoqués
+% ********************************************
+\subsection{Signaux évoqués}
+
+% -> P300
+\subsubsection{P300}
+
+% -> SSEP
+\subsubsection{SSVEP}
+
+% ********************************************
+%         Signaux spontanés
+% ********************************************
+\subsection{Signaux spontanés}
+
+% -> Rythmes sensorymoteur
+\subsubsection{Rythmes sensorimoteurs (RSM)}
+
+% -> Onde lente
+\subsubsection{Ondes corticalee lentes}
+
+% -> Spike
+\subsubsection{Activité \textit{spike}}
+
+
+% //////////////////////////////////////
+% POUR LES LIS ET CLIS
+\citep{chaudhary_brain-machine_2015}
+
+\citep{birbaumer_breaking_2006} conclue que:
+- SMR et P300 donnent de meilleurs résultats que SCP-BCI chez les LIS mais les SCP semblent plus stables, et moins dépendantes des fonctions cognitives, motrices et sensorimotrices, ce qui représente un avantage pour les LIS et CLIS
+
+\citep{kubler_braincomputer_2008} plus la LIS progresse, plus les performances des EEG-BCI décroîssent et pour les CLIS c'est pas super. Etude qui a essayé l'EEG sur les CLIS \citep{de_massari_brain_2013} mais ça marche pas trop par contre la réponse hémodynamique en fNIRS semble plus prometteuse \citep{gallegos-ayala_brain_2014} (décodage 72\%)
+
+% POUR LES PROBLEMES MOTEUR
+- utilisation en général des SMR
+- SMR 8-12hz diminue pendant la tâche motrice (ERD) mais augmente pendant le repos (ERS)
+- \citep{pfurtscheller_brain_2000} première ICM basée sur les SMR (A REGARDER)
+- Décodage d'imagerie motrice par fNIRS \citep{sitaram_temporal_2007, zimmermann_detection_2013}
+
+% CONCLUSION
+- tDCS permet l'apprentissage moteur chez les sujets sains \citep{cuypers_is_2013, reis_time_2015} ou chez les stokes \citep{cuypers_is_2013, lefebvre2013dual}
+% //////////////////////////////////////
+
+\figScaleDesciption{0.7}{wolpow_2002_marqueurs}{Marqueurs de l'activité neuronale \citep{wolpaw_brain_2002}}{Blblabla \citep{wolpaw_brain_2002}}
 % -----------------------------------------------------------------------------
 % -----------------------------------------------------------------------------
 %                         IMAGERIE MOTRICE
