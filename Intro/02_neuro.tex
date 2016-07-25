@@ -25,39 +25,74 @@ Pomper les résultas de rodrigo + besserve + inclure schéma global du cerveau
 % -----------------------------------------------------------------------------
 \section{Signaux physiologiques pour le contrôle d'une ICM}
 \label{sec_marqueurs_AN}
-
-PE, ME, ERD, ERS
-Les signaux peuvent classés en deux catégories \citep{wolpaw_brain_2002, curran_learning_2003, pfurtscheller_rehabilitation_2008}:
+Les signaux peuvent classés en deux catégories \citep{wolpaw_brain_2002, pfurtscheller_rehabilitation_2008}:
 \begin{itemize}
-	\item \textbf{Les signaux évoqués}: sont produits, sans que le sujet en ai conscience, suite à un stimulus externe pouvant être tactile, auditif ou visuel. En \eeg, on parlera de \textit{Potentiel Évoqué} (PE) et en \meg, \textit{Champs magnétique Évoqué}
-	\item \textbf{Signaux spontanés}: ceux-ci peuvent être volontairement modifiés par l'utilisateur.
+	\item \textbf{Les réponses évoqués} ou \textit{exogènes}: sont produites, sans que le sujet en ai conscience, suite à un stimuli externe. 
+	\item \textbf{Les réponses spontanés} ou \textit{endogènes}: celles-ci peuvent être volontairement modifiées par l'utilisateur.
 \end{itemize}
+
+% ********************************************
+%           Rythmes cérébraux
+% ********************************************
+\subsection{Les rythmes cérébraux}
+\subsubsection{Définition des bandes}
+\subsubsection{Rôle fonctionnel}
+\todo[color=red!100]{A FAIRE}
 
 % ********************************************
 %         Signaux évoqués
 % ********************************************
-\subsection{Signaux évoqués}
-
-% -> P300
-\subsubsection{P300}
+\subsection{Réponses évoqués}
+Comme décrit plus haut, les signaux évoqués sont provoqués par un stimuli externe et engendrent une réponse spécifique, \cad localement dans le cerveau et à des instants précis. Ces signaux ainsi provoqués prendront des valeurs différentes en fonction de l'intention du sujet. Et c'est grâce à ces variations de valeurs que le sujet pourra contrôler la BMI. Le sujet est donc dépendant des stimulus qu'on lui envoie. La première conséquence, c'est que les ICM utilisant les signaux évoqués ne nécessitent pas d'apprentissage particulier. En revanche, elles peuvent entraîner une grande fatigue pouvant altérer les performances de l'ICM \citep{wolpaw_brain_2002, curran_learning_2003}.Enfin, les stimulus externes peuvent être de nature différents, que ce soit visuel, auditif ou tactile. Ce type peut s'adapter en fonction de la condition physique du sujet. \\
+Ces réponses sont donc liées à un événement (\textit{event-related}). La plus connue et la plus ancienne est le \textit{Potentiel Évoqué} (PE) recueillis en \eeg (et puisqu'il est lié à l'apparition d'un événement, on parlera d'\textit{Event-Realted Potential} (ERP)) et \textit{Champs magnétique Évoqué} en \meg. Ces ondes sont obtenues en moyennant un grand nombre d'essais par rapport à l'apparition du stimuli, afin d'écraser les variabilité inter-signal (bruits) et renforcer l'émergence des phénomènes communs aux essais. Parmi ces phénomènes, deux sont particulièrement exploités dans le cadre des ICM, les \textit{\SSEP} et l'onde \textit{P300}.
 
 % -> SSEP
-\subsubsection{SSVEP}
+\subsubsection{\SSEP (SSEP)}
+Les SSEP sont une réponse naturelle du cerveau à des stimulus envoyés à une certaine fréquence. Bien souvent, le stimuli est de nature visuelle, on parlera donc de \textit{Steady-State Visual Evoked Potentials} (SSVEP). Généralement, les stimulus visuels sont envoyés à des fréquences comprises entre 3.5hz et 75hz et génèrent, dans le cortex visuel, des réponses aux mêmes fréquences (et harmoniques) \citep{wolpaw_brain_2002, beverina_user_2003}. \\
+\cite{sutter_special_1992} décrit une BCI basée sur les SSVEP (SSVEP-BCI) où l'utilisateur fait face à un écran composé de lettres et de symboles disposés dans une matrice 8x8. Chaque groupe de lettre est flashé à des vitesses différentes pour établir le profil standard du sujet. On demande ensuite à l'individu de choisir une lettre. En flashant de nouveau les éléments de la matrices, les réponses dans le cortex visuel vont différées du profil standard et c'est ça qui permettra d'établir le choix de l'utilisateur. Depuis, les SSVEP ont été utilisées dans de nombreux autres systèmes, comme la sélection binaire \citep{allison2008towards}, pour épeler \citep{cecotti2010self}, le contrôle continu d'un curseur $1D$ ou $2D$ \citep{trejo2006brain}, les prothèses \citep{muller-putz_control_2008} ou encore pour le jeux \citep{lalor_steady-state_2005}. \\
+Ces SSVEP-BCI nécessitent que l'individu ai, d'une part, un restant de contrôle occulo-moteur pour orienter son regard et d'autre part, un système visuelle fonctionnelle. Enfin, puisque des images sont flashées à des vitesses assez importantes, ces ICM ne correspondent pas aux personnes épileptiques.
+
+\figScaleDesciption{0.4}{PSD_SSVEP}{Spectre de puissance d'un signal EEG contenant des SSVEP \citep{lalor_steady-state_2005}}{Spectre de puissance d'un signal EEG contenant des SSVEP à 17hz (ligne pleine) et à 20hz (ligne pointillées). Dans cette étude, les auteurs utilisent les SSVEP pour une prise de décision binaire permettant un contrôle d'un jeux virtuel en $3D$ \citep{lalor_steady-state_2005}}
+
+% -> P300
+\subsubsection{Onde P300}
+Comme décrit ci-dessus, les ERP sont une réponse exogène à un stimulus extérieur pouvant être de nature visuelle, auditive ou tactile. Après moyennage à travers les essais, on peut constater l'apparition d'une série de pic de tension à alternance positive (\textit{P}) et négative (\textit{N}) dont la localisation temporelle est \textit{fixe} (ou contenue dans un intervalle) et connue \citep{wolpaw_brain_2002, beverina_user_2003}. Ces ondes sont étudiées au dessus du cortex pariétal. Par convention, leur nom dérive de l'instant temporel d'apparition. Ainsi, on parlera des ondes N100 (ou N1), de la P200 (ou P2) et enfin de la P300. \\
+Dans le cadre des ICM, on va surtout s'intéresser à cette dernière, la P300 (bien que la N1 est en souvent également prise en compte). A l'instar des SSVEP, des objets sont aléatoirement mis en surbrillance sur un écran et on demande au sujet de choisir un de ces élément et de compter le nombre de fois que celui-ci est flashé. Enfin, lorsqu'une P300 est détectée dans l'activité neuronale, en remontant 300ms plus tôt, il est possible de retrouver l'élément mis en surbrillance à cet instant. Une autre petite beauté de la P300, c'est que son amplitude est d'autant plus forte que le sujet à réussit à dénombrer le nombre d'apparition.
+
+\figScaleDesciption{1}{ERP_and_P300}{ERP et onde P300 \citep{kubler2001brain}}{(A gauche) ERP généré par un stimuli auditif et apparition des différentes ondes, (A droite) Onde P300. On constate une augmentation d'amplitude lorsque l'utilisateur se focalise sur la lettre P (\textit{target letter (P)} et \textit{target row/column}), comparé au profil standard (\textit{standards}) \citep{kubler2001brain}}
+
+La première ICM utilisant la P300 a été introduite par \cite{farwell_talking_1988, donchin_mental_2000}. Ce système appelé le \textit{P300-speller}, permet à l'utilisateur d'épeler des mots. Le sujet est devant un écran formé d'une matrice de lettres aléatoirement flashées. Cette BCI est toujours d'actualité et de nombreuses études continuent de la développer \citep{vaughan_wadsworth_2006, hoffmann2008efficient}. L'utilité de la P300 pour contrôler un fauteuil roulant a également été exploré \citep{vanacker_context-based_2007, pires_visual_2008}. Enfin, \cite{mugler_design_2010} décrivent une ICM testée sur des sujets sains et atteints de SLA, permettant de contrôler un navigateur internet.
+
+\vspace{1\baselineskip}
+Les systèmes présentés utilisent des stimulus visuels. Toutefois, d'autres ICM reposent sur des stimulus auditifs \citep{sellers2006brain, sellers2006p300, furdea2009auditory, schreuder2010new} ou tactiles \citep{muller2006steady, brouwer2010tactile}.
 
 % ********************************************
 %         Signaux spontanés
 % ********************************************
 \subsection{Signaux spontanés}
+Les signaux spontanés correspondent à un ensemble de signaux cérébraux que l'utilisateur peut apprendre à moduler. Cet apprentissage, qui peut s'avérer assez long, va permettre de contrôler une \icm. \\
+Parmi ces signaux, on retrouver les \textit{potentiels corticaux lents} ainsi que les \textit{rythmes sensorimoteurs}, très largement plus présents dans la littérature ICM.
+
+% -> Onde lente
+\subsubsection{Potentiel corticaux lents}
+Les potentiels corticaux lents (ou \SCPS (SCP)) sont des variations lentes du potentiel cortical qui ont lieu entre 500ms et 10s \citep{wolpaw_brain_2002, birbaumer_thought-translation_2003, beverina_user_2003, kleber_direct_2005, pfurtscheller_rehabilitation_2008}. Un utilisateur peut apprendre à contrôler l'amplitude de ces signaux, notamment grâce à un bio-feedback où l'utilisateur voit son activité se moduler en temps réel sur un écran. les SCP peuvent prendre des valeurs positives, généralement lors d'un mouvement ou tout autre fonction impliquant une acivation corticale, ou négative lors d'une réduction de l'activité corticale \citep{rockstroh1989slow, birbaumer1997slow}. \\
+Les ICM basées sur les SCP vont nécessiter un seuil et, en fonction de ce seuil, le sujet module son activité lui permettant un contrôle binaire \citep{birbaumer1999spelling}. Toutefois, l'apprentissage peut s'avérer extrêmement long.
+
+\figScaleDesciption{0.4}{SCP}{Exemple de \SCPS \citep{kubler2001brain}}{Exemple de \SCPS \citep{kubler2001brain}}
 
 % -> Rythmes sensorymoteur
 \subsubsection{Rythmes sensorimoteurs (RSM)}
+Mu pour le cortex sensorimoteur, alpha pour cortex visuel.
+Bande propre À chaque individu par sa location, frÉquence.
+Preparation ou execution motrice diminue le mu et beta en particulier pour les mouvements contralateral / contrairement au repos ou au post-mouvement.
+Cette baisse s'appelle ERD a opposer a l'ERS. C'est baisse et augmentation ont egalement lieu lors de tache d'imagerie motrice
+(TAKE ALL REF)
 
-% -> Onde lente
-\subsubsection{Ondes corticalee lentes}
 
 % -> Spike
-\subsubsection{Activité \textit{spike}}
+\subsection{Décharge neuronale}
 
+LFP
 
 % //////////////////////////////////////
 % POUR LES LIS ET CLIS

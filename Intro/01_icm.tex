@@ -8,15 +8,24 @@
 %                            DEFINITION D UNE ICM
 % -----------------------------------------------------------------------------
 % -----------------------------------------------------------------------------
+
 \section{Définition et objectifs}
+Cette première section a pour but d'introduire et de définir le concept d'\icm. Nous verrons dans quel contexte elles sont apparues, les personnes à qui elles sont destinées ainsi que les principaux éléments qui les composent. \\
+Point de vue lexicale, on utilisera indifféremment \textit{Interface Cerveau-Machine (ICM)}, \textit{Interface Cerveau-Ordinateur (ICO)} ou les termes anglais correspondant à savoir \textit{Brain Computer Interface (BCI)} et \textit{Brain Machine Interface (BMI)}.
 
 % ********************************************
 %           CONTEXTE D'APPARITION
 % ********************************************
 \subsection{Contexte d'apparition des ICM}
 En 1964, Dr. Grey Walter connecte des électrodes directement dans le cortex moteur d'un patient et lui demande de presser un bouton pour faire avancer un rétro-projecteur. En même temps, il enregistre l'activité neuronale de telle sorte que elle aussi, puisse le faire avancer. Là où l'expérience devient remarquable, c'est que le rétro-projecteur avance avant que le patient ne presse le bouton ! Tout l'appareil musculaire du sujet est court-circuité et le contrôle se fait sans mouvement. Contrôler par la \textit{pensée}, un sujet de science fiction qui devient une réalité. Cette anecdote décrite par \cite{graimann_braincomputer_2009}, permet de placer la naissance de la possibilité d'une \icm (ICM) dans l'histoire. C'est le point d'entrée qui a ensuite conduit une grande diversité de chercheurs à se passionner pour ce sujet. \\
-Le terme \textit{Brain Computer Interface} (BCI) fait son apparition, au début des années 70, dans les publications de Jacques Vidal \citep{vidal_toward_1973, vidal1977real} où il était question de contrôler un curseur sur un écran. \\
-If faudra attendre les années 2000 pour que les ICM connaissent un avancement majeur grâce au développement des techniques de neuroimagerie et des connaissances en neurosciences.
+Le terme \textit{Brain Computer Interface} fait son apparition, au début des années 70, dans les publications de Jacques Vidal \citep{vidal_toward_1973, vidal1977real} où il était question de contrôler un curseur sur un écran. \\
+La progression des ICM et de l'intérêt de la communauté scientifique à véritablement commencé dans les années 2000. Trois facteurs sont à l'origine \citep{wolpaw_brain_2002}:
+\begin{enumerate}
+	\item Une amélioration des connaissances des processus neuro-physiologiques et des techniques d'imagerie.
+	\item L'arrivée d'ordinateur bon marché et l'amélioration constante de leur performances et des composants électroniques (processeurs, mémoire vive, logiciel...)
+	\item Une prise de conscience sociétale des besoins de personnes souffrant de problèmes neuro-musculaires.
+\end{enumerate}
+A noter que, à l'heure actuelle, l'arrivée de cartes graphiques bon marché est entrain de révolutionner l'approche computationnelle des ICM permettant des calculs plus lourds en moins de temps (notamment pour le \textit{Deep Learning}). Outre la continuelle amélioration des composants et de leur miniaturisation, la prochaine révolution concernera certainement les ordinateurs quantiques, déjà en phase de test dans les domaines de la génétique et de la chimie. 
 
 % ********************************************
 %               INTERACTIONS NATURELLES
@@ -27,8 +36,14 @@ Pour interagir avec son environnement, l'individu se sert des voies de communica
 % ********************************************
 %           COMMUNICATION ALTERNATIVE
 % ********************************************
-\subsection{ICM: une communication alternative}
-Une ICM (ou BCI en anglais pour \textit{Brain Computer Interface}) est un autre système de communication où les voies naturelles sont cout-circuitées. Au lieu de passer par le système nerveux puis musculaire, le signal cérébral est directement intercepté au niveau du cerveau et va ensuite être transformé en commandes. Une ICM est donc un système permettant de traduire une activité neuronale en commande extérieure. Le terme \textit{traduire} est à prendre au sens linguistique \cad que les signaux cérébraux forment un langage, composé de règles, de motifs ou \textit{pattern}, que l'on va essayé de décoder (via un ordinateur) pour les transformer en opérations. D'où le terme "\icm". \\
+\subsection{Un canal de communication alternatif}
+Il existe plusieurs maladies ou accidents qui entraînent une dégénérescence des performances motrices. Parmi elles, ont peut par exemple citer la Sclérose Latérale Amyotrophique (ou SLA), les accidents vasculaires cérébraux, certaines formes de sclérose, les lésions de la moelle épinière... Toutes ont en commun la possibilité de problème moteur. Dans ce contexte, \cite{wolpaw_brain_2002} introduit trois options pour restaurer ces fonctions:
+\begin{enumerate}
+	\item Augmenter les capacités des facultés motrices restantes. Autrement dit, donner un sens nouveau aux mouvements que l'individu est toujours en capacité de faire. A titre d'exemple, le guitariste virtuose Jason Becker, reconnu pour sa vélocité et dont tout le monde s'entendait sur son incroyable talent, fût un jour frappé par la SLA le conduisant au fur et à mesure à l'immobilité totale. Il convenu alors d'un langage basé sur les mouvements oculaires et, avec la complicité de son père, continua de composer.  
+	\item Contourner la lésion. L'auteur donne à titre d'exemple, une lésion de la moelle épinière que l'on peut contourner en utilisant l'activité des muscles situés au dessus de la lésion pour stimuler les muscles paralysés.
+	\item Enfin, la dernière façon de restaurer des fonctions motrices qui prend tout son sens lorsque les deux précédentes ne sont pas possibles, c'est d'établir un nouveau canal de communication directe entre le cerveau et un ordinateur, et ce, indépendamment de l'activité musculaire. D'où le nom, \textit{\icm}.
+\end{enumerate}
+Une ICM est un autre système de communication où les voies naturelles sont cout-circuitées. Au lieu de passer par le système nerveux puis musculaire, le signal cérébral est directement intercepté au niveau du cerveau et va ensuite être transformé en commandes. Une ICM est donc un système permettant de traduire une activité neuronale en commande extérieure. Le terme \textit{traduire} est à prendre au sens linguistique \cad que les signaux cérébraux forment un langage, composé de règles, de motifs ou \textit{pattern}, que l'on va essayé de décoder (via un ordinateur) pour les transformer en opérations. D'où le terme "\icm". \\
 
 \cite{pfurtscheller_rehabilitation_2008} et \citep{graimann_braincomputer_2009} introduisent quatre éléments qui composent une ICM:
 \begin{enumerate}
@@ -78,7 +93,13 @@ En pratique, cette reconnaissance de classes est mise en place en deux étapes:
 	\item L'entraînement ( ou \train): durant une certaine période, on va apprendre à une machine à reconnaître des événements. Pour cela, on utilise des données dont on connaît la provenance (c'est ce que l'on appelle la \textit{labellisation})
 	\item Le test ( ou \test): une fois la machine entraînée à partir d'une série de marqueurs labélisés, on teste l'algorithme avec des nouvelles données pour évaluer l'acuité de la machine à identifier ces événements.
 \end{enumerate}
-Cette étape de classification, décrite plus largement dans la section \ref{methodo_classification}, est très fortement dépendante de la qualité des marqueurs extraits en amont. Autrement dit, plus ces \textit{features} reflètent fidèlement un état, plus le travail de la machine à identifier ces événements sera facilité.
+Quelque soit l'algorithme de classification, celui-ci doit s'adapter à chaque utilisateur suivant trois niveaux \citep{wolpaw_brain_2002}:
+\begin{enumerate}
+	\item En premier lieu, et de manière assez évidente, il doit pouvoir s'adapter au marqueur du sujet
+	\item Ensuite, l'algorithme doit s'adapter en temps-réel aux variations spontanées. En effet, l'expérience utilisateur va varier en fonction d'un certain nombre de paramètres comme le moment de la journée, la fatigue, la maladie, le taux d'hormones, la motivation/concentration/frustration... \citep{curran_learning_2003}
+	\item Enfin, il doit permettre de prendre en compte l'adaptation du sujet. Durant l'expérience, l'utilisateur module son activité et fournit des efforts pour s'adapter au fonctionnement de la machine. En contrepartie, le software doit prendre en compte cette amélioration en fournissant des performances accrues.
+\end{enumerate}
+Cette étape de classification, décrite plus largement dans la section \ref{methodo_classification}, est très fortement dépendante de la qualité des marqueurs extraits en amont. Autrement dit, plus ces \textit{features} reflètent fidèlement un état, plus le travail de la machine à identifier ces événements sera facilité. \\
 
 % -> Commande :
 \subsubsection{Transformation en commande}
@@ -244,7 +265,9 @@ On peut distinguer différents types d'ICM, sur la base de deux critères \citep{d
 \label{sec_application_ICM}
 Prélever directement l'activité neuronale et donc, \textit{bypasser} les voies naturelles, permet de s'affranchir d'éventuelles limitations physiologiques. C'est pourquoi les ICM représentent un enjeu majeur pour la réhabilitation motrice ou handicap moteur ou encore pour la communication palliative.
 Les applications concrètes des \icm visent donc les personnes disposant de leurs capacités cognitives mais qui sont privées de facultés motrices. \\
-Par exemple, le \textit{syndrome d'enfermement} ou \textit{locked-in syndrome} qui surviennent majoritairement à la suite d'un accident vasculaire cérébrale. Les personnes touchées par ce syndrome sont pleinement consciente de leur corps, de l'environnement, ils peuvent ressentir les sensations de toucher et de douleur mais n'ont plus de facultés motrices, hormis peut-être, les mouvements de paupières ou des yeux. Un autre exemple est celui de la la sclérose latérale amyotrophique (ou SLA) qui est une dégénérescence des neurones moteur. Progressivement, les personnes atteintes de SLA perdent l'usage des bras, des jambes, de la parole des muscles faciaux et enfin de la déglutition. Toutefois, a l'instar du \textit{locked-in syndrome}, la conscience et les facultés cognitives demeurent intactes. \\
+Par exemple, le \textit{syndrome d'enfermement} ou \textit{locked-in syndrome} qui surviennent majoritairement à la suite d'un accident vasculaire cérébrale (AVC). Les personnes touchées par ce syndrome sont pleinement consciente de leur corps, de l'environnement, ils peuvent ressentir les sensations de toucher et de douleur mais n'ont plus de facultés motrices, hormis peut-être, les mouvements de paupières ou des yeux. Un autre exemple est celui de la la sclérose latérale amyotrophique (ou SLA) qui est une dégénérescence des neurones moteur. Progressivement, les personnes atteintes de SLA perdent l'usage des bras, des jambes, de la parole des muscles faciaux et enfin de la déglutition. Toutefois, a l'instar du \textit{locked-in syndrome}, la conscience et les facultés cognitives demeurent intactes. \\
+
+\figScaleDesciption{0.6}{SLA_physio2}{Paralysie causée par la SLA et accident vasculaire cérébrale \citep{kubler2001brain}}{Paralysie causée par la SLA et accident vasculaire cérébrale \citep{kubler2001brain}}
 
 SLA et \textit{locked-in syndrome} ne sont que deux exemples expliquant l'intérêt social du développement des ICM. Redonner un peu de contrôle ou établir un canal de communication avec les familles des patients expliquent l'engouement qui existe depuis maintenant plus de 40 ans pour les ICM.
 
@@ -274,7 +297,12 @@ Conclusion:
 % ********************************************
 %         Robotique et prothèse
 % ********************************************
-\subsection{Robotique et prothèse}
+\subsection{Mobilité, robotique et prothèse}
+
+\subsubsection{Curseur $1D$, $2D$ et $3D$}
+\subsubsection{Contrôler d'un fauteuil roulant}
+\subsubsection{Robotique et prothèse}
+
 Une autre en non-invasive
 \figScaleX{0.6}{hochberg_2012}{Contrôle d'un bras robotisé \citep{hochberg_reach_2012}}
 
