@@ -3,20 +3,45 @@
 % #############################################################################
 \chapter{ICM et neurophysiologie}
 
+Cette chapitre a pour objectif d'introduire les concepts neurophysiologiques sous-jacents au contrôle et à la définition d'une \icm. Le but sera d'expliquer l'origine et la composition des différents types de signaux cérébraux permettant à un utilisateur de piloter une ICM. Pour cela, nous verrons tout d'abord les bases physiologiques liées à la motricité, puis de là, nous verrons quels types de signaux sont couramment extraits et exploités des principales régions motrices pour le contrôle d'une ICM.\\
+\todo[color=red!100]{Etoffer cette intro lorsque les sous-parties seront mieux définies}
+%Cette thèse est principalement articulée autour de la motricité. Les concepts présentés ci-dessous seront donc orientés en conséquence.
+ 
+
 % -----------------------------------------------------------------------------
 % -----------------------------------------------------------------------------
 %                            BASES PHYSIOLOGIQUES
 % -----------------------------------------------------------------------------
 % -----------------------------------------------------------------------------
-\section{Bases physiologiques}
-\figScaleX{0.6}{Grainmann_2002_Brain}{Blabla \citep{graimann_braincomputer_2009}}
+\section{Bases physiologiques liées à la motricité}
+Cette section servira avant tout à identifier les principaux acteurs de la planification et de l'action motrice. Pour cela, on introduira les notions nécessaires sur le cortex ainsi que les principales aires sollicitées dans le cadre des ICM. Puis, de ces aires, nous verrons le principes des rythme cérébrale qui permettra ensuite de justifier les principaux processus neuronaux liés à la motricité.
 
-\section{Apprentissage machine: applications aux neurosciences}
-okok
+\subsection{Notions sur le cortex}
+Le cerveau est l'organe le mieux protégé du corps. Tout d'abord, la peau est une première barrière avec l'extérieur. Ensuite, l'os (le crâne) assure une protection mécanique \cad qu'il va protéger en cas de coups ou de chocs. Viennent ensuite les méninges (dure-mère, l'arachnoïde et la pie-mère), qui sont des membranes enveloppant le système nerveux central (SNC) et qui vont permettre d'une part d'amortir les chocs et d'autre part, empêcher le cerveau de s'abîmer avec l'intérieur du crâne. \\
+La couche suivante est appelée cortex, mesure entre 1 et 5mm d'épaisseur et correspond au corps cellulaire des neurones. Le cortex se divise en quatre régions:
+\begin{itemize}
+	\item Lobe frontal: lié à la planification, la prise de décision et à l'exécution motrice
+	\item Lobe occipital, pour le traitement de la vision, temporal pour l'audition et somatosensorielle pour le touché.
+	\item Lobe pariétal, qui est considéré comme un cortex associatif \cad qu'il joue un rôle important dans l'intégration des informations sensorielles.
+\end{itemize}
+Le cortex moteur, situé dans le lobe frontal, est un ensemble d'aires destinées à la planification et à l'exécution de mouvement volontaires. Il se compose du \textit{cortex pré-moteur} qui va planifier et organiser les mouvements en fonction des informations sensorielles et qui seront ensuite exécutés par le \textit{cortex moteur primaire}. Enfin, l'\textit{aire motrice supplémentaire} (SMA) est impliquée dans la planification des mouvements complexes et dans la coordination.
 
-% -----------------------------------------------------------------------------
-\section{Encodage et décodage moteur: bases physiologiques}
-Pomper les résultas de rodrigo + besserve + inclure schéma global du cerveau
+\figScaleDesciption{1}{anatomofonctionnel}{Présentation du cortex et des aires destinées au contrôle moteur}{(A gauche) - Principaux lobes constituants le cortex et localisation de la SMA, du cortex prémoteur et moteur primaire \citep{graimann_braincomputer_2009}, (A droite) - Vue en coupe du cortex moteur et sensorimoteur permettant le contrôle de différentes régions (\url{http://schoolbag.info/biology/humans/9.html})}
+
+\subsection{L'activité rythmique et lien avec la motricité}
+L'activité rythmique correspond à l'activité neuronale prise dans des bandes de fréquence précises \citep{niedermeyer_normal_2004, niedermeyer2005electroencephalography} (bien qu'elle peut différer légèrement d'une publication à l'autre). Leur extraction se fera donc à l'aide de filtrage.
+% Définition et rôle fonctionnel des rythmes cérébraux
+\paragraph{Définition et rôle fonctionnel des rythmes cérébraux}: l'apparition de ces rythmes résulte d'une synchronisation/désynchronisation d'une population large de neurones et vont permettre de caractériser l'état cognitif d'un individu. On peut distinguer six rythmes cérébraux ayant des propriétés spatio-temporelle différentes. La littérature attribue un très grand nombre de rôles fonctionnels à ces bandes. Les descriptions ci-dessous illustrent une partie des rôles qui leur sont affectés:
+\begin{description}
+   \item[Delta $(\delta \in {[2,4]}Hz)$ :] principalement présentes chez les très jeunes enfants, ces rythmes très lents et de forte amplitude sont particulièrement présents durant le sommeil profond \citep{amzica_electrophysiological_1998, silber_visual_2007}.
+   \item[Theta $(\theta \in {[5,7]}Hz)$ :] les rythmes thêta sont proéminents pour la mémorisation à long terme \citep{klimesch1999eeg} ou dans les états de somnolence et d'hypnose \citep{schacter1977eeg}. 
+   \item[Alpha $(\alpha \in {[8,13]}Hz)$ :] la puissance dans la bande alpha est réputée pour augmenter lorsque les yeux sont fermés \citep{berger1929ueber}. Ce rythme est également important dans la mémorisation \citep{klimesch1999eeg}. \cite{markand1990alpha, klimesch_eeg_2007} décrit plus spécifiquement les rôles supposés de l'alpha.
+   \item[Mu $(\mu \in {[8,13]}Hz)$ :] bande de fréquence identique à celle de l'alpha mais le rythme $\mu$ correspond en fait à l'alpha pris dans les aires sensorimotrices \citep{markand1990alpha}. Un des phénomènes important avec ce rythme qui sera particulièrement exploité par les ICM, c'est la baisse occasionnée lors de tâche motrice ou d'imagerie motrice dans l'hémisphère controlatéral \citep{salmelin1994spatiotemporal, crone_functional_1998-1, pfurtscheller_event-related_1999, pfurtscheller_rehabilitation_2008}. 
+   \item[Beta $(\beta \in {[13,30]}Hz)$ :] tout comme le rythme $\mu$, on observe une baisse dans la bande $\beta$ lors de tâche d'exécution motrice au dessus du cortex moteur sauf que celle-ci est suivie par une augmentation une à deux secondes après la fin du mouvement \citep{pfurtscheller1989patterns, cassim2001does}. Ce phénomène s'appelle le rebond bêta. 
+   \item[Gamma $(\gamma \geq 40Hz)$ :] les oscillations gamma sont présentes en réponse à un stimuli sensoriel, lors de tâche motrices \citep{crone_functional_1998, tallon-baudry_oscillatory_1999} ou dans des tâches de recherche visuelle \citep{tallon-baudry_oscillatory_1997}. La bande haute du $\gamma$ sera limitée par la fréquence d'échantillonnage (critère de Shannon) et donc, par la technique d'enregistrement (l'ECoG et la SEEG permettent d'étudier des phénomènes plus large bandes que la MEG ou l'EEG par exemple)
+\end{description}
+
+\figScaleX{1}{activite_rythmique}{Exemple d'activités rythmiques dans les différentes bandes de fréquences pour un essai unique issue de l'activité sEEG}
 
 % -----------------------------------------------------------------------------
 % -----------------------------------------------------------------------------
@@ -32,14 +57,6 @@ Les signaux peuvent classés en deux catégories \citep{wolpaw_brain_2002, pfurtsc
 \end{itemize}
 
 % ********************************************
-%           Rythmes cérébraux
-% ********************************************
-\subsection{Les rythmes cérébraux}
-\subsubsection{Définition des bandes}
-\subsubsection{Rôle fonctionnel}
-\todo[color=red!100]{A FAIRE}
-
-% ********************************************
 %         Signaux évoqués
 % ********************************************
 \subsection{Réponses évoqués}
@@ -52,14 +69,14 @@ Les SSEP sont une réponse naturelle du cerveau à des stimulus envoyés à une cert
 \cite{sutter_special_1992} décrit une BCI basée sur les SSVEP (SSVEP-BCI) où l'utilisateur fait face à un écran composé de lettres et de symboles disposés dans une matrice 8x8. Chaque groupe de lettre est flashé à des vitesses différentes pour établir le profil standard du sujet. On demande ensuite à l'individu de choisir une lettre. En flashant de nouveau les éléments de la matrices, les réponses dans le cortex visuel vont différées du profil standard et c'est ça qui permettra d'établir le choix de l'utilisateur. Depuis, les SSVEP ont été utilisées dans de nombreux autres systèmes, comme la sélection binaire \citep{allison2008towards}, pour épeler \citep{cecotti2010self}, le contrôle continu d'un curseur $1D$ ou $2D$ \citep{trejo2006brain}, les prothèses \citep{muller-putz_control_2008} ou encore pour le jeux \citep{lalor_steady-state_2005}. \\
 Ces SSVEP-BCI nécessitent que l'individu ai, d'une part, un restant de contrôle occulo-moteur pour orienter son regard et d'autre part, un système visuelle fonctionnelle. Enfin, puisque des images sont flashées à des vitesses assez importantes, ces ICM ne correspondent pas aux personnes épileptiques.
 
-\figScaleDesciption{0.4}{PSD_SSVEP}{Spectre de puissance d'un signal EEG contenant des SSVEP \citep{lalor_steady-state_2005}}{Spectre de puissance d'un signal EEG contenant des SSVEP à 17hz (ligne pleine) et à 20hz (ligne pointillées). Dans cette étude, les auteurs utilisent les SSVEP pour une prise de décision binaire permettant un contrôle d'un jeux virtuel en $3D$ \citep{lalor_steady-state_2005}}
+\figScaleDesciption{0.5}{PSD_SSVEP}{Spectre de puissance d'un signal EEG contenant des SSVEP \citep{lalor_steady-state_2005}}{Spectre de puissance d'un signal EEG contenant des SSVEP à 17hz (ligne pleine) et à 20hz (ligne pointillées). Dans cette étude, les auteurs utilisent les SSVEP pour une prise de décision binaire permettant un contrôle d'un jeux virtuel en $3D$ \citep{lalor_steady-state_2005}}
 
 % -> P300
 \subsubsection{Onde P300}
 Comme décrit ci-dessus, les ERP sont une réponse exogène à un stimulus extérieur pouvant être de nature visuelle, auditive ou tactile. Après moyennage à travers les essais, on peut constater l'apparition d'une série de pic de tension à alternance positive (\textit{P}) et négative (\textit{N}) dont la localisation temporelle est \textit{fixe} (ou contenue dans un intervalle) et connue \citep{wolpaw_brain_2002, beverina_user_2003}. Ces ondes sont étudiées au dessus du cortex pariétal. Par convention, leur nom dérive de l'instant temporel d'apparition. Ainsi, on parlera des ondes N100 (ou N1), de la P200 (ou P2) et enfin de la P300. \\
 Dans le cadre des ICM, on va surtout s'intéresser à cette dernière, la P300 (bien que la N1 est en souvent également prise en compte). A l'instar des SSVEP, des objets sont aléatoirement mis en surbrillance sur un écran et on demande au sujet de choisir un de ces élément et de compter le nombre de fois que celui-ci est flashé. Enfin, lorsqu'une P300 est détectée dans l'activité neuronale, en remontant 300ms plus tôt, il est possible de retrouver l'élément mis en surbrillance à cet instant. Une autre petite beauté de la P300, c'est que son amplitude est d'autant plus forte que le sujet à réussit à dénombrer le nombre d'apparition.
 
-\figScaleDesciption{1}{ERP_and_P300}{ERP et onde P300 \citep{kubler2001brain}}{(A gauche) ERP généré par un stimuli auditif et apparition des différentes ondes, (A droite) Onde P300. On constate une augmentation d'amplitude lorsque l'utilisateur se focalise sur la lettre P (\textit{target letter (P)} et \textit{target row/column}), comparé au profil standard (\textit{standards}) \citep{kubler2001brain}}
+\figScaleDesciption{0.8}{ERP_and_P300}{ERP et onde P300 \citep{kubler2001brain}}{(A gauche) ERP généré par un stimuli auditif et apparition des différentes ondes, (A droite) Onde P300. On constate une augmentation d'amplitude lorsque l'utilisateur se focalise sur la lettre P (\textit{target letter (P)} et \textit{target row/column}), comparé au profil standard (\textit{standards}) \citep{kubler2001brain}}
 
 La première ICM utilisant la P300 a été introduite par \cite{farwell_talking_1988, donchin_mental_2000}. Ce système appelé le \textit{P300-speller}, permet à l'utilisateur d'épeler des mots. Le sujet est devant un écran formé d'une matrice de lettres aléatoirement flashées. Cette BCI est toujours d'actualité et de nombreuses études continuent de la développer \citep{vaughan_wadsworth_2006, hoffmann2008efficient}. L'utilité de la P300 pour contrôler un fauteuil roulant a également été exploré \citep{vanacker_context-based_2007, pires_visual_2008}. Enfin, \cite{mugler_design_2010} décrivent une ICM testée sur des sujets sains et atteints de SLA, permettant de contrôler un navigateur internet.
 
@@ -71,63 +88,90 @@ Les systèmes présentés utilisent des stimulus visuels. Toutefois, d'autres ICM r
 % ********************************************
 \subsection{Signaux spontanés}
 Les signaux spontanés correspondent à un ensemble de signaux cérébraux que l'utilisateur peut apprendre à moduler. Cet apprentissage, qui peut s'avérer assez long, va permettre de contrôler une \icm. \\
-Parmi ces signaux, on retrouver les \textit{potentiels corticaux lents} ainsi que les \textit{rythmes sensorimoteurs}, très largement plus présents dans la littérature ICM.
+Parmi ces signaux, on rencontre les \textit{potentiels corticaux lents} ainsi que les \textit{rythmes sensorimoteurs}. Ces derniers sont largement plus présents dans la littérature ICM. Avant tout, pour apprendre à moduler sont activité neuronale, l'utilisateur devra utiliser une stratégie mentale 
+
+% -> Apprentissage autonome et imagerie motrice
+\subsubsection{Stratégies mentales pour le contrôle d'une ICM}
+Pour assimiler le contrôle des signaux spontanés, il est nécessaire que utilisateur passe par une phase d'apprentissage pouvant être soit autonome, soit guidée via l'utilisation de l'imagerie motrice \citep{curran_learning_2003}.
+\begin{enumerate}
+	\item Apprentissage autonome (\textit{operant conditioning}, \textit{implicit learning} ou \textit{operant self-control}): le choix de la stratégie mentale est laissé à l'utilisateur. C'est à lui de trouver celle qui lui convient le mieux. Dans ce cas, le système doit impérativement fournir un feedback au sujet afin que celui-ci comprenne comment la machine.
+	\item Imagerie motrice: pour cette stratégie mentale, on demandera donc à l'utilisateur d'imaginer des mouvements qui lui seront imposés en amont (cf. \ref{sec_imagerie_motrice})
+\end{enumerate}
+Ces stratégies mentales conditionnent le mode d'interaction de l'utilisateur avec la machine. Il est fréquent que, dans les premiers stades de l'entraînement, les sujets soumis à l'apprentissage autonome utilisent naturellement l'imagerie motrice \citep{wolpaw1991eeg, birbaumer_spelling_1999}. \\
+L'\textit{operant conditioning} demande un long apprentissage (de plusieurs semaines à années) mais les systèmes l'utilisant rapportent de bonnes performances et une grande stabilité \citep{fetz_operant_1969, wolpaw1991eeg, birbaumer_spelling_1999, wolpaw_control_2004-1, birbaumer_breaking_2006, vaughan_wadsworth_2006, wolpaw_brain-computer_2007-1}. Certaines tâches motrices peuvent ne pas convenir aux personnes ayant un déficit moteur de longue date ou depuis la naissance tout comme les tâches visuelles pour les personnes aveugles de naissance \citep{curran_learning_2003}. Donc, autre avantage de l'apprentissage autonome, il permet de prendre en compte la préférence ou le confort d'utilisation qui pourrait jouer un rôle dans les performances de l'ICM \citep{pfurtscheller_brain_2000}. 
 
 % -> Onde lente
 \subsubsection{Potentiel corticaux lents}
-Les potentiels corticaux lents (ou \SCPS (SCP)) sont des variations lentes du potentiel cortical qui ont lieu entre 500ms et 10s \citep{wolpaw_brain_2002, birbaumer_thought-translation_2003, beverina_user_2003, kleber_direct_2005, pfurtscheller_rehabilitation_2008}. Un utilisateur peut apprendre à contrôler l'amplitude de ces signaux, notamment grâce à un bio-feedback où l'utilisateur voit son activité se moduler en temps réel sur un écran. les SCP peuvent prendre des valeurs positives, généralement lors d'un mouvement ou tout autre fonction impliquant une acivation corticale, ou négative lors d'une réduction de l'activité corticale \citep{rockstroh1989slow, birbaumer1997slow}. \\
-Les ICM basées sur les SCP vont nécessiter un seuil et, en fonction de ce seuil, le sujet module son activité lui permettant un contrôle binaire \citep{birbaumer1999spelling}. Toutefois, l'apprentissage peut s'avérer extrêmement long.
+Les potentiels corticaux lents (ou \SCPS (SCP)) sont des variations lentes du potentiel cortical qui ont lieu entre 500ms et 10s \citep{birbaumer1990slow, birbaumer1997slow, birbaumer_thought-translation_2003, birbaumer_slow_1999, kleber_direct_2005}. Un utilisateur peut apprendre à contrôler l'amplitude de ces signaux, notamment grâce à un bio-feedback où l'utilisateur voit son activité se moduler en temps réel sur un écran. les SCP peuvent prendre des valeurs positives, généralement lors d'un mouvement ou tout autre fonction impliquant une activation corticale, ou négative lors d'une réduction de l'activité corticale \citep{rockstroh1989slow, birbaumer1997slow, wolpaw_brain_2002}. \\
+Les ICM basées sur les SCP vont nécessiter un seuil et, en fonction de ce seuil, le sujet module son activité lui permettant un contrôle binaire \citep{birbaumer_spelling_1999}. Toutefois, l'apprentissage peut s'avérer extrêmement long. Le dispositif de traduction de pensées \citep{kubler_thought_1999} (\textit{Thought Translation Device} (TTD)) , est un appareil destiné à entraîné des sujets puis à tester leur apprentissage pour épeler des mots \citep{perelmouter1999language, birbaumer_thought-translation_2003}. Le software est développés en C++ et utilise des outils de $BCI2000$, plate-forme de développement du groupe central de Wadsworth \citep{wolpaw_wadsworth_2003, schalk_bci2000_2004}. Le TTD a été développé pour les sujets complètement paralysés (LIS et CLIS). Tout d'abord, les sujets s'entraînent de manière autonome à moduler leur SCP notemment grâce à un retour visuel et auditif et un renforcement positif (visage souriant et musique lorsque le contrôle est réussit). Après cette phase d'apprentissage machine, les sujets sont ensuite testés pour sélectionner des lettres ou des mots \citep{birbaumer_thought_2000, birbaumer_thought-translation_2003}. \\
+Les SCP ont également été testées à des fins cliniques. \cite{rockstroh1993cortical, kotchoubey1998control} ont montré qu'après un an et demi d'apprentissage autonome à moduler positivement et négativement les SCP, des sujets atteints d'épilepsies pharmacorésistantes ont vu leur crise diminuer de 50\% en moyenne (certains sujets n'avaient plus aucune crise tandis que d'autres n'ont eut aucun changement).
 
-\figScaleDesciption{0.4}{SCP}{Exemple de \SCPS \citep{kubler2001brain}}{Exemple de \SCPS \citep{kubler2001brain}}
+\figScaleDesciption{0.6}{SCP}{Exemple d'apprentissage pour contrôler les \SCPS \citep{kubler2001brain}}{Feedback visuel des SCP renvoyées par le TTD - A droite, un curseur peut se déplacer entre les deux objectifs (en haut et en bas). Les négativité corticales bougent le curseur vers le haut (ligne du haut en pointillé) à l'inverse, les positivités corticales permettent de faire descendre le curseur (ligne pleine du bas). Toute modulation de $7 \mu V$ est considérée comme une réussite \citep{kubler2001brain}}
 
 % -> Rythmes sensorymoteur
 \subsubsection{Rythmes sensorimoteurs (RSM)}
-Mu pour le cortex sensorimoteur, alpha pour cortex visuel.
-Bande propre À chaque individu par sa location, frÉquence.
-Preparation ou execution motrice diminue le mu et beta en particulier pour les mouvements contralateral / contrairement au repos ou au post-mouvement.
-Cette baisse s'appelle ERD a opposer a l'ERS. C'est baisse et augmentation ont egalement lieu lors de tache d'imagerie motrice
-(TAKE ALL REF)
+Les RSM (ou \textit{Sensorimotor rhythms} (SMR)) correspondent à l'amplitude de signaux, au dessus du cortex sensorimoteur, dans des bandes de fréquences spécifiques. Les plus fréquents sont les rythmes $\mu$ 8-13hz et $\beta$ 13-30hz. Un utilisateur peut apprendre à moduler l'amplitude de son activité cérébrale dans ces bandes pour contrôler une \icm notamment par le biais de l'imagerie motrice (cf. \ref{sec_imagerie_motrice}). On appelle \textit{\ERS} lorsque l'amplitude augmente et \textit{\ERD} lorsqu'elle diminue \citep{pfurtscheller_event-related_1999, pfurtscheller_rehabilitation_2008}. \\
+Ces rythmes ont très largement été exploités pour contrôler un BMI, que ce soit pour déplacer un curseur dans une, deux ou trois dimensions \citep{wolpaw_control_2004, mcfarland2008emulation, kayagil2009binary, mcfarland2010electroencephalographic, doud2011continuous}, pour épeler \citep{neuper2006motor, vaughan_wadsworth_2006}, pour contrôler une prothèse \citep{pfurtscheller_brain_2000, muller2005eeg, mcfarland2008brain} ou un fauteuil roulant \citep{tanaka2005electroencephalogram, galan2008brain}
+
+\figScaleDesciption{1}{kubler_mu_and_imagerie}{Utilisation des ERD et du $\mu$ pour contrôler une ICM \citep{kubler2001brain}}{(A gauche) Utilisation de l'imagerie motrice pour contrôler la direction d'un curseur et tracé de l'activité neuronale pour les électrodes C3 (hémisphère gauche) et C4 (hémisphère droit) en utilisant l'activité neuronale contenue dans la bande $\alpha$ - L'utilisateur imagine des mouvements des mains droite ou gauche pour déplacer le curseur. L'imagination d'un mouvement de main gauche entraîne une ERD dans l'hémisphère droit (C4) mais l'activité est maintenue sur C3 (A droite) Modulation du $\mu$ au dessus de C3-C4 pour contrôler un curseur vers le haut (augmentation du $\mu$, ligne pointillée) ou vers le bas (baisse du $\mu$, ligne pleine) \citep{kubler2001brain}}.
+
+\subsubsection{Autres marqueurs}
+
+\paragraph{\PACEN (PAC)}
+\citep{hyafil_neural_2015}
+\citep{canolty_functional_2010}
+\figScale{hyafil_2015}{Mécanismes du couplage phase-amplitude}
+
+\paragraph{Phase}
+blabla
+
+\vspace{1\baselineskip}
+\todo[inline,caption={},color=blue!20]{
+	\textbf{Conclusion sur les signaux physiologiques} \\
+	D'un point de vue clinique \citep{chaudhary_brain-machine_2015}, pour les personnes présentant des déficits moteurs (comme la SLA menant au \textit{locked-in state} (LIS) puis au \textit{completly locked-in state} (CLIS)), les SMR et P300-BCI donnent de meilleurs résultats en absolue mais les SCP-BCI semblent plus stables et moins dépendantes des fonctions cognitives motrices et sensorimotrices \citep{birbaumer_breaking_2006}, ce qui représente un avantage pour ces personnes atteintes en LIS ou CLIS. De plus, \cite{kubler_braincomputer_2008} ont pu montrer une corrélation entre l'évolution de la SLA (et donc de la décroissance des capacités motrices) et les performances des EEG-BCI. Pour compléter ce dernier point, \cite{de_massari_brain_2013} ont utilisé une SCP-BCI pour essayé d'établir une communication (deux choix \textit{yes} et \textit{no}) avec des sujets en LIS (et un en CLIS). Toutefois, les résultats ne sont pas probants, contrairement à \cite{gallegos-ayala_brain_2014} qui ont préféré utiliser la réponse hémodynamique pour un fNIRS-BCI et qui ont pu obtenir des décodages plus prometteurs.
+}
 
 
-% -> Spike
-\subsection{Décharge neuronale}
 
-LFP
-
-% //////////////////////////////////////
-% POUR LES LIS ET CLIS
-\citep{chaudhary_brain-machine_2015}
-
-\citep{birbaumer_breaking_2006} conclue que:
-- SMR et P300 donnent de meilleurs résultats que SCP-BCI chez les LIS mais les SCP semblent plus stables, et moins dépendantes des fonctions cognitives, motrices et sensorimotrices, ce qui représente un avantage pour les LIS et CLIS
-
-\citep{kubler_braincomputer_2008} plus la LIS progresse, plus les performances des EEG-BCI décroîssent et pour les CLIS c'est pas super. Etude qui a essayé l'EEG sur les CLIS \citep{de_massari_brain_2013} mais ça marche pas trop par contre la réponse hémodynamique en fNIRS semble plus prometteuse \citep{gallegos-ayala_brain_2014} (décodage 72\%)
-
-% POUR LES PROBLEMES MOTEUR
-- utilisation en général des SMR
-- SMR 8-12hz diminue pendant la tâche motrice (ERD) mais augmente pendant le repos (ERS)
-- \citep{pfurtscheller_brain_2000} première ICM basée sur les SMR (A REGARDER)
-- Décodage d'imagerie motrice par fNIRS \citep{sitaram_temporal_2007, zimmermann_detection_2013}
-
-% CONCLUSION
-- tDCS permet l'apprentissage moteur chez les sujets sains \citep{cuypers_is_2013, reis_time_2015} ou chez les stokes \citep{cuypers_is_2013, lefebvre2013dual}
-% //////////////////////////////////////
-
-\figScaleDesciption{0.7}{wolpow_2002_marqueurs}{Marqueurs de l'activité neuronale \citep{wolpaw_brain_2002}}{Blblabla \citep{wolpaw_brain_2002}}
+%	- tDCS permet l'apprentissage moteur chez les sujets sains \citep{cuypers_is_2013, reis_time_2015} ou chez les stokes \citep{cuypers_is_2013, lefebvre2013dual}
 % -----------------------------------------------------------------------------
 % -----------------------------------------------------------------------------
 %                         IMAGERIE MOTRICE
 % -----------------------------------------------------------------------------
 % -----------------------------------------------------------------------------
 \section{Imagerie motrice}
+\label{sec_imagerie_motrice}
 
 \subsection{Les différents types d'imagerie}
+%Dans cette partie, il faut définir l?imagerie, ce en quoi elle consiste et le fait qu?elle se construise sur les modalités sensorielles (les sens, auxquels d?ajoute l?imagerie kinesthésique, basée sur les informations proprioceptives). Inutile d?aller chercher des choses trop spécifiques à mon sens dans cette partie, il faut introduire les concepts de manière relativement simples. Je ne suis pas certain qu?il faille trop de références pour décrire les types d?imagerie, cela n?appartient à personne (les chercheurs ont surtout essayé de déterminer l?efficacité relative d?une forme par rapport à une autre, ce genre de choses, mais une ou deux réf sur le fait qu?on construit sur les modalités sensorielles est à mon sens suffisant, par exemple Kosslyn et al. 1990 ? inutile de la lire, il suffit de la citer pour dire qu?il y a différents types d?imagerie : Kosslyn S.M., Seger C., Pani J.R., & Hillger L.A., (1990), When is imagery used in everyday life ? A diary study. Journal of Mental Imagery, 14, 131-152). Je te donne par contre des articles de neuroimagerie permettant de justifier de la spécificité des réseaux sous-jacents à chaque type d?imagerie, si tu le souhaites. Tu pourras même en tirer des illustrations graphiques si nécessaire. \\
+%Tu as quelques subtilités à envisager ici. Traditionnellement, on distingue l?imagerie visuelle, kinsthésique, tactile, auditive et olfactive. Dans l?imagerie visuelle, tu as l?imagerie visuelle interne (associée, à la première personne, où l?on est forcément acteur du mouvement) et l?externe (dissociée, à la 3ème personne, où l?on est spectateur de soi-même ou de quelqu?un d?autre). Il ne faut pas confondre imagerie interne et imagerie kinesthésique, ce que font certaines personnes, donc je te suggère plutôt la classification que je t?ai mentionnée précédemment. De mémoire, dans les articles, tu verras des choses orientées sur imagerie motrice visuelle vs kinethésique (Solodkin, Guillot), d?autres sur imagerie visuelle 1ère et 3ème personne (Ruby & Decety, Jackson, Lorey) et enfin d?autres mêlant tout cela (Jiang et Seiler).
+
+
+\subsection{Autre utilisation de l'imagerie motrice}
+%Là encore, je pense qu?il faut faire simple. L?idée est de montrer ce que cela peut apporter. Tu peux notamment donner les bénéfices liés aux gains de performance et la facilitation de l?apprentissage moteur (sportifs, musiciens), avec surtout des références à des revues de question faisant le tour de la question (Feltz & Landers, 1983 ; Driskell et al., 1994 ; Guillot & Collet, 2008 ; Schuster et al., 2011 ; Di Rienzo et al., 2016) ou encore dans le domaine de la réhabilitation en cas de blessures ou d?incapacités motrices (Jackson et al., 2001; Sharma, 2006; de Vries & Mulder, 2007; McEwen et al., 2009; Malouin et al., 2013 ; Di Rienzo et al., 2014). Regarde un peu dans ces articles et tu auras largement de quoi illustrer certaines idées sans forcément chercher à être exhaustif. Tu peux éventuellement aussi dire qu?il y a des effets sur la confiance, la motivation et la régulation de l?anxiété (Munroet et al., 2000 ; Cumming & Williams, 2013).
+%
+%Enfin, tu peux faire un lien entre imagerie et exécution et imagerie et préparation du mouvement, et te référer, de manière générale, à Jeannerod (1994) qui décrit ces aspects me semble-t-il.
 
 \subsection{Imagerie, intention et exécution motrice}
+%C?est une question central, qui renvoie au principe d?équivalence fonctionnelle entre exécuter et imaginer un mouvement.
+%
+%L?approche originale est neurofonctionnelle, donc basée sur la comparaison des substrats neuronaux impliqués dans les deux types de pratique. Il y a des centaines de travaux sur la question. La grande majorité souligne l?équivalence fonctionnelle, d?autres spécifient les différences et les spécificités de l?imagerie versus la pratique et inversement. Je te donne d?importantes références et plutôt de revue, afin d?avoir des papiers qui traitent de l?ensemble de la question (Jeannerod, 1994 déjà envoyé ; Munzert et al., 2009 ; Lotze & Halsband, 2006 ; Guillot & Collet, 2005b ; Guillot et al., 2012 ; Hétu et al., 2013 ; Holmes & Collins, 2001 ; Di Rienzo et al., 2016 déjà envoyé)
+%
+%Par la suite, on peut étendre aux autres similitudes entre imaginer et effectuer, notamment équivalence temporelle (revues de questions sur le sujet : Guillot & Collet 2005a ; Guillot et al. 2012), similitude des réponses neurovétégatives (revue : Collet et al., 2013), voire à la prise en compte des contraintes biomécaniques lors des mouvements simulés mentalement. À toi de voir si c?est utile d?aller jusque-là ou pas J
+
+
 \citep{hanakawa_motor_2008}
 \figScale{hanakawa_2008}{Comparatif}
 
 \subsection{Utilisation de l'imagerie motrice pour les ICM}
 
-\subsection{Autre utilisation de l'imagerie motrice}
+
+\section{Apprentissage machine: applications aux neurosciences}
+okok
+
+% -----------------------------------------------------------------------------
+\section{Encodage et décodage moteur}
+Pomper les résultas de rodrigo + besserve + inclure schéma global du cerveau
+
+
 

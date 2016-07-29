@@ -99,7 +99,7 @@ Quelque soit l'algorithme de classification, celui-ci doit s'adapter à chaque ut
 	\item Ensuite, l'algorithme doit s'adapter en temps-réel aux variations spontanées. En effet, l'expérience utilisateur va varier en fonction d'un certain nombre de paramètres comme le moment de la journée, la fatigue, la maladie, le taux d'hormones, la motivation/concentration/frustration... \citep{curran_learning_2003}
 	\item Enfin, il doit permettre de prendre en compte l'adaptation du sujet. Durant l'expérience, l'utilisateur module son activité et fournit des efforts pour s'adapter au fonctionnement de la machine. En contrepartie, le software doit prendre en compte cette amélioration en fournissant des performances accrues.
 \end{enumerate}
-Cette étape de classification, décrite plus largement dans la section \ref{methodo_classification}, est très fortement dépendante de la qualité des marqueurs extraits en amont. Autrement dit, plus ces \textit{features} reflètent fidèlement un état, plus le travail de la machine à identifier ces événements sera facilité. \\
+Cette étape de classification, décrite plus largement dans la section \ref{methodo_classification}, est très fortement dépendante de la qualité des marqueurs extraits en amont. Autrement dit, plus ces \textit{features} reflètent fidèlement un état, plus le travail de la machine à identifier ces événements sera facilité.
 
 % -> Commande :
 \subsubsection{Transformation en commande}
@@ -210,7 +210,7 @@ L'utilisation de l'IRMf pour les ICM a été exploité \cite{sitaram_fmri_2007}. Ce
 % -> Imagerie par infrarouge :
 \subsubsection{\fNIRS (fNIRS)}
 Technique d'imagerie relativement récente, puisque la première description du principe fut décrite par \citep{jobsis1977noninvasive}, celle-ci exploite la lumière infra-rouge (longueur d'ondes entre 650 et 1000nm) pour mesurer les variations de concentration de l'hémoglobine oxygénée (HbO) et l'hémoglobine désoxygénée (HbR). La principale limitation de cette technique est qu'elle ne permet pas l'étude de structures profondes (profondeur de 3cm maximum à partir du sommet du crâne). \\
-Cette technique est de plus en plus rencontrée dans la littérature ICM dû à son moindre coût et à sa portabilité. La première ICM utilisant la fNIRS a été décrite par \cite{coyle_suitability_2004}. Dans cette étude, les auteurs utilisent l'imagerie motrice (compression d'une balle en caoutchouc) et déterminant si l'activité du sujet et en activité ou au repos. Depuis, bien d'autres études ont suivi, dont beaucoup se focalisent sur l'imagerie motrice \citep{nagaoka2010development, fazli2012enhanced, mihara2013near, kaiser2014cortical}. \cite{naseer_fnirs_2015} propose une review récente des principales ICM-fNIRS.
+Cette technique est de plus en plus rencontrée dans la littérature ICM dû à son moindre coût et à sa portabilité. La première ICM utilisant la fNIRS a été décrite par \cite{coyle_suitability_2004}. Dans cette étude, les auteurs utilisent l'imagerie motrice (compression d'une balle en caoutchouc) et déterminant si l'activité du sujet et en activité ou au repos. Depuis, bien d'autres études ont suivi, dont beaucoup se focalisent sur l'imagerie motrice \citep{sitaram_temporal_2007, nagaoka2010development, fazli2012enhanced, mihara2013near, zimmermann_detection_2013, kaiser2014cortical}. \cite{naseer_fnirs_2015} propose une review récente des principales ICM-fNIRS.
 
 \figScaleDesciption{0.8}{Waldert_2009_recording}{Méthodes d'acquisition de l'activité cérébrale \citep{waldert_review_2009}}{Méthodes d'acquisition de l'activité cérébrale \citep{waldert_review_2009} classées par invasivité. La figure indique également la taille des populations de neurones enregistrés ainsi que la résolution spatiale intimement liée à l'invasivité.}
 
@@ -265,7 +265,7 @@ On peut distinguer différents types d'ICM, sur la base de deux critères \citep{d
 \label{sec_application_ICM}
 Prélever directement l'activité neuronale et donc, \textit{bypasser} les voies naturelles, permet de s'affranchir d'éventuelles limitations physiologiques. C'est pourquoi les ICM représentent un enjeu majeur pour la réhabilitation motrice ou handicap moteur ou encore pour la communication palliative.
 Les applications concrètes des \icm visent donc les personnes disposant de leurs capacités cognitives mais qui sont privées de facultés motrices. \\
-Par exemple, le \textit{syndrome d'enfermement} ou \textit{locked-in syndrome} qui surviennent majoritairement à la suite d'un accident vasculaire cérébrale (AVC). Les personnes touchées par ce syndrome sont pleinement consciente de leur corps, de l'environnement, ils peuvent ressentir les sensations de toucher et de douleur mais n'ont plus de facultés motrices, hormis peut-être, les mouvements de paupières ou des yeux. Un autre exemple est celui de la la sclérose latérale amyotrophique (ou SLA) qui est une dégénérescence des neurones moteur. Progressivement, les personnes atteintes de SLA perdent l'usage des bras, des jambes, de la parole des muscles faciaux et enfin de la déglutition. Toutefois, a l'instar du \textit{locked-in syndrome}, la conscience et les facultés cognitives demeurent intactes. \\
+Un vasculaire cérébrale (AVC) peut engendre un état d'enfermement (\textit{locked-in state (LIS)}). Les personnes dans cet état sont pleinement consciente de leur corps, de l'environnement, ils peuvent ressentir les sensations de toucher et de douleur mais n'ont plus de facultés motrices, hormis peut-être, les mouvements de paupières ou des yeux. Un autre exemple est celui de la sclérose latérale amyotrophique (ou SLA) qui est une dégénérescence des neurones moteur (motoneurones). Progressivement, les personnes atteintes de SLA perdent l'usage des bras, des jambes, de la parole des muscles faciaux et enfin de la déglutition mais la conscience et les facultés cognitives demeurent intactes. L'évolution de la maladie amène à deux possibilités \citep{chaudhary_brain-machine_2015}: accepter une dépendance totale (respiration artificielle et nutrition) ou un décès par insuffisance respiratoire. Dans le premier cas, la maladie entraîne progressivement les patients en LIS ne leur laissant qu'un minimum de fonctions motrices. Lorsque le patient perd tout contrôle musculaire, ce qui finit souvent par les muscles des yeux, il rentre dans un état d'enfermement complet (\textit{completely locked-in state (CLIS)}). \\
 
 \figScaleDesciption{0.6}{SLA_physio2}{Paralysie causée par la SLA et accident vasculaire cérébrale \citep{kubler2001brain}}{Paralysie causée par la SLA et accident vasculaire cérébrale \citep{kubler2001brain}}
 
@@ -273,7 +273,7 @@ SLA et \textit{locked-in syndrome} ne sont que deux exemples expliquant l'intérê
 
 
 % //////////////////////////////////////////////////////////
-\citep{chaudhary_brain-machine_2015}
+
 ALS deux possibilités:
 - Accepter respi artificielle + se faire nourrir
 - Mourir d'insufisace respiratoire
