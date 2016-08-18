@@ -38,6 +38,7 @@ FiltOrder = N_{cycle} \times f_{s}/f_{oi}
 où $f_{s}$ est la fréquence d'échantillonnage, $f_{oi}$ est la fréquence d'intérêt et $N_{cycle}$ est un nombre de cycles définit par $N_{cycle}=3$ pour les oscillations lentes et $N_{cycle}=6$ pour les oscillations rapides. 
 
 \subsubsection{Transformée d'Hilbert}
+\label{methodo_hilbert}
 Transformée permettant de passer un signal temporel $x(t)$ du domaine réel au domaine complexe. Le signal peut ensuite s'écrire $x_{H}(t)=a(t)e^{j\phi(t)}$ où $a(t)$ est l'amplitude et $\phi(t)$, la phase. Cette transformation est particulièrement exploitée car le module de $x_{H}(t)$ permet de récupérer l'amplitude et la phase est obtenue en prenant l'angle de $x_{H}(t)$.
 
 \subsubsection{Transformée en ondelettes}
@@ -118,6 +119,7 @@ L'extraction de la phase se fait de la m\^{e}me manière que pour le \PACFR, en p
 %                   PAC
 % ********************************************
 \subsection{\PACEN}
+\label{methodo_PAC}
 Le calcul du \PACEN ne se limite pas uniquement à la méthode. En réalité, pour obtenir une estimation fiable sur des données réelles, il est indispensable de suivre les trois étapes suivantes:
 \begin{enumerate}
 	\item Estimation de la véritable valeur de PAC. Il existe plusieurs méthodes.
@@ -420,7 +422,7 @@ Les méthodes de filtrage demandent moins de ressources et représentent donc un p
 % -> Généralisation temporelle
 \subsection{Généralisation temporelle}
 L'introduction du \textit{single-feature} faite plus haut était une présentation générique, \cad que celle-ci est vraie quelque soit les features étudiés. On pourra donc classifier des attributs de puissance, de PAC, de phase, d'entropie... On peut également envisage l'étude un seul marqueur mais dans sa dimension temporelle. En effet, cela consiste à entraîner et tester un classifieur à différents instants temporels pour voir si le décodage varie dans le temps. Une des limitations de cette utilisation d'un classifieur est que, à chaque instant, celui-ci change. Donc on ne peut inférer aucune généralisation. Pour envisager une généralisation, il faut entraîner le classifieur à un instant puis le tester à travers toute la dimension temporelle restante. Dans ce cas, on pourra parler de généralisation mais reste encore le problème du choix de l'instant temporel qui servira à entraîner le prédicateur.\\
-\figScaleX{0.55}{waldert_timeresolved}{Exemple de décodage temporel \citep{waldert_hand_2008}. Ici, l'auteur décode 4-directions de mouvements de la main dans le temps. A chaque instant, un classifieur est créé, entraîné puis testé à ce même instant.}
+\figScaleX{0.5}{waldert_timeresolved}{Exemple de décodage temporel \citep{waldert_hand_2008}. Ici, l'auteur décode 4-directions de mouvements de la main dans le temps. A chaque instant, un classifieur est créé, entraîné puis testé à ce même instant.}
 
 Pour répondre à cette question, \cite{king_characterizing_2014} introduisent une idée particulièrement esthétique visant à généraliser le comportement d'un classifieur à travers le temps. Sans trop de surprise, ils ont nommé cette méthode la \textit{généralisation temporelle}. Elle permet de répondre à deux limitations:
 \begin{itemize}

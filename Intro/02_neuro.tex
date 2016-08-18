@@ -98,7 +98,7 @@ Pour assimiler le contrôle des signaux spontanés, il est nécessaire que utilisat
 	\item Imagerie motrice: pour cette stratégie mentale, on demandera donc à l'utilisateur d'imaginer des mouvements qui lui seront imposés en amont (cf. \ref{sec_imagerie_motrice})
 \end{enumerate}
 Ces stratégies mentales conditionnent le mode d'interaction de l'utilisateur avec la machine. Il est fréquent que, dans les premiers stades de l'entraînement, les sujets soumis à l'apprentissage autonome utilisent naturellement l'imagerie motrice \citep{wolpaw1991eeg, birbaumer_spelling_1999}. \\
-L'\textit{operant conditioning} demande un long apprentissage (de plusieurs semaines à années) mais les systèmes l'utilisant rapportent de bonnes performances et une grande stabilité \citep{fetz_operant_1969, wolpaw1991eeg, birbaumer_spelling_1999, wolpaw_control_2004-1, birbaumer_breaking_2006, vaughan_wadsworth_2006, wolpaw_brain-computer_2007-1}. Certaines tâches motrices peuvent ne pas convenir aux personnes ayant un déficit moteur de longue date ou depuis la naissance tout comme les tâches visuelles pour les personnes aveugles de naissance \citep{curran_learning_2003}. Donc, autre avantage de l'apprentissage autonome, il permet de prendre en compte la préférence ou le confort d'utilisation qui pourrait jouer un rôle dans les performances de l'ICM \citep{pfurtscheller_brain_2000}. 
+L'\textit{operant conditioning} demande un long apprentissage (de plusieurs semaines à années) mais les systèmes l'utilisant rapportent de bonnes performances et une grande stabilité \citep{fetz_operant_1969, wolpaw1991eeg, birbaumer_spelling_1999, wolpaw_control_2004-1, birbaumer_breaking_2006, vaughan_wadsworth_2006, wolpaw_brain-computer_2007}. Certaines tâches motrices peuvent ne pas convenir aux personnes ayant un déficit moteur de longue date ou depuis la naissance tout comme les tâches visuelles pour les personnes aveugles de naissance \citep{curran_learning_2003}. Donc, autre avantage de l'apprentissage autonome, il permet de prendre en compte la préférence ou le confort d'utilisation qui pourrait jouer un rôle dans les performances de l'ICM \citep{pfurtscheller_brain_2000}. 
 
 % -> Onde lente
 \subsubsection{Potentiel corticaux lents}
@@ -113,17 +113,32 @@ Les SCP ont également été testées à des fins cliniques. \cite{rockstroh1993corti
 Les RSM (ou \textit{Sensorimotor rhythms} (SMR)) correspondent à l'amplitude de signaux, au dessus du cortex sensorimoteur, dans des bandes de fréquences spécifiques. Les plus fréquents sont les rythmes $\mu$ 8-13hz et $\beta$ 13-30hz. Un utilisateur peut apprendre à moduler l'amplitude de son activité cérébrale dans ces bandes pour contrôler une \icm notamment par le biais de l'imagerie motrice (cf. \ref{sec_imagerie_motrice}). On appelle \textit{\ERS} lorsque l'amplitude augmente et \textit{\ERD} lorsqu'elle diminue \citep{pfurtscheller_event-related_1999, pfurtscheller_rehabilitation_2008}. \\
 Ces rythmes ont très largement été exploités pour contrôler un BMI, que ce soit pour déplacer un curseur dans une, deux ou trois dimensions \citep{wolpaw_control_2004, mcfarland2008emulation, kayagil2009binary, mcfarland2010electroencephalographic, doud2011continuous}, pour épeler \citep{neuper2006motor, vaughan_wadsworth_2006}, pour contrôler une prothèse \citep{pfurtscheller_brain_2000, muller2005eeg, mcfarland2008brain} ou un fauteuil roulant \citep{tanaka2005electroencephalogram, galan2008brain}
 
-\figScaleDesciption{1}{kubler_mu_and_imagerie}{Utilisation des ERD et du $\mu$ pour contrôler une ICM \citep{kubler2001brain}}{(A gauche) Utilisation de l'imagerie motrice pour contrôler la direction d'un curseur et tracé de l'activité neuronale pour les électrodes C3 (hémisphère gauche) et C4 (hémisphère droit) en utilisant l'activité neuronale contenue dans la bande $\alpha$ - L'utilisateur imagine des mouvements des mains droite ou gauche pour déplacer le curseur. L'imagination d'un mouvement de main gauche entraîne une ERD dans l'hémisphère droit (C4) mais l'activité est maintenue sur C3 (A droite) Modulation du $\mu$ au dessus de C3-C4 pour contrôler un curseur vers le haut (augmentation du $\mu$, ligne pointillée) ou vers le bas (baisse du $\mu$, ligne pleine) \citep{kubler2001brain}}.
+\figScaleDesciption{1}{kubler_mu_and_imagerie}{Utilisation des ERD et du $\mu$ pour contrôler une ICM \citep{kubler2001brain}}{(A gauche) Utilisation de l'imagerie motrice pour contrôler la direction d'un curseur et tracé de l'activité neuronale pour les électrodes C3 (hémisphère gauche) et C4 (hémisphère droit) en utilisant l'activité neuronale contenue dans la bande $\alpha$ - L'utilisateur imagine des mouvements des mains droite ou gauche pour déplacer le curseur. L'imagination d'un mouvement de main gauche entraîne une ERD dans l'hémisphère droit (C4) mais l'activité est maintenue sur C3 (A droite) Modulation du $\mu$ au dessus de C3-C4 pour contrôler un curseur vers le haut (augmentation du $\mu$, ligne pointillée) ou vers le bas (baisse du $\mu$, ligne pleine) \citep{kubler2001brain}}
 
 \subsubsection{Autres marqueurs}
+Les marqueurs présentés ci-dessus sont ceux que l'on retrouve le plus largement à travers la littérature. Toutefois, d'autres marqueurs de l'activité neuronale sont étudiés essentiellement d'un point de vue neuro-scientifique, \cad pour améliorer la compréhension des phénomènes physiologiques.
 
-\paragraph{\PACEN (PAC)}
-\citep{hyafil_neural_2015}
-\citep{canolty_functional_2010}
-\figScale{hyafil_2015}{Mécanismes du couplage phase-amplitude}
+\paragraph{Décomposition phase-amplitude:} tout signal temporel réel peut être décomposé en un signal d'amplitude (ou enveloppe car elle va suivre les maxima du signal) et un signal de phase qui indique la situation instantanée d'un cycle (pic, creux, passage à zéro \dots). La transformée d'Hilbert permet de décomposer ainsi n'importe quel signal (\ref{methodo_hilbert}).
+\figScaleDesciption{1}{phamp_decomp}{Décomposition d'un signal en phase et amplitude}{(En gris) Un signal original, (En rouge) L'amplitude du signal, (En bleu) la phase instantanée}
 
-\paragraph{Phase}
-blabla
+\paragraph{Phase:} si l'amplitude a très largement été étudiée, que ce soit dans le cadre des ICM, du décodage et de son implication physiologique, la phase reste à l'heure actuelle l'objet d'un nombre plus restreint d'études. Toutefois, quelques études ont montré l'implication de la phase basse-fréquence dans l'encodage neuronal de mouvements \citep{hammer_role_2013, hammer_predominance_2016}.
+
+\paragraph{Couplage inter-fréquences locaux ou à distance:} ou \textit{Cross-Frequency Coupling} (CFC) regroupe un ensemble de marqueurs qui, contrairement aux marqueurs présentés ci-dessus, étudient une forme de corrélation entre deux signaux pouvant être soit locaux (comme provenant d'une même électrode) ou à distance pour évaluer des synchronisations d'aires cérébrales. Ces \textit{features} sont étudiés dans des bandes de fréquences particulières et vont donc nécessiter une filtrage en amont. Ensuite, on pourra extraire de ces signaux filtrés les informations de phase et d'amplitude afin d'étudier différentes formes de couplage:
+\begin{description}
+	\item[Couplage à distance phase-phase:] le \textit{Phase-Locking Value} (PLV) \citep{lachaux_measuring_1999, lachaux_studying_2000} est un des outils permettant de déterminer la synchronisation de phase. Le couplage inter-fréquence phase-phase semble jouer un rôle dans la communication inter-structures \citep{fries_mechanism_2005, gregoriou_high-frequency_2009, siegel_phase-dependent_2009, elswijk_corticospinal_2010}
+	\item[Couplage à distance amplitude-amplitude:] bien que le rôle physiologique du couplage inter-fréquences amplitude-amplitude soit encore incertain, de tel couplages ont été décris dans la littérature \citep{friston_another_1997, shirvalkar_bidirectional_2010, siegel_phase-dependent_2009}
+	\item[Couplage local ou à distance phase-amplitude:] ou \textit{\PACEN} (PAC), fait intervenir des signaux pris dans deux bandes de fréquence et permet d'évaluer la façon dont ces signaux évoluent l'un avec l'autre. Plus précisément, on considère un signal dans les basses fréquences (BF), typiquement dans les bandes delta, thêta ou alpha et on extrait la phase de ce signal. Ensuite, on considère l'amplitude d'un signal haute fréquence (HF), souvent dans la bande gamma. Le PAC renseigne si la phase des BF et l'amplitude des HF évoluent de manière synchrones. A noter ici que il n'est pas question d'inférer une relation de cause/conséquence entre la phase des BF et l'amplitude des HF. Autrement dit, le PAC ne permet pas de conclure que l'un vient moduler l'autre. Plusieurs outils méthodologiques permettant une mesure du PAC ont été proposés (cf. \ref{methodo_PAC}) \\
+	Le rôle physiologique du PAC est encore discuté \citep{canolty_functional_2010, hyafil_neural_2015} tout comme son implémentation méthodologique \citep{aru_untangling_2015}, mais il a été observé dans des tâches variées \citep{bruns2004task, voytek_shifts_2010, soto_investigation_2012}, dans la maladie de Parkinson \citep{hemptinne_exaggerated_2013}, dans la prise de risques \citep{lee_correlation_2013} ou dernièrement dans l'encodage mémoriel \citep{lega_slow-theta--gamma_2016}. Enfin, \cite{yanagisawa_regulation_2012} ont pu montrer l'existence d'un couplage alpha-gamma dans le cortex sensorimoteur durant une période de repos. Ensuite, ce couplage diminue avec l'exécution de tâches motrice (mouvements de saisie, de pincée et d'ouverture de main). Enfin, cette étude a montré que ce couplage alpha-gamma, dans cette région sensorimotrice, ne permettait pas de décoder ces différents types de mouvements. A noter que généralement l'amplitude est prise dans la bande gamma mais \cite{cohen_oscillatory_2008} ont démontré l'existence d'un couplage entre la phase du delta et thêta avec l'amplitude de l'alpha et du gamma dans la prise de décision.
+\end{description}
+
+%\figScale{hyafil_2015}{Mécanismes du couplage phase-amplitude}
+
+
+% ********************************************
+%                ICM hybrides
+% ********************************************
+\subsection{ICM hybrides}
+Pour finir, les systèmes d'ICM présentés ci-dessus sont uniquement basés sur l'activité neuronale. Plus récemment, il a été proposé d'intégrer d'autres signaux physiologiques (comme l'activité musculaire) pour améliorer l'acuité des systèmes. Ces interfaces utilisant à la fois l'activité neuronale et autres signaux physiologiques sont appelées ICM hybrides (voir \cite{muller-putz_towards_2015} pour une \textit{review} récente de ces systèmes hybrides).
 
 \vspace{1\baselineskip}
 \todo[inline,caption={},color=blue!20]{
@@ -131,9 +146,8 @@ blabla
 	D'un point de vue clinique \citep{chaudhary_brain-machine_2015}, pour les personnes présentant des déficits moteurs (comme la SLA menant au \textit{locked-in state} (LIS) puis au \textit{completly locked-in state} (CLIS)), les SMR et P300-BCI donnent de meilleurs résultats en absolue mais les SCP-BCI semblent plus stables et moins dépendantes des fonctions cognitives motrices et sensorimotrices \citep{birbaumer_breaking_2006}, ce qui représente un avantage pour ces personnes atteintes en LIS ou CLIS. De plus, \cite{kubler_braincomputer_2008} ont pu montrer une corrélation entre l'évolution de la SLA (et donc de la décroissance des capacités motrices) et les performances des EEG-BCI. Pour compléter ce dernier point, \cite{de_massari_brain_2013} ont utilisé une SCP-BCI pour essayé d'établir une communication (deux choix \textit{yes} et \textit{no}) avec des sujets en LIS (et un en CLIS). Toutefois, les résultats ne sont pas probants, contrairement à \cite{gallegos-ayala_brain_2014} qui ont préféré utiliser la réponse hémodynamique pour un fNIRS-BCI et qui ont pu obtenir des décodages plus prometteurs.
 }
 
-
-
 %	- tDCS permet l'apprentissage moteur chez les sujets sains \citep{cuypers_is_2013, reis_time_2015} ou chez les stokes \citep{cuypers_is_2013, lefebvre2013dual}
+
 % -----------------------------------------------------------------------------
 % -----------------------------------------------------------------------------
 %                         IMAGERIE MOTRICE
@@ -141,13 +155,20 @@ blabla
 % -----------------------------------------------------------------------------
 \section{Imagerie motrice}
 \label{sec_imagerie_motrice}
+L'imagerie motrice (MI) est définie par la représentation d'une action non-suivie de son exécution. Dans les sections précédentes, nous avons vu que l'IM permettait de contrôler une \icm. Les substrats neuronaux mis en jeux lors de l'imagination d'un mouvement sont sensiblement les mêmes que lors de l'exécution de ce mouvement, ce qui permet donc aux personnes à mobilité réduite de solliciter les aires motrices sans la possibilité d'accomplir le mouvement. \\
+Cette section a pour objectif de raffiner l'imagerie motrice, \cad introduire les différents types d'imagerie, différentes applications et enfin, leur utilisation pour les ICM.
 
 \subsection{Les différents types d'imagerie}
+Il existe plusieurs types d'imagerie \citep{kosslyn1990imagery}, mais toutes reposent sur l'exploitation de modalités sensorielles, \cad sur les sens. Pour cette raison, on distingue l'imagerie visuelle, tactile, auditive et olfactive. L'imagerie visuelle se décompose en deux sous-divisions: interne (ou à la première personne) et externe (ou à la troisième personne) \citep{ruby_effect_2001, jackson_neural_2006, lorey_embodied_2009}. Dans le premier cas, on est directement acteur de l'action, donc par exemple, on pourra imaginer effectuer un mouvement de bras d manière similaire à une réelle exécution. En imagerie visuelle externe, on est spectateur d'un mouvement pouvant être effectué par une autre personne, ou par soi-même. A ces différents types d'imagerie, s'ajoute l'imagerie kinesthésique basée sur des informations proprioceptives. Bien que à priori proches, imagerie visuelle et kinesthésique sollicitent des substrats neuronaux différents \citep{solodkin_fine_2004, guillot_brain_2009}. \\
+Si une personne imagine avoir une balle dans la main, c'est de l'imagerie visuelle interne. Si elle imagine que cette balle est tenue par une tierce personne, c'est de l'imagerie externe. Enfin, si la personne imagine les sensation que peut procurer les propriétés de cette balle (comme sa texture, sa malléabilité, son poids ou sa taille) c'est de l'imagerie kinesthésique. De nombreuses études ont comparés les différents types d'imagerie permettant de mettre en valeur les réseaux associés \citep{jiang_neural_2015, seiler_biological_2015}.
+
+
 %Dans cette partie, il faut définir l?imagerie, ce en quoi elle consiste et le fait qu?elle se construise sur les modalités sensorielles (les sens, auxquels d?ajoute l?imagerie kinesthésique, basée sur les informations proprioceptives). Inutile d?aller chercher des choses trop spécifiques à mon sens dans cette partie, il faut introduire les concepts de manière relativement simples. Je ne suis pas certain qu?il faille trop de références pour décrire les types d?imagerie, cela n?appartient à personne (les chercheurs ont surtout essayé de déterminer l?efficacité relative d?une forme par rapport à une autre, ce genre de choses, mais une ou deux réf sur le fait qu?on construit sur les modalités sensorielles est à mon sens suffisant, par exemple Kosslyn et al. 1990 ? inutile de la lire, il suffit de la citer pour dire qu?il y a différents types d?imagerie : Kosslyn S.M., Seger C., Pani J.R., & Hillger L.A., (1990), When is imagery used in everyday life ? A diary study. Journal of Mental Imagery, 14, 131-152). Je te donne par contre des articles de neuroimagerie permettant de justifier de la spécificité des réseaux sous-jacents à chaque type d?imagerie, si tu le souhaites. Tu pourras même en tirer des illustrations graphiques si nécessaire. \\
 %Tu as quelques subtilités à envisager ici. Traditionnellement, on distingue l?imagerie visuelle, kinsthésique, tactile, auditive et olfactive. Dans l?imagerie visuelle, tu as l?imagerie visuelle interne (associée, à la première personne, où l?on est forcément acteur du mouvement) et l?externe (dissociée, à la 3ème personne, où l?on est spectateur de soi-même ou de quelqu?un d?autre). Il ne faut pas confondre imagerie interne et imagerie kinesthésique, ce que font certaines personnes, donc je te suggère plutôt la classification que je t?ai mentionnée précédemment. De mémoire, dans les articles, tu verras des choses orientées sur imagerie motrice visuelle vs kinethésique (Solodkin, Guillot), d?autres sur imagerie visuelle 1ère et 3ème personne (Ruby & Decety, Jackson, Lorey) et enfin d?autres mêlant tout cela (Jiang et Seiler).
 
 
 \subsection{Autre utilisation de l'imagerie motrice}
+
 %Là encore, je pense qu?il faut faire simple. L?idée est de montrer ce que cela peut apporter. Tu peux notamment donner les bénéfices liés aux gains de performance et la facilitation de l?apprentissage moteur (sportifs, musiciens), avec surtout des références à des revues de question faisant le tour de la question (Feltz & Landers, 1983 ; Driskell et al., 1994 ; Guillot & Collet, 2008 ; Schuster et al., 2011 ; Di Rienzo et al., 2016) ou encore dans le domaine de la réhabilitation en cas de blessures ou d?incapacités motrices (Jackson et al., 2001; Sharma, 2006; de Vries & Mulder, 2007; McEwen et al., 2009; Malouin et al., 2013 ; Di Rienzo et al., 2014). Regarde un peu dans ces articles et tu auras largement de quoi illustrer certaines idées sans forcément chercher à être exhaustif. Tu peux éventuellement aussi dire qu?il y a des effets sur la confiance, la motivation et la régulation de l?anxiété (Munroet et al., 2000 ; Cumming & Williams, 2013).
 %
 %Enfin, tu peux faire un lien entre imagerie et exécution et imagerie et préparation du mouvement, et te référer, de manière générale, à Jeannerod (1994) qui décrit ces aspects me semble-t-il.
@@ -166,12 +187,41 @@ blabla
 \subsection{Utilisation de l'imagerie motrice pour les ICM}
 
 
-\section{Apprentissage machine: applications aux neurosciences}
-okok
+%\section{Apprentissage machine: applications aux neurosciences}
+%okok
 
 % -----------------------------------------------------------------------------
-\section{Encodage et décodage moteur}
-Pomper les résultas de rodrigo + besserve + inclure schéma global du cerveau
+\section{Décodage directionnel des membres supérieurs}
+Que ce soit pour déplacer un curseur, pour le contrôle d'une prothèse ou pour toute autre application, le décodage de directions est au centre du fonctionnement d'un bon nombre d'\icm. Pour ce faire, les équipes utilisent bien souvent une tâche appelée \textit{center-out} où le sujet bouge son bras du centre vers une direction imposée, que ce soit avec le curseur d'une souris ou avec un joystick. A noter ici que certaines équipes ce sont également intéressées au moment où le sujet prépare le mouvement. Le but sera donc, en \textit{offline}, d'essayer de retrouver la direction effectuée par le sujet que ce soit pendant la période d'exécution ou de préparation en utilisant l'activité neuronale seule. \\
+Le décodage directionnel fait intervenir trois principales composantes:
+\begin{enumerate}
+	\item L'aire cérébrale étudiée (cortex moteur primaire, prémoteur, pariétal, préfrontal...). Ces aires peuvent apporter des informations complémentaires à différents instants temporels durant la tâche, c'est pourquoi elles sont bien souvent combinées pour améliorer l'acuité de décodage.
+	\item L'optimisation des marqueurs: le travail en \textit{offline} permet une exploration plus vaste des marqueurs puisqu'il n'y a pas la contrainte d'application temps-réel. 
+	\item L'optimisation des paramètres de classification: de la même façon, on va pouvoir tester des classifieurs avec des méthodologies plus lourdes. 
+\end{enumerate}
+
+\subsection{Décodage directionnel}
+L'utilisation des micro-électrodes chez le singe ont permis de mettre en valeur le \textit{directional tuning} \citep{georgopoulos_relations_1982, georgopoulos_neuronal_1986, georgopoulos_coding_2015}, \cad que le taux de décharges dépend de la direction et donc, un neurone pourra afficher une direction préférentielle dans laquelle il déchargera davantage. Le \textit{directional tuning} a également été étudié avec le signal LFP chez le singe \citep{mehring_comparing_2004, rickert_encoding_2005}. Chez l'homme, l'utilisation du signal filtré basse fréquence en ECoG \citep{mehring_comparing_2004, ball_differential_2009} et l'amplitude prise dans différentes bandes de fréquences \citep{leuthardt_braincomputer_2004, ball_differential_2009} ont aussi permis de mettre en évidence des modulations spécifiques en fonction des directions permettant un décodage. Pour quatre directions, \cite{ball_differential_2009} a obtenu des décodages supérieurs à 80\% en ECoG, en combinant les électrodes du cortex moteur. Plus récemment, \cite{gunduz_differential_2016} montre des décodages significatifs en utilisant l'activité gamma en ECoG que ce soit pour décoder l'exécution ou la préparation de mouvements effectués dans 8 directions (jusqu'à 30\% pour décoder la préparation et 50\% pour l'exécution dans les quatre directions en combinant jusqu'à 30 électrodes ECoG).
+
+\figScaleDesciption{1}{directional_tuning_invasif}{\textit{Directional tuning} et décodage directionnel}{(A gauche) Cinq essais montrant le taux de décharge d'un neurone moteur en fonction de directions de mouvements \citep{georgopoulos_relations_1982}. On constate que ce neurone affiche une préférence pour les directions vers la gauche (A droite) Évolution temporelle du décodage de quatre directions utilisant l'amplitude dans différentes bandes de fréquences pour des électrodes prises dans le cortex moteur primaire \citep{ball_differential_2009}}
+
+Le décodage directionnel a également été exploré dans le cadre de données non-invasives, en EEG et MEG \citep{waldert_decoding_2007, waldert_hand_2008}. Dans cette étude, l'auteur montre des décodages jusqu'à 67\% pour décoder quatre directions de mouvements. Il est intéressant de noter que ces décodages significatifs ont été obtenus en utilisant le signal filtré dans les basses fréquences et que la puissance dans les bandes bêta et gamma ne semblent pas décoder. Enfin, l'EEG et la MEG fournissent des résultats similaires et la combinaison des deux améliore peu les résultats dans cette étude. \cite{hammon_predicting_2008} ont également montré des décodages significatifs pour décoder la directionnalité que ce soit pendant l'exécution, ou la préparation motrice.
+
+\subsection{Prédiction continu de la cinétique du mouvement}
+Les études ci-dessus tentent de décoder les directions, \cad d'essayer de retrouver en \textit{offline} les directions effectuées par le sujets. D'autres articles tentent de décoder la position, la vitesse ou l'accélération du mouvement, notamment via l'utilisation du filtre de Kalman \citep{wu_inferring_2002, wu_neural_2003, wu_modeling_2004, wu_bayesian_2006, pistohl_prediction_2008, li_unscented_2009}
+
+ \figScaleDesciption{1}{decodage_position_wu}{Décodage continu de la cinétique d'un mouvement 2D}{Décodage continu de la cinétique d'un mouvement 2D (position/vitesse/accélération) \citep{wu_neural_2003}. Le mouvement réellement effectué (en rouge) est reconstruit en utilisant l'activité \textit{spike} et le filtre de Kalman (en bleu)}
 
 
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+%                      CONCLUSION DU CHAPITRE 2
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+\vspace{3\baselineskip}
+\todo[inline,caption={},color=orange!20]{
+	\textbf{Conclusion du chapitre 2} \\
+	Les méthodes non-invasives ne nécessitent aucune intervention chirurgicale et peuvent donc être appliquées sur n'importe quel individu. De plus, elles sont particulièrement accessibles, \cad que leur mise en place est relativement simple. \\
+	Toutefois, ces méthodes de mesures souffrent encore de compromis. Si l'EEG et la MEG ont une excellente résolution temporelle, la résolution spatiale est peu précise. A contrario, l'IRMf ou la PET offrent une excellente résolution spatiale mais la dimension temporelle est lésée. Les méthodes invasives ne souffrent pas de ces compromis, puisqu'elles offrent à la fois une excelle
+}
 

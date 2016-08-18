@@ -59,7 +59,7 @@ A titre d'exemple et pour illustrer ce dernier point, un utilisateur pourrait pa
 %         COMPOSANTES D'UNE ICM
 % ********************************************
 \subsection{Principales composantes d'une ICM}
-Même si chaque \icm se destine à une utilisation particulière et contient des traitements qui lui sont propres (cf. \ref{sec_application_ICM}), on peut globalement dire qu'une ICM s'articule autour de cinq grandes étapes ordonnées \citep{pfurtscheller_rehabilitation_2008,graimann_braincomputer_2009}:
+Même si chaque \icm se destine à une utilisation particulière et contient des traitements qui lui sont propres, on peut globalement dire qu'une ICM s'articule autour de cinq grandes étapes ordonnées \citep{pfurtscheller_rehabilitation_2008,graimann_braincomputer_2009}:
 \begin{enumerate}
 	\item L'acquisition de l'activité neuronale
 	\item Les pré-traitements
@@ -110,6 +110,33 @@ Cette transformation en commande est ensuite physiquement appliquée à un système
 
 Les ICM partagent globalement ces cinq étapes mais se différencient donc le type d'enregistrement de l'activité neuronale, par les pré-traitements associés, par le type de marqueurs étudié, par l'algorithme de classification choisi et surtout, par l'application concrète de cette \icm.
 
+% ********************************************
+%           Applications des ICMs
+% ********************************************
+\subsection{Applications des ICM: cliniques et non-cliniques}
+La réalisation concrète des ICM s'est articulée autour des applications cliniques, \cad destinées à essayer d'améliorer les conditions de vie de certaines personnes puis, dans un second temps, pour des applications ludiques et tout publique.
+
+\subsubsection{Applications cliniques}
+A l'heure actuelle, il existe de nombreuses maladies soit dont on ignore l'origine, soit qui sont pour le moment incurables. Parmi ces pathologies, certaines évoluent en enfermant les patients dans des conditions de vies difficiles. C'est dans ce contexte clinique qu'apparaissent de nombreuses ICM qui ne sont donc pas des traitements, mais bien des solutions \textit{temporaires} pour aider certaines personnes à mieux vivre avec leur handicap.
+\paragraph{Pathologies et ICM :} Prélever directement l'activité neuronale et donc, \textit{bypasser} les voies naturelles, permet de s'affranchir d'éventuelles limitations physiologiques. C'est pourquoi les ICM représentent un enjeu majeur pour la réhabilitation motrice ou handicap moteur ou encore pour la communication palliative. Les applications concrètes des \icm visent donc les personnes disposant de leurs capacités cognitives mais qui sont privées de facultés motrices. \\
+Un accident vasculaire cérébrale (AVC) peut engendre un état d'enfermement (\textit{locked-in state (LIS)}). Les personnes dans cet état sont pleinement consciente de leur corps, de l'environnement, ils peuvent ressentir les sensations de toucher et de douleur mais n'ont plus de facultés motrices, hormis peut-être, les mouvements de paupières ou des yeux. Un autre exemple est celui de la sclérose latérale amyotrophique (ou SLA) qui est une dégénérescence des neurones moteur (motoneurones). Progressivement, les personnes atteintes de SLA perdent l'usage des bras, des jambes, de la parole des muscles faciaux et enfin de la déglutition mais la conscience et les facultés cognitives demeurent intactes. L'évolution de la maladie amène à deux possibilités \citep{chaudhary_brain-machine_2015}: accepter une dépendance totale (respiration artificielle et nutrition) ou un décès par insuffisance respiratoire. Dans le premier cas, la maladie entraîne progressivement les patients en LIS ne leur laissant qu'un minimum de fonctions motrices. Lorsque le patient perd tout contrôle musculaire, ce qui finit souvent par les muscles des yeux, il rentre dans un état d'enfermement complet (\textit{completely locked-in state (CLIS)}). \\
+SLA et \textit{locked-in syndrome} ne sont que deux exemples expliquant l'intérêt social du développement des ICM. Redonner un peu de contrôle ou établir un canal de communication avec les familles des patients expliquent l'engouement qui existe depuis maintenant plus de 40 ans pour les ICM.
+
+\figScaleDesciption{0.5}{SLA_physio2}{Paralysie causée par la SLA et accident vasculaire cérébrale \citep{kubler2001brain}}{Paralysie causée par la SLA et accident vasculaire cérébrale \citep{kubler2001brain}}
+
+\paragraph{Exemples d'applications:} les applications cliniques peuvent être divisées en deux grandes familles: les ICM destinées à rétablir un lien de communication (\textit{communicatoin palliative}) et les ICM pour redonner de la mobilité.
+\subparagraph{Communication palliative:} ces ICM présentent en général des lettres ou groupe de lettres qui doivent pouvoir être sélectionnés volontairement par l'utilisateur. Le \textit{P300-Speller} \citep{farwell_talking_1988, donchin_mental_2000}, utilisant l'onde P300, est sans aucun doute l'interface la plus connue et la plus exploitée à ce jour pour la communication palliative. Le \textit{Hex-o-spell} \citep{blankertz_note_2007} est une autre interface contrôlable par l'utilisateur via l'imagerie motrice.
+\subparagraph{Mobilité, robotique et prothèse:} ces systèmes sont destinés à aider, améliorer ou remplacer des facultés motrices lésées. Ces applications dont la mobilité est au centre peuvent afficher différents degrés de complexité:
+\begin{itemize}
+	\item Curseur $1D$, $2D$ et $3D$: certainement la première étape, le but ici est de permettre au sujet de pouvoir contrôler le curseur sur un moniteur. Ce curseur pourra par exemple servir de bouton \textit{yes/no} ou pour le déplacement \citep{wolpaw1991eeg, wu_neural_2003, trejo2006brain, kayagil2009binary, sung-phil_kim_point-and-click_2011, vadera_stereoelectroencephalography_2013} ou tout simplement pour de la navigation comme le \textit{web-browsing} \citep{mugler_design_2010}. Ces catégories de déplacement de curseur diffèrent par le nombre de degrés de liberté qu'elles offrent.  
+	\item Contrôle d'un fauteuil roulant: comme le nom l'indique, l'idée ici est de permettre à un utilisateur de contrôler son fauteuil roulant via son activité neuronale seulement. En effet, si de nombreuses personnes handicapées peuvent encore se servir de leur membres supérieurs, d'autres sont complètement dépendantes. Ce type d'applications permettra donc à terme de redonner une libérté de mouvement à ces personnes \citep{tanaka2005electroencephalogram, leeb_self-paced_2007, galan_brain-actuated_2008, philips_adaptive_2007, vanacker_context-based_2007, pires_visual_2008, rebsamen_brain_2009, lin_eeg_2010, diez_commanding_2013}.
+	\item Prothèse: enfin, dernière application liée à la mobilité, le contrôle de prothèse est un large défi. A titre d'exemple, le contrôle d'un bras robotisé doit permettre le contrôle de celui-ci dans l'espace ainsi que des mouvements de main, de coude... C'est un problème à haute dimensionnalité et donc complexe. Toutefois, modulo un certain degrés de réussite, certaine équipe ont proposé de tel systèmes \citep{fetz_real-time_1999, hochberg_reach_2012, yanagisawa_electrocorticographic_2012, sunny_robotic_2016}
+\end{itemize}
+
+\subsubsection{Applications non-cliniques et récréatives}
+Les ICM ont également été exploitées à d'autres fins que des applications cliniques:
+\paragraph{Jeux:} les ICM dédiées aux jeux utilisent l'activité neuronale pour contrôler un vaisseau spatial, un objet ou un personnage dans un environnent virtuel \citep{lalor_brain_2004, nijholt_bci_2008, oude_bos_brainbasher_2008, coyle_eeg-based_2011}. Outre le caractère récréatif de ce type de dispositif, les ICM basées sur le jeux pourraient très bien servir pour entraîner la machine d'une manière plus ludique et moins fatigante.
+\paragraph{Art:} pour finir, les ICM peuvent avoir des applications artistiques comme pour la composition et la pratique musicale \citep{miranda_harnessing_2003, miranda_brain-computer_2006, hamadicharef_brain-computer_2010} ou pour peindre \citep{munsinger_brain_2010, zickler2013brain}
 
 % ********************************************
 %                 OPEN DATA
@@ -132,6 +159,7 @@ Ces compétitions présentent de nombreux avantages:
 \vspace{2\baselineskip}
 \todo[inline,caption={},color=blue!10]{
 	\textbf{Conclusion sur la présentation des ICM} \\
+	
 }
 
 
@@ -154,7 +182,7 @@ On parlera d'intracrânien pour les enregistrements à l'intérieur de la boîte crâ
 
 % -> Microélectrodes :
 \subsubsection{Enregistrements unitaires}
-\textit{\sua (SUA)} et \textit{\mua (MUA)} sont des micro-électrodes déposées directement au contact de neurones et  enregistrent des décharges neuronales. SUA et MUA se distinguent par la taille des populations enregistrées. \\
+\textit{\sua (SUA)} et \textit{\mua (MUA)} sont des micro-électrodes déposées directement au contact de neurones et enregistrent des décharges neuronales. SUA et MUA se distinguent par la taille des populations enregistrées. Les décharges sont événements très courts dans le temps, donc pour être en mesure de les capter, les systèmes d'acquisition possèdent des fréquences d'échantillonnage très élevées (de l'ordre de 30khz). Le signal obtenu en filtrant en dessous de 300hz, est appelé \textit{\LFP} (LFP) et représente l'activité électrique d'une assemblée de neurones prise dans un petit volume.\\
 Dans le cadre des ICM, les micro-électrodes peuvent être implantées directement dans le cortex moteur primaire et permettre un contrôle de BCI de la plus haute précision et fidélité. Chez l'animal, des rats ont pu contrôler en temps réel un bras robotisé pour obtenir de l'eau \citep{chapin1999real} et des singes ont également pu contrôler un bras robotisé ainsi qu'une pince au bout \citep{velliste2008cortical}. Auparavant, en 2006, \cite{hochberg_neuronal_2006} démontre qu'un patient tétraplégique implanté avec 96 micro-électrodes, peut contrôler un curseur sur un écran d'ordinateur, d'ouvrir et fermer une main artificielle ainsi que d'effectuer des mouvements rudimentaires à l'aide d'un bras robotisé. En complément, \cite{sung-phil_kim_point-and-click_2011} utilise les micro-électrodes pour contrôler et cliquer à l'aide un pointeur sur un écran 2D. Mais c'est en 2012 que le sujet contrôle complètement le bras robotisé, dans l'espace, lui permettant d'attraper et de boire son café \citep{hochberg_reach_2012}. Même si le mouvement n'est pas aussi fluide et rapide qu'un mouvement réel, ce fût une avancée majeure et une  preuve du concept chez l'homme. \cite{collinger2013high} décrivent également le contrôle d'un bras robotisé par un patient implanté avec 96-microélectrodes. Avec des taux de décodage élevés, le sujet réussit à contrôler un bras robotisé à 7-dimensions (3 degrès de translation, 3 degrés de rotation et un degrés de saisie).
 
 \figScaleDesciption{1}{hochberg_2006_2012}{ICM utilisant des micro-électrodes \citep{hochberg_neuronal_2006, hochberg_reach_2012}}{(\textit{A gauche}) \citep{hochberg_neuronal_2006}, (\textit{A droite}) \citep{hochberg_reach_2012}}
@@ -162,16 +190,16 @@ Dans le cadre des ICM, les micro-électrodes peuvent être implantées directement 
 
 % -> Stéréoélectroencéhalographie :
 \subsubsection{\seeg (SEEG)}
-Macro-électrodes enregistrant des populations plus larges que les micro-électrodes. Contrairement à la SUA ou MUA où l'on peut compter le nombre de fois qu'un ou plusieurs neurones déchargent, la SEEG enregistre des potentiels électriques $(\mu V)$. \\
+Macro-électrodes enregistrant des populations plus larges que les micro-électrodes. Contrairement à la SUA ou MUA où l'on peut compter le nombre de fois qu'un ou plusieurs neurones déchargent, la SEEG enregistre des potentiels électriques $(\mu V)$. La fréquence d'échantillonnage est plus faible que celle des micro-électrodes (de l'ordre de 1khz) et donne donc accès au signal LFP.\\
 Les données utilisant la \seeg sont globalement rares dans la littérature. Leur utilisation dans le cadre des ICM n'est pas fréquente mais a quand même été exploré dans le cadre d'ICM dédiée à la communication \citep{krusienski_control_2011-1,shih_signals_2012} ou au contrôle de curseur 2D \citep{vadera_stereoelectroencephalography_2013} \\
 C'est le type d'enregistrement qui a été le plus exploité durant cette thèse. Une section complète lui est donc accordée (cf. \ref{sec_intra_data}).
 
 % -> Electrocorticographie :
 \subsubsection{\ecog (ECoG)}
 L'ECoG est une grille flexible composée d'une matrice d'électrodes. Celle-ci est ensuite déposée à la surface corticale. Parce que cette méthode n'est pas intracortical elle est dite \textit{semi-invasive}. En comparaison avec l'EEG (voir section suivante), l'ECoG présente de nombreux atouts \citep{schalk_brain-computer_2011}. Tout d'abord, la résolution spatiale est meilleure (de l'ordre du millimètre contre quelques centimètres pour l'EEG). Une meilleure amplitude dont le maximum peut-être jusqu'à 5 fois supérieure à celle de l'EEG (amplitude max pour l'EEG est d'environ 10-20$\mu V$). L'ECoG est également moins sensible aux artefacts (mouvements musculaires et oculaires). Enfin, elle permet d'enregistrer des phénomènes plus large bande (entre 0 et 500Hz contre 0-40Hz pour l'EEG). \\
-L'utilisation de l'ECoG dans le cadre des ICM est fréquente \citep{schalk_brain-computer_2011, shih_brain-computer_2012}, que ce soit pour le décodage appliqué aux membres supérieurs comme les mouvements de doigts \citep{scherer2009classification, acharya2010electrocorticographic}, de trajectoire de main \citep{schalk2007decoding, gunduz2009mapping} ou de bras \citep{pistohl_prediction_2008}. Il a également été démontré qu'il est possible de décoder des mouvements fins de saisie avec la main, comme des saisies précises avec le bout des doigts versus des saisies avec la main entière \citep{pistohl_decoding_2012}, ou encore des mouvements de saisie, de pincée, d'ouverture de la main, de flexion et d'extension du coude ou de bras robotisé \citep{muller-putz_control_2008, yanagisawa_electrocorticographic_2012-1}. De plus, l'ECoG a également été exploité pour le contrôle d'un curseur 1 ou 2D \citep{leuthardt_braincomputer_2004, wilson2006ecog, felton2007electrocorticographically, milekovic_online_2012} ainsi que pour la communication palliative \citep{brunner2011rapid, krusienski2011control}.
+L'utilisation de l'ECoG dans le cadre des ICM est fréquente \citep{schalk_brain-computer_2011, shih_brain-computer_2012}, que ce soit pour le décodage appliqué aux membres supérieurs comme les mouvements de doigts \citep{scherer2009classification, acharya2010electrocorticographic}, de trajectoire de main \citep{schalk2007decoding, gunduz2009mapping} ou de bras \citep{pistohl_prediction_2008}. Il a également été démontré qu'il est possible de décoder des mouvements fins de saisie avec la main, comme des saisies précises avec le bout des doigts versus des saisies avec la main entière \citep{pistohl_decoding_2012}, ou encore des mouvements de saisie, de pincée, d'ouverture de la main, de flexion et d'extension du coude ou de bras robotisé \citep{muller-putz_control_2008, yanagisawa_electrocorticographic_2012}. De plus, l'ECoG a également été exploité pour le contrôle d'un curseur 1 ou 2D \citep{leuthardt_braincomputer_2004, wilson2006ecog, felton2007electrocorticographically, milekovic_online_2012} ainsi que pour la communication palliative \citep{brunner2011rapid, krusienski2011control}.
 
-\figScaleDesciption{1}{shalk_and_yanagisawa_ecog}{Micro et macro-électrodes pour l'\ecog \citep{schalk_brain-computer_2011, yanagisawa_electrocorticographic_2012-1}}{\textit{A gauche} - (\textbf{A-B}) Micro-électrode, (\textbf{C}) Représentation schématique d'une électrode, (\textbf{D}) Grille d'électrodes déposée directement au contact du cortex, (\textbf{E}) Placement chirurgical de la grille d'électrodes \citep{schalk_brain-computer_2011}. \textit{A Droite} - Décodage de mouvements de la main et contrôle d'un bras robotisé \citep{yanagisawa_electrocorticographic_2012-1}}
+\figScaleDesciption{1}{shalk_and_yanagisawa_ecog}{Micro et macro-électrodes pour l'\ecog \citep{schalk_brain-computer_2011, yanagisawa_electrocorticographic_2012}}{\textit{A gauche} - (\textbf{A-B}) Micro-électrode, (\textbf{C}) Représentation schématique d'une électrode, (\textbf{D}) Grille d'électrodes déposée directement au contact du cortex, (\textbf{E}) Placement chirurgical de la grille d'électrodes \citep{schalk_brain-computer_2011}. \textit{A Droite} - Décodage de mouvements de la main et contrôle d'un bras robotisé \citep{yanagisawa_electrocorticographic_2012}}
 
 
 % ********************************************
@@ -256,78 +284,11 @@ On peut distinguer différents types d'ICM, sur la base de deux critères \citep{d
 \end{enumerate}
 
 
-% -----------------------------------------------------------------------------
-% -----------------------------------------------------------------------------
-%                         APPLICATION DES ICMs
-% -----------------------------------------------------------------------------
-% -----------------------------------------------------------------------------
-\section{Applications cliniques et non-cliniques}
-\label{sec_application_ICM}
-Prélever directement l'activité neuronale et donc, \textit{bypasser} les voies naturelles, permet de s'affranchir d'éventuelles limitations physiologiques. C'est pourquoi les ICM représentent un enjeu majeur pour la réhabilitation motrice ou handicap moteur ou encore pour la communication palliative.
-Les applications concrètes des \icm visent donc les personnes disposant de leurs capacités cognitives mais qui sont privées de facultés motrices. \\
-Un vasculaire cérébrale (AVC) peut engendre un état d'enfermement (\textit{locked-in state (LIS)}). Les personnes dans cet état sont pleinement consciente de leur corps, de l'environnement, ils peuvent ressentir les sensations de toucher et de douleur mais n'ont plus de facultés motrices, hormis peut-être, les mouvements de paupières ou des yeux. Un autre exemple est celui de la sclérose latérale amyotrophique (ou SLA) qui est une dégénérescence des neurones moteur (motoneurones). Progressivement, les personnes atteintes de SLA perdent l'usage des bras, des jambes, de la parole des muscles faciaux et enfin de la déglutition mais la conscience et les facultés cognitives demeurent intactes. L'évolution de la maladie amène à deux possibilités \citep{chaudhary_brain-machine_2015}: accepter une dépendance totale (respiration artificielle et nutrition) ou un décès par insuffisance respiratoire. Dans le premier cas, la maladie entraîne progressivement les patients en LIS ne leur laissant qu'un minimum de fonctions motrices. Lorsque le patient perd tout contrôle musculaire, ce qui finit souvent par les muscles des yeux, il rentre dans un état d'enfermement complet (\textit{completely locked-in state (CLIS)}). \\
+%\textit{P300 speller} : blablabla\\
+%
+%\textit{Hex-o-spell} : ICM indirecte asynchrone développée par \cite{blankertz_berlin_2006, blankertz_note_2007}, elle utilise l'imagerie motrice pour sélectionner des caractères. Le sujet imagine un mouvement de la main droite pour faire tourner la roue puis, stoppe la rotation et sélectionne un groupe de lettres en imaginant un mouvement de pied droit. Ce dispositif a permis à un sujet d'atteindre la vitesse de 7.6 caractères/min
+%\figScaleX{0.9}{hex_o_spell_color}{Hex-o-spell \citep{blankertz_note_2007}}
 
-\figScaleDesciption{0.6}{SLA_physio2}{Paralysie causée par la SLA et accident vasculaire cérébrale \citep{kubler2001brain}}{Paralysie causée par la SLA et accident vasculaire cérébrale \citep{kubler2001brain}}
-
-SLA et \textit{locked-in syndrome} ne sont que deux exemples expliquant l'intérêt social du développement des ICM. Redonner un peu de contrôle ou établir un canal de communication avec les familles des patients expliquent l'engouement qui existe depuis maintenant plus de 40 ans pour les ICM.
-
-
-% //////////////////////////////////////////////////////////
-
-ALS deux possibilités:
-- Accepter respi artificielle + se faire nourrir
-- Mourir d'insufisace respiratoire
-Dans le premier cas, maladie progresse jusqu'à perdre tout contrôle musculaire, qui finit souvent par le contrôle des muscles des yeux. C'est un état d'enfermement complet (\textit{completely locked-in state}). Si il reste encore un peu de contrôle musculaire, on parle alors de \textit{locked-in state}
-
-Conclusion:
-- Avenir prometteur
-- ICM hybrid \citep{muller-putz_towards_2015}
-- \citep{zimmermann_detection_2013} montre que les ICM-fnirs hybrides sont plus efficaces pour détecter les intentions motrices
-% ///////////////////////////////////////////////////////////
-
-% ********************************************
-%         Communication palliative
-% ********************************************
-\subsection{Communication palliative}
-\textit{P300 speller} : blablabla\\
-
-\textit{Hex-o-spell} : ICM indirecte asynchrone développée par \cite{blankertz_berlin_2006, blankertz_note_2007}, elle utilise l'imagerie motrice pour sélectionner des caractères. Le sujet imagine un mouvement de la main droite pour faire tourner la roue puis, stoppe la rotation et sélectionne un groupe de lettres en imaginant un mouvement de pied droit. Ce dispositif a permis à un sujet d'atteindre la vitesse de 7.6 caractères/min
-\figScaleX{0.9}{hex_o_spell_color}{Hex-o-spell \citep{blankertz_note_2007}}
-
-% ********************************************
-%         Robotique et prothèse
-% ********************************************
-\subsection{Mobilité, robotique et prothèse}
-
-\subsubsection{Curseur $1D$, $2D$ et $3D$}
-\subsubsection{Contrôler d'un fauteuil roulant}
-\subsubsection{Robotique et prothèse}
-
-Une autre en non-invasive
-\figScaleX{0.6}{hochberg_2012}{Contrôle d'un bras robotisé \citep{hochberg_reach_2012}}
-
-% ********************************************
-%              Mobilité
-% ********************************************
-\subsection{Mobilité}
-
-
-% ********************************************
-%       Applications non-cliniques
-% ********************************************
-\subsection{Autres applications non-cliniques}
-
-% -> Jeux
-\subsubsection{Jeux}
-
-% -> Internet
-\subsubsection{\textit{Web-browsing}}
-
-% -> Artistique
-\subsubsection{Artistique}
-ICM painting
-
-Conclusion sur les hybrides
 
 % -----------------------------------------------------------------------------
 % -----------------------------------------------------------------------------
@@ -335,7 +296,7 @@ Conclusion sur les hybrides
 % -----------------------------------------------------------------------------
 % -----------------------------------------------------------------------------
 \vspace{3\baselineskip}
-\todo[inline,caption={},color=red!20]{
+\todo[inline,caption={},color=orange!20]{
 	\textbf{Conclusion du chapitre 1} \\
 	Les méthodes non-invasives ne nécessitent aucune intervention chirurgicale et peuvent donc être appliquées sur n'importe quel individu. De plus, elles sont particulièrement accessibles, \cad que leur mise en place est relativement simple. \\
 	Toutefois, ces méthodes de mesures souffrent encore de compromis. Si l'EEG et la MEG ont une excellente résolution temporelle, la résolution spatiale est peu précise. A contrario, l'IRMf ou la PET offrent une excellente résolution spatiale mais la dimension temporelle est lésée. Les méthodes invasives ne souffrent pas de ces compromis, puisqu'elles offrent à la fois une excelle
