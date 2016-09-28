@@ -108,6 +108,10 @@ Les SCP ont également été testées à des fins cliniques. \cite{rockstroh1993corti
 
 \figScaleDesciption{0.6}{SCP}{Exemple d'apprentissage pour contrôler les \SCPS \citep{kubler2001brain}}{Feedback visuel des SCP renvoyées par le TTD - A droite, un curseur peut se déplacer entre les deux objectifs (en haut et en bas). Les négativité corticales bougent le curseur vers le haut (ligne du haut en pointillé) à l'inverse, les positivités corticales permettent de faire descendre le curseur (ligne pleine du bas). Toute modulation de $7 \mu V$ est considérée comme une réussite \citep{kubler2001brain}}
 
+% -> Bereitschaftspotential
+\subsubsection{Le Bereitschaftspotential}
+Le Bereitschaftspotential (BP), ou \textit{readiness potential}, est un potentiel moteur focalisé principalement dans la pré-aire motrice supplémentaire (pré-SMA) et SMA \citep{kornhuber1965hirnpotentialanderungen, ball1999role, brunia2000motor}. Le BP comprend deux composantes dont la première, la composante précoce (ou \textit{early BP}), commence environ deux secondes avant le début du mouvement qui est ensuite suivie d'une pente négative tardive (ou \textit{late BP}), environ 400ms avant le début du mouvement \citep{shibasaki_what_2006}. Il a été montré que le BP dépend de paramètres de mouvements tels que l'état de préparation ou encore la répétition et précision de mouvement \citep{birbaumer1990slow}. Enfin, le BP est d'avantage présent lors de mouvements auto-initiés, comparés à des mouvements imaginés ou basés sur un \textit{cue} externe \citep{deiber1999mesial, jenkins2000self, jankelowitz_movement-related_2002}.
+
 % -> Rythmes sensorymoteur
 \subsubsection{Rythmes sensorimoteurs (RSM)}
 Les RSM (ou \textit{Sensorimotor rhythms} (SMR)) correspondent à l'amplitude de signaux, au dessus du cortex sensorimoteur, dans des bandes de fréquences spécifiques. Les plus fréquents sont les rythmes $\mu$ 8-13hz et $\beta$ 13-30hz. Un utilisateur peut apprendre à moduler l'amplitude de son activité cérébrale dans ces bandes pour contrôler une \icm notamment par le biais de l'imagerie motrice (cf. \ref{sec_imagerie_motrice}). On appelle \textit{\ERS} lorsque l'amplitude augmente et \textit{\ERD} lorsqu'elle diminue \citep{pfurtscheller_event-related_1999, pfurtscheller_rehabilitation_2008}. \\
@@ -123,7 +127,7 @@ Les marqueurs présentés ci-dessus sont ceux que l'on retrouve le plus largement 
 
 \paragraph{Phase:} si l'amplitude a très largement été étudiée, que ce soit dans le cadre des ICM, du décodage et de son implication physiologique, la phase reste à l'heure actuelle l'objet d'un nombre plus restreint d'études. Toutefois, quelques études ont montré l'implication de la phase basse-fréquence dans l'encodage neuronal de mouvements \citep{hammer_role_2013, hammer_predominance_2016}.
 
-\paragraph{Couplage inter-fréquences locaux ou à distance:} ou \textit{Cross-Frequency Coupling} (CFC) regroupe un ensemble de marqueurs qui, contrairement aux marqueurs présentés ci-dessus, étudient une forme de corrélation entre deux signaux pouvant être soit locaux (comme provenant d'une même électrode) ou à distance pour évaluer des synchronisations d'aires cérébrales. Ces \textit{features} sont étudiés dans des bandes de fréquences particulières et vont donc nécessiter une filtrage en amont. Ensuite, on pourra extraire de ces signaux filtrés les informations de phase et d'amplitude afin d'étudier différentes formes de couplage:
+\paragraph{Couplage inter-fréquences locaux ou à distance:} ou \textit{Cross-Frequency Coupling} (CFC) regroupe un ensemble de marqueurs qui, contrairement à ceux présentés ci-dessus, étudient une forme de corrélation entre deux signaux pouvant être soit locaux (comme provenant d'une même électrode) ou à distance pour évaluer des synchronisations d'aires cérébrales. Ces \textit{features} sont étudiés dans des bandes de fréquences particulières et vont donc nécessiter une filtrage en amont. Ensuite, on pourra extraire de ces signaux filtrés les informations de phase et d'amplitude afin d'étudier différentes formes de couplage:
 \begin{description}
 	\item[Couplage à distance phase-phase:] le \textit{Phase-Locking Value} (PLV) \citep{lachaux_measuring_1999, lachaux_studying_2000} est un des outils permettant de déterminer la synchronisation de phase. Le couplage inter-fréquence phase-phase semble jouer un rôle dans la communication inter-structures \citep{fries_mechanism_2005, gregoriou_high-frequency_2009, siegel_phase-dependent_2009, elswijk_corticospinal_2010}
 	\item[Couplage à distance amplitude-amplitude:] bien que le rôle physiologique du couplage inter-fréquences amplitude-amplitude soit encore incertain, de tel couplages ont été décris dans la littérature \citep{friston_another_1997, shirvalkar_bidirectional_2010, siegel_phase-dependent_2009}
@@ -187,8 +191,6 @@ Si une personne imagine avoir une balle dans la main, c'est de l'imagerie visuel
 \subsection{Utilisation de l'imagerie motrice pour les ICM}
 
 
-%\section{Apprentissage machine: applications aux neurosciences}
-%okok
 
 % -----------------------------------------------------------------------------
 \section{Décodage directionnel des membres supérieurs}
