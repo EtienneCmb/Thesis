@@ -1,0 +1,252 @@
+%!TEX root = ../main.tex
+% #############################################################################
+%                                   LOGICIELS
+% #############################################################################
+\chapter{Développements informatiques}
+
+A l'heure actuelle, il existe une vaste diversité de \textit{toolboxs}/logiciels permettant d'analyser puis de visualiser des données neuro-scientifiques, que ce soit en \textit{Matlab}, en \textit{Python} ou tout autre langage. Parmi ces solutions, on pourrait citer \textit{Brainstorm}, \textit{FieldTrip}, \textit{MNE python}, \textit{Nipipe}, \textit{ELAN}... Toutes sont développées depuis des années, par des équipes hautement qualifiées et expertes et jouissent d'une excellente réputation. Durant cette thèse, nous avons souhaité proposer des solutions informatiques pour les raisons suivantes :
+\begin{description}
+	\item[Maîtrise et compréhension des outils :] bien qu'il soit tout à fait envisageable d'analyser ligne par ligne ces \textit{toolboxs}, le code peut parfois être assez dense et difficile à comprendre. Coder soi-même ses outils est une merveilleuse méthode pour les démystifier et surtout, pour les utiliser correctement c'est-à-dire connaître les avantages et les limites de chacun.
+	\item[Adaptation, amélioration et indépendance :] lorsque l'on choisit une \textit{toolbox} on est limité aux possibilités et à la qualité d'implémentation de celle-ci. Il se peut que des besoins très spécifiques ne soient donc pas couverts (pour des données intracrânienne comme dans le cadre de cette thèse, il existe peu de solution). Pour ces raisons, le développement d'outils personnels permet une meilleure couverture des besoins spécifiques et assure une indépendance façe aux limites d'une boîte à outils.
+	\item[Acquisition de compétences :] l'inconvénient majeur de l'implémentation d'outils est le temps, un temps qui est forcément pris sur autre chose. En revanche, c'est une somme de compétences non-négligeables.
+	\item[Identité, communication et communauté :] si les outils développés sont de qualité et forment un ensemble cohérent, une communauté d'utilisateurs peut se mettre en place ce qui peut contribuer à faire connaître une équipe ou un laboratoire.
+\end{description}
+
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+%                            PYTHON
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+\section{Choix du langage: Python}
+Dans leur première version, les solutions informatiques ont été développées en \textit{Matlab}. \textit{Python} s'est imposé plus tard notamment grâce à son confort d'écriture et sa qualité syntaxique, l'abondance de documentions, d'utilisateurs et de modules. De plus, c'est une langage portable, pouvant être installé sur toute machine et tout système et surtout, \textit{Open Source} distribuable à souhait. A noter que le langage \textit{Julia} (\url{https://julialang.org/}) a également été testé. Ce langage se veut particulièrement prometteur puisqu'il promet une syntaxe élégante à l'instar de \textit{Python} et des performances se rapprochant du \textit{C}, devançant ainsi \textit{Python} dans sa version non-optimisée. Il a toutefois été écarté, non à cause de ses performances mais parce que c'est un langage encore récent et comportant un nombre plus réduit de modules que \textit{Python} et une communauté plus petite.
+
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+%                Paquets développés durant cette thèse
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+\section{Paquets développés durant cette thèse}
+Trois paquets ont été développés pour proposer une solution cohérente de l'extraction des données à la visualisation des résultats :
+\begin{description}
+	\item[ipywksp :] workspace s'intégrant dans les notebooks \textit{Jupyter}.
+	\item[brainpipe :] paquet permettant d'analyser des données (pré-traitements, extraction de features, classification et visualisation 2D)
+	\item[visbrain :] ensemble de modules destinés à des visualisations complexes et de hautes performances.
+\end{description}
+
+% _______________ IPYWKSP _______________
+\subsection{ipywksp}
+Ce paquet est destiné aux utilisateurs venant de \textit{Matlab} et souhaitant retrouver un workspace semblable. \textbf{ipywksp} mêle plusieurs langages (\textit{Python}, \textit{HTML} et \textit{Javascript}) et permet de visualiser le type, le contenue et la taille des variables, de les sauvegarder/charger et de les visualiser. Enfin, ce paquet
+
+\subsubsection{Installation et utilisation}
+Dans un terminal, lancer : \\
+\textbf{git clone https://github.com/EtienneCmb/ipywksp.git} \\
+\textbf{python setup.py install} \\
+
+Pour utiliser le workspace, lancer dans un notebook \textit{Jupyter} :
+\begin{python}
+# Chargement du module :
+from ipywksp import workspace
+
+# Ouverture du workspace avec un thème noir et s'affichant automatiquement au survol de la souris :
+workspace(theme="dark", autoHide=True)
+\end{python}
+
+\figScaleDesciption{.8}{theme_dark}{\textit{ipywksp} : Exemple de workspace pour \textit{Jupyter}}{\textit{ipywksp} : Exemple de workspace pour \textit{Jupyter}}
+
+
+% _______________ BRAINPIPE _______________
+\subsection{Brainpipe}
+Ce paquet est destiné à l'analyse de données de tout type même si il est particulièrement adapté aux données intracrânienne. Il permet d'extraire un ensemble d'attributs, de les classifier, d'effectuer des analyses statistiques et de visualiser les résultats sur des graphes simples. Tout les résultats obtenus durant cette thèse ont été obtenu avec ce module et donc, toutes les méthodes y sont implémentées.
+
+% -------------------> Fonctionnalités
+\subsubsection{Fonctionnalités}
+
+% Study
+\paragraph{Study : }
+Ce sous-module permet de gérer plusieurs études et plusieurs jeux de données, de gérer un très grands nombres de fichiers, de créer une arborescence de dossiers propre, une meilleure gestion des chemins d'accès ce qui est un atout majeur pour des collaborations.
+\begin{python}
+	# Importation des librairies :
+	import numpy as np
+	from brainpipe.system import study
+
+	# Création de deux études :
+	st = study('MEG')
+	st.add('~/Python/')
+	st = study('EEG')
+	st.add('~/Python/')
+
+	# Création et sauvegarde d'une variable dans le sous-dossier database :
+	x = np.random.rand(1000)
+	st.save('database', 'test.npy', x)
+\end{python}
+
+% Pré-traitements :
+\paragraph{Pré-traitements :}
+Ensemble d'outils pour pré-traiter les données, \cad des outils de filtrage performants, la bipolarisation et la recherche des structures anatomiques associées à des coordonnées MNI/Talairach.
+\begin{python}
+	# Chargement des librairies :
+	from brainpipe.preprocessing import bipolarization, xyz2phy
+	from brainpipe.system import study
+
+	# Chargement de l'étude en cours :
+	st = study('CenterOut')
+
+	# Chargement des données à pré-traiter :
+	data, channels, xyz = st.load('database', 'centerout_data.npz')
+	# Où :
+	# - data : les données intracrâniennes
+	# - channels : nom des channels monopolaires
+	# - xyz : les coordonnées MNI des channels
+
+	# Bipolarisation et recherche des structures anatomiques :
+	data_bip, channels_bip, xyz_bip = bipolarization(data, channels, xyz=xyz)
+	phy = xyz2phy().get(xyz_bip, channels_bip)
+\end{python}
+
+% Features :
+\paragraph{Attributs :}
+Brainpipe intègre une collection relativement importante de features calculables :
+\begin{itemize}
+	\item Signal filtré
+	\item Amplitude
+	\item Puissance (hilbert, wavelet ou PSD)
+	\item Phase Amplitude Coupling (nombreuses méthodologies / possibilité de générer des signaux synthétiques couplés)
+	\item Phase-Locking Factor (PLF)
+	\item Cartes temps-frequences
+	\item Phase-Locked Power (puissance alignées sur un cue)
+	\item Event-Related Phase Amplitude Coupling (ERPAC)
+	\item Phase préférentielle
+	\item Phase Locking Value (PLV, soit à travers le temps, soit à travers les trials)
+	\item Entropie spectrale
+\end{itemize}
+A noter que certains attributs intègrent un fenêtrage et le calcul dans des bandes de fréquences. De plus, tous ont été implémentés de façon matricielle et peuvent être calculés en parallèle pour un temps de calcul le plus réduit possible. Enfin, tous comprennent de nombreuses configuration possibles, intègrent le calcul de significativité et les outils de visualisation.
+
+\begin{python}
+	# Chargement des librairies :
+	from brainpipe.feature import *
+	import numpy as np
+	import matplotlib.pyplot as plt
+
+	sf = 1024  # Fréquence d'échantillonage
+
+	# On génère des données contenant un couplage entre 10 et 100hz :
+	data = cfcRndSignals(sf=sf, fPha=10, fAmp=100, ndatasets=10, noise=2, chi=.5)[0].T
+	npts = data.shape[0]
+
+	# On génère des vecteurs phase et amplitude :
+	pVec, aVec, pha, amp = cfcVec()
+
+	# Calcul du PAC :
+	pacO = pac(sf, npts, pha_f=pha, amp_f=amp, Id='133')
+	xPac = pacO.get(data, data, matricial=True)[0]
+	xPac = np.squeeze(xPac)  # Suppression des dimensions inutiles
+
+	# Plot du PAC avec les fonctions intégrées :
+	fig = plt.figure()
+	pacO.plot2D(fig, xPac.mean(-1), vmin=0, vmax=16, xvec=pVec, yvec=aVec, xlabel='Fréquence de phase (hz)',
+	            ylabel='Fréquence amplitude (hz)', title='Example de PAC', cmap='viridis', cblabel='Couplage PAC')
+	plt.show()
+\end{python}
+
+\figScaleDesciption{.4}{exemple_PAC}{Exemple de calcul PAC avec brainpipe}{Exemple de calcul PAC avec brainpipe}
+
+% Classification :
+\paragraph{Classification :}
+L'essentiel de la classification est assuré par \textit{scikit-learn} \citep{scikit-learn}. Toutefois, brainpipe offre certaines fonctionnalités d'ordre pratiques qui, de manière non-exhaustive, peuvent être résumées à :
+\begin{itemize}
+	\item Possibilité de définir une cross-validation et différents classifieurs et surtout, de pouvoir comparer leur performances de manière plus compactes.
+	\item Adaptation de la classification aux données neuro-scientifiques, notamment en offrant un calcul en parallèle plus efficace car mieux adapté à nos petites données (en comparaison aux énormes banques de données d'images). De plus, de nombreuses études utilisent des classification particulière telles que le \textit{Leave-p-Subject-Out}, présente dans brainpipe tout comme les cross-validation de type \textit{10-times...}.
+	\item Généralisation temporelle \citep{king_characterizing_2014}
+	\item Calcul de la significativité des décodages plus synthétique (loi binomiale ou permutations)
+\end{itemize}
+Pour les neuro-scientifiques, brainpipe est un bon point d'entré au monde de la classification puisqu'il permet de rapidement classifier nos données en un minimum de lignes et de manière lisible. Toutefois, pour une utilisation plus fine, un programme en \textit{scikit-learn} pure reste moins limitatif.
+
+% Statistiques :
+\paragraph{Statistiques :}
+En plus des statistiques calculés pour chaque attribut et pour la classification, brainpipe met à disposition un ensemble d'outils d'analyses statistiques. Calcul et gestion de permutations, correction multiple (Bonferroni, False Discovery Rate, Maximum statistic) ainsi que des outils pour les données circulaires (comme des données de phase).
+
+% Visualisation :
+\paragraph{Visualisation :}
+Enfin, des fonctions pour visualiser des données ont également été ajoutées. Celles-ci permettent de créer des graphes 2D esthétiques et hautement configurables (plot de lignes avec déviation, ajout de valeur \textit{p}, de lignes verticales/horizontales, plot d'image, de contours...).
+
+\begin{python}
+	# Chargement des librairies :
+	from brainpipe.visual import BorderPlot
+	import numpy as np
+
+	# Définition d'un vecteur temps et de 10 sinusoïdales:
+	sf = 1024
+	_, t = np.mgrid[0:10, 0:1000] / sf
+	x = np.sin(2*np.pi*5*t) + .5 * np.random.rand(*t.shape)
+
+	# Plot du signal et de sa déviation :
+	BorderPlot(t[0, :], x.T, kind='std', xlabel='Temps', ylabel='Amplitude',
+	           title='Exemple de visualisation')
+	plt.show()
+\end{python}
+\figScaleDesciption{.7}{exemple_visu}{Exemple de plot d'un signal et de sa déviation}{Exemple de plot d'un signal et de sa déviation}
+
+% -------------------> Téléchargement, installation et documentation
+\subsubsection{Installation et documentation}
+Pour installer brainpipe, lancer dans un terminal : \\
+\textbf{git clone https://github.com/EtienneCmb/brainpipe.git} \\
+\textbf{python setup.py install} \\
+Pour finir, une documentation complète est disponible en ligne \url{https://etiennecmb.github.io/brainpipe}
+
+% _______________ VISBRAIN _______________
+\subsection{Visbrain}
+Visbrain est un paquet destiné à la visualisation de données neuro-scientifiques. Sa particularité réside dans le fait qu'il se base sur Vispy \cite{campagnola_vispy_2013} qui lui même utilise \textit{OpenGL}. Les calculs sont envoyés sur la carte graphique ce qui, en conséquence, offre de très hautes performances en terme de fluidité et de temps de calcul. De plus, les interactions entre l'utilisateur et les différents modules se font via des interfaces graphiques (\textit{Graphical User Interface, GUI}) construites à partir de \textit{PyQt}.
+
+% -------------------> Présentation
+\subsubsection{Présentation des modules}
+
+% Brain :
+\paragraph{Brain :}
+\textit{Brain} est une GUI avec un cerveau MNI dans lequel il est possible d'insérer des objets :
+\begin{itemize}
+	\item \textbf{Sources} : dispositions de sources matérialisées par des sphères de couleur
+	\item \textbf{Connectivité} : possibilité d'afficher des liens de connectivité entre ces sources
+	\item \textbf{Structures} : ajout de structures 3D internes soit basées sur les aires de Brodmann soit sur l'AAL (\textit{Automated Anatomical Labeling})
+	\item \textbf{Autres} : tout autre objet à trois dimensions peut-être rajouté par l'utilisateur.
+\end{itemize}
+Il n'y a aucune limite sur le nombre d'objets pouvant être ajoutés et ils peuvent tous être contrôlés indépendamment (couleur, transparence, taille, forme...). De plus, certains de ces objets peuvent interagir ensemble. Par exemple, l'activité des sources peuvent être projetées sur le surface du cerveau ou sur des structures internes. \\
+Dernier point important, toutes les interactions possibles depuis l'interface graphique (et par raccourcis) sont également possibles en ligne de commande (Voir les \href{http://etiennecmb.github.io/visbrain/brain.html\#user-functions}{User functions} dans la documentation). Cette fonctionnalité est particulièrement utile pour produire un grand nombre de figures puisque tout peut être automatisé.
+
+\figScaleDesciption{1}{visbrain_brain}{Exemples des principales fonctionnalités de \textbf{Brain}}{Exemples des principales fonctionnalités de \textbf{Brain}, (A) Sites intracrâniens et connectivité, (B) Sources MEG et projection de leur puissance bêta sur le thalamus, (C) Nombre de sources contribuant à chaque point de l'hémisphère droit, (D) Projection de l'activité corticale de plusieurs sources intracrâniennes, (E) Exemple de scène complexe mêlant différents objets possédant chacun leur configuration}
+
+% Sleep :
+\paragraph{Sleep :}
+\textit{Sleep} est un module particulièrement performant pour visualiser, analyser et éditer des données de sommeil. Il a été développé en collaboration avec \href{https://raphaelvallat.github.io/}{Raphael Vallat}. \\
+Parmi les fonctionnalités principales, on peut citer :
+\begin{itemize}
+	\item Chargement de fichiers *.edf, *.eeg (Brainvision, ELAN) et *.trc
+	\item Visualisation temporelle des données polysomnographiques (avec possibilité d'afficher/cacher les channels, contrôle des unités temporelles, de la taille de fenêtre, de l'amplitude...), en spectrogramme ou sous forme topographique
+	\item Chargement/visualisation/édition/sauvegarde de l'hypnogramme
+	\item Implémentation de détection de spindles, K-complexes, slow waves, rapid eye movements (REM), contraction musculaire ou encore de pic. Chaque détection peut être lancée sur les channels souhaités et des repères visuels sont ajoutés à l'hypnogramme
+	\item Outils de traitement de signal (suppression des composantes linéaire et de moyenne, bipolarisation/re-référencement, outil de filtrage pour afficher le signal filtré, l'amplitude, la puissance ou encore la phase)
+	\item Nombreux raccourcis pour une interaction la plus efficace possible. 
+	\item Une fonction d'\textit{Auto scoring} est actuellement en cours de développement.
+\end{itemize}
+
+\figScaleDesciption{1}{Sleep_013}{Exemples des principales fonctionnalités de \textbf{Sleep}}{Exemples des principales fonctionnalités de \textbf{Sleep}, (A) Possibilité de choisir les channels à afficher et contrôle indépendant des amplitudes, (B) Représentation temporelle des données polysomnographique, (C) Sprectogramme d'un channel, (D) Visualisation de l'hypnogramme et possibilité de l'éditer, (E) Détections de spindle et de REM sur deux channels, (F) Exemple de représentation topographique (topoplot)}
+
+% Ndviz :
+\paragraph{Ndviz}
+Le module \textit{Ndviz} a été conçu pour fouiller et explorer des données multi-dimensionnelles. Un des soucis majeurs des étudiants qui ne sont pas familiers avec la programmation est de se faire une image de ce que signifie une matrice et surtout, arriver à gérer les dimensions. Par exemple, des données organisées en $(n_channels, n_points, n_essais)$ offrent un certain nombre de visualisation possible à travers les dimensions : essais par essais par channel, la moyenne des essais par channel voir la moyenne à travers certains channels et essais... De plus, pour des données que l'on ne connaît pas, il peut être difficile de rechercher des artefacts, des activités épileptiques... \textit{Ndviz} essaye de répondre à ses différentes problématiques en offrant différentes fonctionnalités :
+\begin{itemize}
+	\item Dans tout \textit{Ndviz} il est possible de sélectionner les dimensions à inspecter ce qui permet de se familiariser avec les matrices.
+	\item Possibilité de visualiser plusieurs milliers de signaux disposés en grille en même temps. Cette fonctionnalité est issue d'un exemple de \textit{Vipy} originalement codé par \href{https://github.com/rossant}{Cyrille Rossant}. Par exemple, pour des données organisées en $(nchannels, npoints, nessais)$, il serait possible d'afficher une grille de $nchannels$ lignes et $nessais$ colonnes et où sur chaque point de cette grille serait disposé un signal de $npoints$ temporels. Cette fonctionnalité permet donc de visualiser des données comportant au maximum trois dimensions. 
+	\item De plus, en sélectionnant trois dimensions on peut aussi visualiser les données sous forme d'image (avec la couleur en guise de troisième dimension) ce qui pourrait par exemple être utile pour inspecter un grand nombre de carte temps-fréquence. Enfin, en sélectionnant deux dimensions, les données peuvent être représentées sous forme linéaire, en nuage de points, en histogramme ou spectrogramme.
+\end{itemize}
+
+\figScaleDesciption{1}{ndviz}{Exemples des principales fonctionnalités de \textbf{Ndviz}}{Exemples des principales fonctionnalités de \textbf{Ndviz}, (A) Visualisation de 40000 signaux disposés dans une grille de (200, 200). Chaque signal fait plusieurs milliers de points et il est possible de zoomer sur chaque signal, (B) Représentation linéaire d'un signal, (C) Exemple de représentation sous forme d'image, (D-E) Calcul du spectrogramme et d'un histogramme d'un signal, (F) Représentation en nuage de points. Cette dernière représentations pourrait être utilisée pour inspecter des features}
+
+% Figure :
+\paragraph{Figure}
+Ce dernier module est le plus simple et certainement le plus utile. Il permet de faire des mises en page complexes de figures qui peuvent ensuite être exportées en haute définition et prête à être intégrée dans un papier. Il peut charger des images, les couper, les disposer en grille, ajouter des colorbars (soit pour chaque figure soit des colorbar communes à plus images), contrôler la couleur de l'arrière plan, ajouter des titres à tous les axes... 
+
+\figScaleDesciption{1}{visbrain_figure}{Exemple de mise en page avec le module \textbf{Figure}}{Exemple de mise en page avec le module \textbf{Figure}}
+
+% -------------------> Téléchargement, installation et documentation
+\subsubsection{Installation et documentation}
+La procédure d'installation est plus complexe car elle possède plus de dépendances. Elle a donc été décrite plus largement dans la documentation \url{http://etiennecmb.github.io/visbrain/}. A noter que cette documentation décrit et illustre les fonctionnalités de chaque module et des exemples complets sont également mis à disposition \url{https://github.com/EtienneCmb/visbrain/tree/master/examples}

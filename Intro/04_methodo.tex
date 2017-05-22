@@ -1,17 +1,17 @@
+%!TEX root = ../main.tex
 % #############################################################################
 %                             METHODOLOGIE
 % #############################################################################
 \chapter{Méthodologie}
 
-\todo[color=red!100]{Inclure une meilleure description des figures}
 Cette partie méthodologique sera divisée en deux grandes sous parties visant à présenter :
 \begin{enumerate}
-	\item L'extraction des features: présentation des méthodes utilisées dans le cadre de l'extraction d'attributs issus de l'activité neuronale. De manière générale, nous avons étudiés des attributs spectraux comprenant:
+	\item \textbf{L'extraction des features}: présentation des méthodes utilisées dans le cadre de l'extraction d'attributs issus de l'activité neuronale. De manière générale, nous avons étudiés des attributs spectraux comprenant:
 	\begin{itemize}
 		\item Phase et puissance spectrale
 		\item Attributs de couplage
 	\end{itemize}
-	\item Le machine learning: présentation des principaux algorithmes testées dans le cadre du décodage de l'activité neuronale 
+	\item \textbf{Le machine learning}: présentation des principaux algorithmes testées dans le cadre du décodage de l'activité neuronale 
 \end{enumerate}
 
 
@@ -25,7 +25,6 @@ Comme nous l'avons décrit précédemment, l'objectif du décodage de l'activité neu
 Tout les attributs testés dans le cadre de cette thèse sont des attributs spectraux, donc issus de bandes de fréquences. La plupart de ces outils partagent donc une partie méthodologique commune à savoir, le filtrage. De plus, la plupart sont extraits en utilisant la transformée d'Hilbert. Pour éviter une redondance à travers les attributs, nous allons tout d'abord introduire quelques pré-requis.
 
 \subsection{Pré-requis}
-\todo[color=red!100]{Cette partie ne devrait pas figurer dans l'extraction des features}
 % ********************************************
 %               PRE-REQUIS
 % ********************************************
@@ -66,7 +65,7 @@ Pour une distribution de permutations construite à partir de deux sous-ensembles
 	\item $A<B$ si $A$ est parmi les $N\times p$ premiers échantillons (\textit{"One-tailed test lower tail"})
 	\item $A\neg B$ si $A$ est soit inférieur aux $(N\times p)/2$ premiers échantillons soit supérieur aux $(N-N\times p)/2$
 \end{itemize}  
-\figScaleX{0.6}{stat_permutations}{\textit{"One-tailed"} et \textit{"two-tailed"} test}
+\figScaleDesciption{1}{stat_perm}{Évaluation statistique à base de permutations}{Évaluation statistique à base de permutations, \textit{(A)} \textit{"Two-tailed"}, \textit{(B)} \textit{"One-tailed"}}
 Grâce à cette méthode d'évaluation statistique, nous pourrons par exemple conclure si l'on a une augmentation, une diminution ou une différence statistique entre une valeur de puissance et la puissance contenue dans une période de baseline. Dernière précision, on comprend ainsi que pour obtenir une valeur $p$ il faut que la taille de la distribution $N$ soit au moins de $1/p$.
 
 \subsubsection{Hyperplan}
@@ -135,14 +134,14 @@ Pour aller un peu plus loin, et présenter quelques méthodes, il est nécessaire d
 \begin{enumerate}
 
 	% MEAN VECTOR LENGTH
-	\item \mvl: \\
+	\item \textbf{\mvl}: \\
 	Cette méthode à été introduite par \cite{canolty_high_2006} et consiste à sommer, à travers le temps, le complexe formé de l'amplitude des hautes fréquences avec la phase des basses fréquences. L'équation est donnée par:
 	\begin{equation}
 	MVL = |\sum_{j=1}^{N} a_(j) \times e^{j\phi(j)}|
 	\end{equation} \\
 	
 	% KULLBACK-LEIBLER DIVERGENCE
-	\item \kld:\\
+	\item \textbf{\kld}:\\
 	A l'origine, la divergence de Kullback-Leibler (KLD), qui est issue de la théorie de l'information, permet de mesurer les dissimilarités entre deux distributions de probabilités. Ainsi, pour pouvoir utiliser cette mesure dans le cadre du PAC, \cite{tort_measuring_2010} propose une solution élégante qui consiste à générer une distribution de densité probabilités de l'amplitude (DPA) en fonction des valeurs de phase et d'ensuite utiliser le KLD pour comparer cette distribution à la densité de probabilité d'une distribution uniforme (DPU). Plus la DPA s'éloigne de la DPU, plus le couplage entre l'amplitude et la phase est consistant. \\
 	Pour construire la DPA, l'astuce consiste à couper le cercle trigonométrique en N tranches (dans l'article il est proposé de couper en 18 tranches de 20°). Puis, si on prend l'exemple de la tranche $[0,20°]$, on va chercher tout les instants temporels où la phase prend des valeurs comprises entre $[0,20°]$ ($t, \phi(t) \subset [0,20°]$). On prend ensuite la moyenne de l'amplitude pour ces valeurs de $t$ et on répète cette procédure pour chacune des tranches de phase. On obtient ainsi la densité d'amplitudes en fonction des valeurs de phase. Il ne reste plus qu'à normaliser cette distribution par la somme des amplitudes à travers les tranches et on récupère une distribution de densité de probabilités. La figure \ref{fig:PAC_plot_Tort_2010} \citep{tort_measuring_2010} présente un exemple de DPA en fonction de tranches de phase. \\
 
@@ -155,7 +154,7 @@ Pour aller un peu plus loin, et présenter quelques méthodes, il est nécessaire d
 	où $P(j)$ est la densité de probabilité de $a(t)$ en fonction de $\phi(t)$ et $Q(j)$ est la densité de probabilité d'une distribution uniforme. \\
 	
 	% HEIGHT-RATIO
-	\item \hr \\
+	\item \textbf{\hr} \\
 	La méthode du \hr \citep{lakatos_oscillatory_2005} est extr\^{e}mement proche du \kld. En effet, l'amplitude sera binée de la même façon en fonction des tranches de phase. La mesure du PAC est ensuite donnée par:
 	\begin{equation}
 	hr=(f_{max}-f_{min})/f_{max}
@@ -163,7 +162,7 @@ Pour aller un peu plus loin, et présenter quelques méthodes, il est nécessaire d
 	où $f_{max}$ et $f_{min}$ sont respectivement le maximum et le minimum de la de la densité de probabilité de l'amplitude en fonction des valeurs de phase. \\
 	
 	% NDPAC
-	\item \ndpac \\
+	\item \textbf{\ndpac} \\
 	Le \ndpac, qui n'est pas une des méthodes les plus fréquemment rencontrées, présente toutefois une avantage certain. En plus de fournir une estimation fiable du \pacFR, \cite{ozkurt_statistically_2012} démontre l'existence d'un seuil à partir duquel on peut considérer l'estimation du PAC comme étant statistiquement fiable. La beauté de cette méthode, c'est que ce seuil statistique, qui est une fonction de la valeur p désirée, ne dépend que de la taille de la série temporelle. Ce qui rend son utilisation particulièrement simple. \\
 	Pour estimer le PAC, une des hypothèses ayant permis d'aboutir à ce seuil statistique est de devoir normaliser l'amplitude par un z-score dénotée $\tilde{a}(t)$. L'estimation du PAC est quasiment identique au MVL puisque c'est en réalité le carré de celle-ci. Enfin, pour une valeur p désirée, l'article introduit le seuil statistique: \\
 	\begin{equation}
@@ -210,13 +209,19 @@ Exemple concret, si on cherche à conna\^{i}tre les modulations de puissance cont
 
 \figScaleX{1}{hemptinne_2013}{\textbf{(A)} Exemple de cartes temps-fréquence phase locked sur le $\beta$, \textbf{(B)} Exemple de comodulogramme}
 
-La figure \ref{fig:hemptinne_2013} \citep{hemptinne_exaggerated_2013} met en évidence que la représentation des cartes temps-fréquence phase-locked \textbf{(A)} est limitée d'une part, par la phase sur laquelle on choisit de recaler et d'autre part cette méthode est également limité par l'instant où l'on choisit de recaler. Pour la figure \textbf{(B)}, le calcul du PAC se faisant à travers la dimension temporelle, on a aucune idée de l'évolution du couplage dans le temps. \\
+La figure \ref{fig:hemptinne_2013} \citep{hemptinne_exaggerated_2013} met en évidence que la représentation des cartes temps-fréquence phase-locked \textbf{(A)} est limitée d'une part, par la phase sur laquelle on choisit de recaler et d'autre part cette méthode est également limité par l'instant où l'on choisit de recaler. Pour la figure \textbf{(B)}, le calcul du PAC se faisant à travers la dimension temporelle, on a aucune idée de l'évolution du couplage dans le temps.
 
 % ERPAC
 \subsubsection{\PACEN: résolution temporel?}
-\todo[color=red!100]{Enlever la description neuneu}
-Comment peut-on savoir si un ensemble de musiciens jouent ensemble, en rythme? L'approche traditionnelle consiste à dire que, en fonction de la prestation du groupe, on sera en mesure de dire si ils étaient en rythme ou non. Donc on focalise notre attention sur chaque instant du morceau et on analyse chaque note, chaque décalage. Cela signifie aussi que toute notre attention a été mobilisée par l'analyse du rythme et finalement, on passe à côté de la musique. Notre attention au détail nous a écarté du morceau global. On pourrait dire que l'on a écrasé la dimension temporelle du morceau. Une autre approche consiste à assister à toute les répétitions du fameux groupe. Ce faisant, on est capable de dire si d'une manière générale les musiciens ont tendance à jouer ensemble. Ainsi, le jour d'une représentation, toute notre attention peut rester uniquement sur le concert. On garde donc la dimension temporelle.\\ 
-C'est par ce changement de positionnement face au problème de résolution temporelle que \cite{voytek_method_2013} introduit le \erpac . L'approche traditionnelle du PAC nécessitant de connaître un nombre de cycles afin d'en déduire l'existence ou non du couplage, et donc perdre la dimension temps, l'article propose de calculer le PAC à travers les essais (ou répétitions). Pour un jeu de données de M essais de longueur N, on extrait respectivement les phases et les amplitudes $\phi_{M}(t)$ et $a_{M}(t)$ puis, pour chaque point temporel, on calcul la corrélation à travers les essais (corrélation linéaire-circulaire \citep{berens_circstat_2009} qui se fait entre l'amplitude et des sinus/cosinus de la phase). Il en résulte une valeur de corrélation pour chaque instant et donc, de couplage. \\
+\cite{voytek_method_2013} introduit une méthode appelée \textit{\erpac} permettant de mesurer l'évolution temporelle du PAC. L'approche traditionnelle nécessite de connaître un nombre de cycles afin d'en déduire l'existence ou non du couplage, et donc perdre la dimension temps. L'article propose de calculer le PAC à travers les essais (ou répétitions). Pour un jeu de données de M essais de longueur N, on extrait respectivement les phases et les amplitudes $\phi_{M}(t)$ et $a_{M}(t)$ puis, pour chaque point temporel, on calcul la corrélation à travers les essais (corrélation linéaire-circulaire \citep{berens_circstat_2009} qui se fait entre l'amplitude et des sinus/cosinus de la phase). Il en résulte une valeur de corrélation pour chaque instant et donc, de couplage. \\
+Il est intéressant de noter que ce changement de positionnement dimensionnel est le même dans le cadre du calcul du \textit{Phase-Locking Statistics} (PLS). \cite{lachaux_measuring_1999} propose de mesurer la synchronie de phase entre deux sites distants en calculant le PLS à travers les essais (dans ce cas, on conserve la dimension temporelle) ou alors à l'intérieur de chaque essais (\cite{lachaux_studying_2000} - on perd la dimension temporelle mais on conserve la dimension essais ce qui permet d'envisager une classification avec le \textit{single-trial} PLS)
+
+% Phase préférentielle
+\subsubsection{Phase préférentielle}
+La phase préférentielle correspondant à la phase où l'amplitude est maximum. De manière analogue au \kld, l'amplitude est d'abord découpée en fonction de tranches de phases. La tranche de phase donnant une amplitude maximum est alors appelée \textit{phase préférentielle} (PP). Cette mesure est particulièrement proche du \hr, il serait intéressant d'étudier si l'un ou l'autre est porteuse d'une plus grande quantité d'informations. \\
+Dans le cadre de cette thèse, nous avons entamé une exploration de l'utilité de la PP pour décoder des directions de mouvements, à la fois durant la préparation et l'exécution motrice. Nous avons obtenu des résultats faiblement significatifs et difficiles à remettre dans le contexte de la littérature. Pour cette raison, et par manque d'investigations supplémentaires, les résultats n'ont pas été inclus dans les papiers.
+
+\figScaleDesciption{1}{PP_example}{Exemple de phase préférentielle}{Exemple de phase préférentielle - Chaque disque représente les modulations d'amplitude pour différentes valeurs de phase durant (A) une phase de préparation motrice et (B) d'exécution motrice pour quatre directions de mouvement (haut / bas / gauche / droite)}
 
 
 
@@ -275,8 +280,8 @@ La labellisation c'est le fait d'associer à chaque événement l'appartenance à un
 		x_{trial_{N}} \\
 	\end{pmatrix}
 \end{equation}
-D'où le nom apprentissage supervisé. Finalement, l'apprentissage machine se fera gr\^{a}ce à ce vecteur label $y$ et cette matrice d'attributs $x$. Ce qui nous amène directement aux notions de \textit{training set} et de \textit{testing set}.\\
-\figScaleX{0.5}{clf_labeling}{Labellisation de données}
+D'où le nom apprentissage supervisé. Finalement, l'apprentissage machine se fera gr\^{a}ce à ce vecteur label $y$ et cette matrice d'attributs $x$. Ce qui nous amène directement aux notions de \textit{training set} et de \textit{testing set}.
+\figScaleDesciption{0.5}{clf_labeling}{Labellisation des données}{Labellisation de données - pour un vecteur de données x, chacun des essais se voit attribuer une classe $c_{i} \in [\![0;3]\!]$}
 
 
 % ********************************************
@@ -302,18 +307,17 @@ Un autre cas particulier, est celui du \textit{Leave-p-Subject-Out} \citep{vidau
 %                 CLASSIFIEURS
 % ********************************************
 \subsection{Classifieurs}
-\todo[color=red!100]{Changer les images de LDA et SVM pour celle de naseer. Inclure dendogramme svm de Tarek et justifier le choix du LDA par rapport à la littérature ICM pour sa rapidité et sa fiabilité.}
 \begin{enumerate}
 
 	% LINEAR DISCRIMINANT ANALYSIS
 	\item \lda (LDA) \\
-	Le LDA \citep{fisher_use_1936} est un classifieur linéaire. Pour un problème à deux classes, le LDA tente de trouver un hyperplan qui va maximiser la distance entre les classes tout en minimisant la variance inter-classes. Ce classifieur fait l'hypothèse que les données sont normalement distribuées avec la même co-variance. Un problème multi-classes pouvant être transformée en multiple bi-classes, le LDA tente de trouver un hyperplan séparant la classe du reste (\textit{One-vs-All}) \\	
-	\figScaleX{0.4}{LDA_Lotte_2007}{Principe du \lda  \citep{lotte_review_2007}}
+	Le LDA \citep{fisher_use_1936} est un classifieur linéaire. Pour un problème à deux classes, le LDA tente de trouver un hyperplan qui va maximiser la distance entre les classes tout en minimisant la variance inter-classes. Ce classifieur fait l'hypothèse que les données sont normalement distribuées avec la même co-variance. Un problème multi-classes pouvant être transformée en multiple bi-classes, le LDA tente de trouver un hyperplan séparant la classe du reste (\textit{One-vs-All})
+	\figScaleDesciption{1}{LDA_Lotte_2007}{Principe du \lda \citep{lotte_review_2007, naseer_fnirs_2015}}{Principe du \lda \citep{lotte_review_2007, naseer_fnirs_2015}}
 	
 	% SUPPORT VECTOR MACHINE
 	\item \svm (SVM)\\
-	Le SVM \citep{boser_training_1992, cortes_support-vector_1995, vladimir1995nature} utilise également un hyperplan pour séparer deux classes. Toutefois, cet hyperplan optimal est trouvé en maximisant les marges (ou distance) entre ce plan et les attributs les plus proches. Le SVM possède une particularité, il utilise un noyau qui peut permettre de résoudre les problèmes linéaire (\textit{linear SVM}) mais également les problèmes non-linéaire en projetant les données dans un espace de dimension supérieure (\textit{kernel trick}). Un noyau que l'on retrouve assez régulièrement est le \textit{Radial Basis Function (RBF)} \citep{burges_tutorial_1998}. Les problèmes multi-classes peuvent également être traités en \textit{One-vs-All}
-	\figScaleX{0.4}{SVM_Lotte_2007}{Principe du \svm \citep{lotte_review_2007}}
+	Le SVM \citep{boser_training_1992, cortes_support-vector_1995, vladimir1995nature} utilise également un hyperplan pour séparer deux classes. Toutefois, cet hyperplan optimal est trouvé en maximisant les marges (ou distance) entre ce plan et les attributs les plus proches. Le SVM possède une particularité, il utilise un noyau qui peut permettre de résoudre les problèmes linéaire (\textit{linear SVM}) mais également les problèmes non-linéaire en projetant les données dans un espace de dimension supérieure (\textit{kernel trick}). Un noyau que l'on retrouve assez régulièrement est le \textit{Radial Basis Function (RBF)} \citep{burges_tutorial_1998}. Les problèmes multi-classes peuvent également être traités en \textit{One-vs-All}. Pour une utilisation optimale du SVM, il est vivement conseillé d'utiliser la libraire C \textit{libsvm} ainsi que de lire les pré-requis sur son utilisation et optimisation \citep{chang_libsvm_2011}.
+	\figScaleDesciption{1}{SVM_Lotte_2007}{Principe du \svm \citep{lotte_review_2007, naseer_fnirs_2015}}{Principe du \svm \citep{lotte_review_2007, naseer_fnirs_2015}}
 	
 	% K-NEAREST NEIGHBOR
 	\item \knn (KNN) \\
@@ -328,7 +332,6 @@ Un autre cas particulier, est celui du \textit{Leave-p-Subject-Out} \citep{vidau
 La figure \ref{comp_clf} en annexe, issue de l'excellentissime librairie python scikit-learn dédiée au machine learning, illustre le comportement de chaque classifieur façe à trois types de données. D'autres informations détaillées à propos des classifieurs peuvent être trouvées dans  \cite{lotte_review_2007, wieland_performance_2014, wu_top_2008}
 \figScaleX{0.9}{clf_classifier}{Entraînement puis test d'un classifieur linéaire}
 
-\todo[color=orange!100]{Il faut impérativement une partie sur le deep learning}
 
 % ********************************************
 %               DECODING ACCURACY
@@ -370,7 +373,7 @@ De manière théorique, le seuil de chance est donné par $1/c$ où $c$ est le nombr
 	Autant les méthodes $(a)$ et $(b)$ nous renseigne véritablement sur la consistance d'un décodage par rapport aux données, autant la méthode $(c)$ donne des informations un peu différentes. En effet, en cas de décodage non-significatif, on pourra soit conclure qu'il n'y a pas de consistance dans les attributs à l'intérieur des classes, soit que le classifieur est incapable d'utiliser cette l'inter-dépendance. \cite{ojala_permutation_2010} précise que dans ce cas, il n'est pas nécessaire d'utiliser un classifieur compliqué et qu'un classifieur simple devrait suffire.
 \end{enumerate}
 
-Cette partie est volontairement synthétique puisqu'elle a fait l'objet d'une publication scientifique (cf. \ref{seuil_chance}). \\
+Cette partie a fait l'objet d'une publication scientifique (cf. \ref{seuil_chance} - \citep{combrisson_exceeding_2015}). \\
 Un pipeline standard de classification est proposé en annexe (cf. \ref{clf_pip}).
 
 % -> Single et Multi-features
@@ -411,7 +414,6 @@ Parmi ces \textit{Wrapper methods}, on peut citer:
 		\figScaleX{1}{clf_backward}{Exemple d'une \bfe appliquée sur six features}
 		\begin{center} \rule{5cm}{0.2pt} \end{center}
 	\end{enumerate}
-	\todo[color=red!100]{Description par exemple de l'entraineur de foot et décrire les figures d'avantage}
 	De manière générale, il est rapporté que la FFS converge plus rapidement que la BFE \citep{guyon_introduction_2003}. Toutefois, la FFS tombe plus facilement dans des minimums locaux et donc, mène à un décodage moins bon. En effet, la \textit{forward} sélectionne pas-à-pas les meilleurs attributs, elle est donc moins ensembliste que la \textit{backward}.
 \end{enumerate}
 
@@ -433,67 +435,30 @@ La méthodologie consiste à prendre un instant $i$, entraîner le classifieur et t
 
 \figScaleX{0.5}{king_timegene}{Exemple de généralisation temporelle \citep{king_characterizing_2014}}
 
-\todo[color=orange!100]{Il y a aussi des interprétations neuro-scientiques possibles. Comme le fait d'entraîner dans une phase et de tester dans une autre. Si ça marche, ça veut aussi dire que ces phases partagent des corrélats neuronaux. A voir si j'inclue ceci.}
 %D'un point de vue neuro-scientifique, la \textit{généralisation temporelle} apporte également son lot d'informations complémentaires, même si, l'interprétation n'est pas toujours évidente. Si l'on imagine tâche au cours de laquelle se succèdent des phases (eg. Phase de repos/préparation motrice/exécution motrice). Ce n'est pas très étonnant si on entraîne
 
 
 % ********************************************
 %              CONCLUSION
 % ********************************************
-\section{Configuration pour débuter}
-Dans la jungle des méthodes, il peut parfois être difficile de s'y retrouver. Cette section a pour objectif de fournir une liste de méthodes conseillées pour débuter. Rien ne dit que ce sont les meilleures méthodes mais elles ont le mérite d'avoir fait leurs preuves, que ce soit dans cette thèse et surtout, dans la littérature. Gardons à l'esprit que les meilleures méthodes dépendent des données mais certaines, sont plus polyvalentes.
-
-\vspace{1\baselineskip}
-
-\todo[inline,caption={},color=blue!20]{
-	\textbf{Couplage phase-amplitude :} \\
-	\kld avec swapping des essais de phase et d'amplitude \citep{tort_measuring_2010}
-}
-
-\vspace{1\baselineskip}
-
-\todo[inline,caption={},color=green!20]{
-	\textbf{Classification :} \\
-	\begin{enumerate}
-		\item Cross-validation: 10-folds
-		\item Classifieur: \svm avec noyau linéaire \citep{vladimir1995nature,lotte_review_2007}
-		\item Évaluation statistique: permutations \citep{ojala_permutation_2010,combrisson_exceeding_2015}
-		\item Multi-features: \bfe \citep{guyon_introduction_2003}
-	\end{enumerate}
-}
-
-% ********************************************
-%              BRAINPIPE
-% ********************************************
-\section{Implémentation des méthodes présentées}
-\todo[color=red!100]{Inclure des figures issues de brainpipe pour montrer les différentes possibilités}
-A force d'implémenter différentes méthodes afin de les tester, il se trouve que cet amas de fonction a formé assez naturellement une \textit{toolbox}. Avec un peu de mise en forme, une uniformisation à travers les fonctions et la constitution d'une aide, nous avons décidé de mettre cet ensemble d'outils \textit{online} et en libre accès. \\
-La toolbox s'appelle \brainpipe, entièrement codée en Python. Le choix de python a également été mûrement réfléchis. La première version était en Matlab. Toutefois, Python présente les avantages d'être libre, beaucoup plus souple et intuitif et bien plus puissant. De plus, la communauté s'est appropriée ce langage et est particulièrement réactive. Quant à la documentation, elle est excellente et permet d'apprivoiser ce langage très rapidement. Autre point fort qui est une conséquence du libre, c'est la multitudes d'outils existants. Par exemple, pour la classification, il existe \textit{scikit-leanr} dont la qualité est sans comparaison possible avec Matlab. Enfin, les derniers outils à la pointe (tel que \textit{tensorflow} de Google) ne seront jamais proposé en Matlab. Le Julia (qui est un autre langage de programmation) semble particulièrement prometteur mais, étant très jeune et ne disposant que d'une petite communauté, il a été écarté. Autre point, les outils que nous avons présenté dans cette partie méthode peuvent nécessiter énormément de ressources. \brainpipe a donc entièrement été développé pour le calcul parallèle qui est intégré par défaut. A titre de comparaison, le calcul du PAC sur tout un jeux de données a pris une semaine Matlab, contre une journée en Python.
-
-\vspace{1\baselineskip}
-\brainpipe est dédiée à la classification de signaux cérébraux. La construction globale peut être résumée avec les points suivants:
-\begin{itemize}
-	\item \textit{Pre-processing}: pré-traitement de données (filtrage, re-référencement, informations anatomiques en fonction de coordonnées MNI...)
-	\item \textit{Features}: extraction d'une large variété de features (amplitude, puissance, phase, PAC, PLV, ERPAC, entropie...)
-	\item \textit{Classification} des signatures cérébrales: repose sur \textit{scikit-learn} pour l'implémentation des algorithmes de classification. \brainpipe sert à faire le lien entre l'analyse de données neuro-scientifiques et le \textit{machine-learning}. Il y a également un module dédié au \textit{multi-features}.
-	\item \textit{Statistics}: tout les attributs disposent des méthodes statistiques ainsi que pour la classification et la correction multiple. 
-	\item \textit{Visualization}: enfin, un ensemble d'outils de visualisation sont également disponible afin de faciliter les représentations graphiques.
-\end{itemize}
-
-\vspace{1\baselineskip}
-Liens vers \brainpipe:
-\begin{itemize}
-	\item Téléchargement: \url{https://github.com/EtienneCmb/brainpipe}
-	\item Documentation en ligne: \url{https://etiennecmb.github.io/}
-\end{itemize}
-
-
-\begin{enumerate}
-	\item \textit{ipywksp}: pour les personnes désirant ou utilisant déjà python, un environnement de développement particulièrement agréable et puissant s'impose de plus en plus. Ce projet s'appelle 
-	\href{http://jupyter.org/}{Jupyter}. Pour l'introduire brièvement, c'est un notebook dans lequel le code est intégré dans des cellules qui peuvent être lancées individuellement. Une des lacunes de ce notebook pour les utilisateurs Matlab, c'est le manque d'un \textit{workspace} pour voir les variables en cours. \textit{ipywksp} est un petit module, également développé dans cette thèse qui vient combler ce manque. Toujours en libre accès: \url{https://github.com/EtienneCmb/ipywksp}  
-	\item \textit{visbrain}: visbrain est un petit logiciel de visualisation dont le but, à terme, sera de pouvoir proposer une interface simple et modulable permettant de visualiser toute formes de signaux comme des séries temporelles, des cartes temps-fréquences... visbrain sera certainement la composante graphique de brainpipe, toujours en python. A l'heure actuelle, visbrain comprend une interface graphique pour visualiser des données dans un cerveau MNI et une autre pour visualiser des séries temporelles. Le projet débute, mais le lien suivant permet de suivre son évolution: \url{https://github.com/EtienneCmb/visbrain}
-	
-	\figScaleX{1}{visbrain}{Exemples de représentations possibles avec visbrain : matérialisation de sources internes, de connectivité, contrôle de la transparence/couleur pour tout les objets, projection corticales des sources internes...}
-\end{enumerate}
-
-
+%\section{Configuration pour débuter}
+%Dans la jungle des méthodes, il peut parfois être difficile de s'y retrouver. Cette section a pour objectif de fournir une liste de méthodes conseillées pour débuter. Rien ne dit que ce sont les meilleures méthodes mais elles ont le mérite d'avoir fait leurs preuves, que ce soit dans cette thèse et surtout, dans la littérature. Gardons à l'esprit que les meilleures méthodes dépendent des données mais certaines, sont plus polyvalentes.
+%
+%\vspace{1\baselineskip}
+%
+%\todo[inline,caption={},color=blue!20]{
+%	\textbf{Couplage phase-amplitude :} \\
+%	\kld avec swapping des essais de phase et d'amplitude \citep{tort_measuring_2010}
+%}
+%
+%\vspace{1\baselineskip}
+%
+%\todo[inline,caption={},color=green!20]{
+%	\textbf{Classification :} \\
+%	\begin{enumerate}
+%		\item Cross-validation: 10-folds
+%		\item Classifieur: \svm avec noyau linéaire \citep{vladimir1995nature,lotte_review_2007}
+%		\item Évaluation statistique: permutations \citep{ojala_permutation_2010,combrisson_exceeding_2015}
+%		\item Multi-features: \bfe \citep{guyon_introduction_2003}
+%	\end{enumerate}
+%}

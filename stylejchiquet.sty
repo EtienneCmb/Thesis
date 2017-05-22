@@ -45,6 +45,7 @@
 \usepackage{float}
 \usepackage{wrapfig}
 \usepackage{graphicx}
+\usepackage{amsmath}
 %\ifpdf
 %  % configuration de graphicx et hyperref pour sortie PDF
 %  \RequirePackage[pdftex]{graphicx}
@@ -299,7 +300,7 @@
 
 % Annexe se comportez comme un chapitre
 \let\oldappendix=\appendix
-\renewcommand\appendix{%
+\renewcommand\appendix{
   \oldappendix
   \chapter{Annexes}
   \thispagestyle{plain}

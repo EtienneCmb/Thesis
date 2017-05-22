@@ -3,27 +3,15 @@
 % #############################################################################
 \chapter{Objectifs de la thèse}
 
-% -----------------------------------------------------------------------------
-\section{Décodage cérébrale à partir d'activité intracrânienne}
-Expliquer que le terme motif utilisé en intro se transforme ici en feature ou attribut. Ce qui nous permet d'effectuer une succession de mouvements identiques c'est que il y a dans l'AN des pattern permettant de reproduire des mouvements. D'ailleurs, c'est grâce à ça que l'on peut se perfectionner dans un sport ou en zik car il y a apprentissage.
-\begin{itemize}
-\item Exemple d'un schéma d'implantation + IRM 
-\item Bipolarisation: débruitage et augmentation de la spécificité (article Karim)
-\item Extraction de features (ici on pourrait mentionner que le deep learning pourrait marcher sur les données brutes)
-\end{itemize}
+Durant cette thèse, nous avons principalement utilisé les données intracrâniennes issues d'une tâche motrice (cf. \ref{chap_data_xp}) afin d'étudier les axes suivants :
+\begin{description}
+	\item[Utilisation des outils de \textit{machine learning} :] les méthodes d'apprentissage machine ont été utilisées comme un outil de validation pour explorer les différences entre des états moteur.
+	\item[Comparatif d'états moteur :] dans un premier temps, nous avons chercher à raffiner la connaissance des substrats neuronaux propres à un état de repos, de préparation ou d'exécution motrice. Puis, dans un second temps, nous avons étudié le décodage directionnel durant ces phases de préparation ou d'exécution motrice.
+	\item[Exploration et amélioration des marqueurs de l'activité cérébrale :] pour comprendre ce qui caractérise ces états, nous avons extrait de l'activité neuronale une variété relativement large de marqueurs spectraux (principalement la puissance, la phase et le \pacFR). De plus, nous avons fait varier de nombreux paramètres liés à ces attributs (taille et emplacement des fenêtres temporelles et fréquentielles, comparatif de différentes méthodologies propres à chaque \textit{feature}\dots)
+	\item[Exploration des régions non-motrices :] les données intracrâniennes nous ont également permis d'explorer si des régions non-motrices peuvent discriminer certains états ou si leur association avec des régions motrices peut constituer un gain de performances. 
+	\item[Optimisation des paramètres de \textit{machine learning} :] de nombreux paramètres liés à la classification ont été pris en compte afin d'évaluer leur influence sur le décodage (choix et optimisation de l'algorithme de classification et de validation croisée, stratégie de \textit{multi-features}, évaluation statistique\dots)
+	\item[Implémentation et mise à disposition d'un ensemble de méthodes :] enfin, l'essentiel des méthodes et des outils présentés et utilisés durant cette thèse ont été codé en Python puis mis à la disposition de tous sur un compte Github. Ces outils comprennent l'extraction de marqueurs, leur classification ainsi qu'un ensemble de fonction pour visualiser les résultats. 
+\end{description}
 
-% -----------------------------------------------------------------------------
-% Features
-\section{Exploration et amélioration des features}
-\subsubsection{Rôle physiologique du \pacEN}
-
-
-
-% -----------------------------------------------------------------------------
-\section{Comparatif des classifieurs}
-Expliquer que, chaque classifier possède une méthodologie propre permettant de répondre à des types de données différentes (en fonction des hypothèses de fonctionnement de chacun des classifiers)
-
-% -----------------------------------------------------------------------------
-\section{Exploration des régions non-motrices}
-\citep{van_langhenhove_interfaces_2008}
-\figScale{langhenhove_2008}{Localisation des aires sensorimotrices}
+\vspace{1\baselineskip}
+Tous ces différents paramètres ont permis d'avoir une compréhension assez fine des impacts méthodologiques mais ont aussi forcé chaque étude à être hautement dimensionnelle. Cette thèse permettra peut-être aux lecteurs, et je l'espère, de commencer son exploration avec une nombre plus restreint de dimensions.

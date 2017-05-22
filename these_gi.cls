@@ -49,6 +49,9 @@
 
 \usepackage{blindtext}
 \usepackage{pdfpages}
+\usepackage{pythonhighlight}
+% \usepackage{listings}             % Include the listings-package
+% \lstset{language=Python}
 
 \usepackage{silence}
 
