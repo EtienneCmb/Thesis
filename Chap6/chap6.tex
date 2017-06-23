@@ -4,10 +4,21 @@
 \pagestyle{headings}
 
 \chapter*{Introduction}
-Mon introduction
+\textit{Sleep}, développé en collaboration avec Raphaël Vallat, est un des modules de \textit{Visbrain} (cf. \ref{Etude5_visbrain}) il hérite donc des mêmes avantages à savoir une interface graphique modulaire et des rendus graphiques envoyés sur le GPU. Ce module est destiné à visualiser des données polysomnographiques et est donc capable de gérer de large datasets de sommeil. Ce module bénéficie d'un article à part entière est ceci résulte du manque de solutions équivalentes incluant autant de fonctionnalités, libre et dont le rendu graphique est aussi efficace. Parmi les principales fonctionnalités de \textit{Sleep}, on peut citer:
+\begin{itemize}
+    \item Chargement des formats de données les plus courants (BrainVision, Micromed, European Data Format, ELAN...). De plus, des données brutes peuvent également être envoyées directement. Si MNE Python est installé, la liste de fichiers supportés est encore étendue.
+    \item Contrôle des channels à afficher avec gestion individuelle ou groupées des amplitudes.
+    \item Chargement d'hypnogramme (*.txt ou *.hyp) ou définition d'un hypnogramme vide.
+    \item L'hypnogramme peut ensuite être scorer soit via un tableau référençant où chaque stade commence/termine, soit dans un style \textit{drag-and-drop} soit de manière plus conventionnelle en utilisant des raccourcis clavier prévus à cet effet.
+    \item Possibilité d'afficher le spectrogramme d'un channel ou la représentation topographique.
+    \item Plusieurs outils de traitement de signal (filtrage, re-référencement et bipolarisation, décomposition complexe et visualisation de la phase/amplitude/puissance dans des bandes de fréquences).
+    \item Détections automatiques d'événements (\textit{spindles}, \textit{K-complex}, \textit{slow-waves}, \textit{muscle twitch}, \textit{REM} et \textit{peak}). Ces détections sont ensuite directement visualisables sur chaque channel et sont également reportées sur l'hypnogramme.
+\end{itemize}
+\textit{Sleep} est installé en même temps que \textit{Visbrain} \footnotemark[1] et a sa propre documentation \footnotemark[2]. Pour finir, nous fournissons également des scripts et des données disponibles en accès libre \footnotemark[3].
 
 \footnotetext[1]{\url{https://github.com/EtienneCmb/visbrain}}
 \footnotetext[2]{\url{https://etiennecmb.github.io/visbrain/sleep}}
+\footnotetext[3]{\url{https://drive.google.com/drive/folders/0B6vtJiCQZUBvRjc3cFFYcmFIeW8?usp=sharing}}
 
 %%% --------------------------
 %%% Article

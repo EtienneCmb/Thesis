@@ -4,7 +4,14 @@
 \pagestyle{headings}
 
 \chapter*{Introduction}
-Mon introduction
+\textit{Visbrain} est un paquet Python, également disponible en libre accès, dédié à la visualisation de données neuroscientifiques. Ce projet a été d'abord pensé pour répondre aux besoins spécifiques des données intracrâniennes puis a été étendu pour couvrir d'autre besoins de visualisations. A l'heure actuelle, quatre modules ont été implémentés :
+\begin{description}
+    \item[Ndviz] : module entièrement dédié au \textit{data-mining}. Il permet en effet de visualiser des données multi-dimensionnelles et de les représenter sous diverses formes (ligne continue, nuage de points, image, histogramme, décomposition temps-fréquence).  
+    \item[Brain] : tout type de visualisation nécessitant une représentation dans un cerveau MNI en 3D. Dans ce cerveau pouvant être transparent ou opaque il est également possible de rajouter des boules (matérialisant des sources ou des électrodes), des liens de connectivité et des régions d'intérêt (Brodmann ou AAL). Il n'y a aucune limitation quant au nombre d'objets pouvant être ajoutés. Enfin, les figures peuvent être exportées en très haute définition.
+    \item[Sleep] : dernier né des modules, il permet de visualiser des données polysomnographiques et de scorer un hypnograme. Ce module fait l'objet d'un article à part entière (cf. \ref{Etude6_sleep}).
+    \item[Figure] : dernier module bien pratique permettant de mettre en page des figures complexes à partir d'images enregistrées en amont. Ce module assure un lien entre les figures exportables depuis les autres modules de \textit{Visbrain} et des figures définitives pouvant être incluent dans un papier. 
+\end{description}
+Chacun de ces modules vient avec une interface graphique modulaire \cad où chaque élément pouvant être affiché ou caché et accessibles depuis des raccourcis clavier. La partie graphique est assurés par \textit{VisPy}, paquet qui construit un pont entre Python et OpenGL. En conséquence, les rendus graphiques sont envoyés sur la carte graphique ce qui permet une expérience fluide. De nouveaux modules ont été planifiés (\textit{Connect}, pour de la connectivité, \textit{Topo} pour des représentations topographiques, \textit{Signal} et \textit{Image} pour des visualisations de signaux simples et un module \textit{ERP} a également été envisagé).\textit{Visbrain} est téléchargeable sur Github \footnotemark[1] et vient avec une documentation détaillée des modules \footnotemark[2].
 
 \footnotetext[1]{\url{https://github.com/EtienneCmb/visbrain}}
 \footnotetext[2]{\url{https://etiennecmb.github.io/visbrain/}}
