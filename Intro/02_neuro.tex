@@ -1,7 +1,7 @@
 % #############################################################################
 %                        PRESENTATION DE LA THEMATIQUE
 % #############################################################################
-\chapter{ICM et neurophysiologie}
+\chapter{Décodage des mécanismes cérébraux qui soustendent les processus moteurs}
 
 Cette chapitre a pour objectif d'introduire les concepts neurophysiologiques sous-jacents au contrôle et à la définition d'une \icm. Le but sera d'expliquer l'origine et la composition des différents types de signaux cérébraux permettant à un utilisateur de piloter une ICM. Pour cela, nous verrons tout d'abord les bases physiologiques liées à la motricité, puis de là, nous verrons quels types de signaux sont couramment extraits et exploités des principales régions motrices pour le contrôle d'une ICM.
  
@@ -11,10 +11,10 @@ Cette chapitre a pour objectif d'introduire les concepts neurophysiologiques sou
 %                            BASES PHYSIOLOGIQUES
 % -----------------------------------------------------------------------------
 % -----------------------------------------------------------------------------
-\section{Bases physiologiques liées à la motricité}
+\section{Bases physiologiques de la motricité (Le système moteur)}
 Cette section servira avant tout à identifier les principaux acteurs de la planification et de l'action motrice. Pour cela, on introduira les notions nécessaires sur le cortex ainsi que les principales aires sollicitées dans le cadre des ICM. Puis, de ces aires, nous verrons le principes des rythme cérébral qui permettra ensuite de justifier les principaux processus neuronaux liés à la motricité.
 
-\subsection{Notions sur le cortex}
+\subsection{Notions de neuroanatomie}
 Le cerveau est l'organe le mieux protégé du corps. Tout d'abord, la peau est une première barrière avec l'extérieur. Ensuite, l'os (le crâne) assure une protection mécanique \cad qu'il va protéger en cas de coups ou de chocs. Viennent ensuite les méninges (dure-mère, l'arachnoïde et la pie-mère), qui sont des membranes enveloppant le système nerveux central (SNC) et qui vont permettre d'une part d'amortir les chocs et d'autre part, empêcher le cerveau de s'abîmer avec l'intérieur du crâne. \\
 La couche suivante est appelée cortex, mesure entre 1 et 5mm d'épaisseur et correspond au corps cellulaire des neurones. Le cortex se divise en quatre régions:
 \begin{itemize}
@@ -26,7 +26,7 @@ Le cortex moteur, situé dans le lobe frontal, est un ensemble d'aires destinées 
 
 \figScaleDesciption{1}{anatomofonctionnel}{Présentation du cortex et des aires destinées au contrôle moteur}{(A gauche) - Principaux lobes constituants le cortex et localisation de la SMA, du cortex prémoteur et moteur primaire \citep{graimann_braincomputer_2009}, (A droite) - Vue en coupe du cortex moteur et sensorimoteur permettant le contrôle de différentes régions (\url{http://schoolbag.info/biology/humans/9.html})}
 
-\subsection{L'activité rythmique et lien avec la motricité}
+\subsection{Activité rythmique (oscillations) et motricité }
 \label{subsec_act_rythmique}
 L'activité rythmique correspond à l'activité neuronale prise dans des bandes de fréquence précises \citep{niedermeyer_normal_2004, niedermeyer2005electroencephalography} (bien qu'elle peut différer légèrement d'une publication à l'autre). Leur extraction se fera donc à l'aide de filtrage.
 % Définition et rôle fonctionnel des rythmes cérébraux
@@ -47,7 +47,7 @@ L'activité rythmique correspond à l'activité neuronale prise dans des bandes de 
 
 
 % -----------------------------------------------------------------------------
-\section{Décodage directionnel des membres supérieurs}
+\section{Décodage des mouvements du membres supérieurs }
 Que ce soit pour déplacer un curseur, pour le contrôle d'une prothèse ou pour toute autre application, le décodage de directions est au centre du fonctionnement d'un bon nombre d'\icm. Pour ce faire, les équipes utilisent bien souvent une tâche appelée \textit{center-out} où le sujet bouge son bras du centre vers une direction imposée, que ce soit avec le curseur d'une souris ou avec un joystick. A noter ici que certaines équipes ce sont également intéressées au moment où le sujet prépare le mouvement. Le but sera donc, en \textit{offline}, d'essayer de retrouver la direction effectuée par le sujet que ce soit pendant la période d'exécution ou de préparation en utilisant l'activité neuronale seule. \\
 Le décodage directionnel fait intervenir trois principales composantes:
 \begin{enumerate}
