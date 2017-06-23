@@ -1,16 +1,25 @@
 %!TEX root = ../main.tex
-\part{Étude 4: Tensorpac, logiciel Python de calcul de Phase-Amplitude Coupling}
+\part{Étude 4 : Tensorpac, logiciel Python de calcul de Phase-Amplitude Coupling}
 \label{Etude4_tensorpac}
 \pagestyle{headings}
 
 
 \chapter*{Introduction}
-Mon introduction
+Le \pacFR (PAC) est une mesure de couplage entre la phase d'ondes lentes et l'amplitude d'ondes rapides. L'évaluation d'un couplage peut être fait de manière suivante :
+\begin{itemize}    
+    \item Extraction de la phase et de l'amplitude en utilisant soit des outils de filtrage suivi de la transformée d'Hilbert, soit une transformation continue en ondelettes.
+    \item Calcul du couplage entre ces deux signaux en utilisant une des méthodologies existantes \citep{tort_measuring_2010,ozkurt_statistically_2012,canolty_high_2006}...
+    \item Le PAC étant une mesure sensible aux bruits, on construit une distribution de mesure de PAC pouvant arriver par chance.
+    \item La véritable mesure de PAC est ensuite normalisée par cette distribution de chance afin de minimiser le bruit.
+\end{itemize}
+Un nombre conséquent de méthodes ont été proposées pour chacune de ces étapes ce qui complique la comparaison et la reproductibilité. De plus, toutes les publications introduisant de nouvelles méthodes les présentent en utilisant des vecteurs et ne fournissent pas l'adaptation matricielle ce qui ne prend pas en compte le format des données (nombre de sujets, d'électrodes, d'essais...) et donc n'est pas du tout optimal d'un point de vue temps de calcul.\\
+Dans ce contexte, nous avons mis en place une toolbox Python, \textbf{Tensorpac}, dédiée au calcul du \pacFR. Dans cette toolbox les méthodes sont implémentées de façon modulaire ce qui signifie que l'utilisateur peut combiner les méthodes existantes pour chacune des étapes du calcul du PAC. D'autre part, \textbf{Tensorpac} utilise des tenseurs permettant de généraliser le calcul depuis des séries temporelles vers des données multi-dimensionnelles. Cette implémentation en tenseurs est combinée à du calcul en parallèle ce qui diminue encore le temps d'exécution et facilite l'envoie sur des serveurs de calcul. \textbf{Tensorpac} est distribué sous une licence  
+
+\footnotetext[1]{\url{https://github.com/EtienneCmb/tensorpac}}
+\footnotetext[2]{\url{https://etiennecmb.github.io/tensorpac/}}
 
 
 %%% --------------------------
 %%% Article
 %%% --------------------------
 \includepdf[pages={1-18}]{Chap4/combrisson_2017_tensorpac.pdf}
-
-
